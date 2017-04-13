@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h2 class="vhoditLead">в поддерживающую уборку входит: </h2>
+        <ul class="vhoditItems">
+            <li ng-repeat="task in taskData | filter : {parent_id : '1'} ">
+                <p><i class="glyphicon glyphicon-ok"></i>{{task.name}}</p>
+            </li>
+        </ul>
+    </div>
+
+</div>

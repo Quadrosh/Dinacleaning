@@ -1,0 +1,77 @@
+<nav class="navbar navbar-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand"><img src="assets/img/dclogo.png" alt="Динаклининг - уборка с заботой"></a>
+            <ul class="navbar-nav navbar-right">
+                <li><a ui-sref="home" ui-sref-active="active">Главная</a></li>
+                <li><a ui-sref="home.services" ui-sref-active="active">Услуги</a></li>
+                <li><a ui-sref="home.clean" ui-sref-active="active">Чистота</a></li>
+                <li><a ui-sref="home.advantages" ui-sref-active="active">Преимущества</a></li>
+                <li><a ui-sref="customers" ui-sref-active="active">Наши заказчики</a></li>
+                <li><a ui-sref="review" ui-sref-active="active">Отзывы</a></li>
+                <li><a ui-sref="order" ui-sref-active="active">Заказать</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
+<h3 class="logolead ">{{pageData.pagehead}}</h3>
+   <!--<h5> {{pageData.pagedescription}}</h5>-->
+
+
+
+<ul rn-carousel
+    rn-carousel-index="carouselIndex"
+    rn-carousel-easing="easeInOutQuad"
+    rn-carousel-duration="1200"
+    rn-carousel-auto-slide="20"
+    rn-carousel-pause-on-hover
+    class="top-carousel">
+    <li ng-repeat="slide in homeData">
+        <img src="/assets/img/{{slide.image}}" alt=""/>
+        <h2 class="lead">{{slide.lead}}</h2>
+        <p class="text" ng-bind-html="slide.text|nl2br"></p>
+    </li>
+    <div class="carousel-indicators" rn-carousel-indicators ng-if="homeData.length > 1" slides="homeData" rn-carousel-index="carouselIndex"></div>
+
+</ul>
+
+<section class="uslugi" id="servicesSection">
+    <h2 class="pagename">{{allPages[1].pagehead}}</h2>
+    <!--<p class="info text-right">{{allPages[1].pagedescription}}</p>-->
+    <!--<p class="text">{{allPages[1].text}}</p>-->
+    <ul class="sideMenu">
+        <li><a ui-sref="home.povsednevnaya" ui-sref-active="active">Повседневная уборка</a></li>
+        <li><a ui-sref="home.generalnaya" ui-sref-active="active">Генеральная уборка</a></li>
+        <li><a ui-sref="home.remont" ui-sref-active="active">Уборка после ремонта</a></li>
+    </ul>
+
+    <div ui-view="services"><img class="defaultImage" src="/assets/img/services.jpg" alt="Виды уборки"></div>
+</section>
+
+
+<section id="clearSection" >
+    <h2 class="lead">{{allPages[2].pagehead}}</h2>
+    <p class="text">{{allPages[2].pagedescription}}</p>
+    <!--<p class="text">{{allPages[2].text}}</p>-->
+</section>
+<section id="advantagesSection" >
+    <h2 class="pagename">{{allPages[6].pagehead}}</h2>
+    <p class="info text-center">({{allPages[6].pagedescription}})</p>
+
+    <!--<h1 class="text-center">{{advantagesData[1].name}}</h1>-->
+
+    <div ui-view="advantages">
+        <p class="text-center">А вот тут я расскажу о наших преимуществах</p>
+
+        <h1 class="text-center">{{advantagesData[1].name}}</h1>
+        <div class="text-center">
+            <a class="btn btn-primary" ui-sref="home.advantages" ui-sref-active="active">Дальше</a>
+        </div>
+
+    </div>
+
+
+</section>
+

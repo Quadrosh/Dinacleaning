@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+
+        <h2 id="advantageName" class="lead_">{{advantagesData[i].name}}</h2>
+        <p id="advantageText" class="text_" ng-bind-html="advantagesData[i].description|nl2br"></p>
+
+        <div class="text-center">
+            <a class="btn btn-primary" ng-click="goNextAdvantage()">Еще</a>
+        </div>
+
+    </div>
+
+</div>
+
