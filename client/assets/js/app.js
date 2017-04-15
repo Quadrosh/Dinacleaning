@@ -43966,8 +43966,8 @@ app
             $scope.newOrder = function(data){
                 OrderService.post(data).then(function(){
                     alert('заказ отправлен');
-                }).catch(function(){
-                    alert('неполучилось');
+                }).catch(function(error){
+                    alert('неполучилось, ошибка '+ error);
                 });
             }
 
