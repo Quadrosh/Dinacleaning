@@ -9,8 +9,6 @@ app
                                    advantagesData){
             $scope.advantagesData = advantagesData;
             $scope.i = 0;
-            //var $advantageName = $("#advantageName");
-            //$advantageName.html( $demoText.html().replace(/./g, "<span>$&amp;</span>").replace(/\s/g, " "));
 
             $scope.goNextAdvantage = function(){
                 //TweenLite.to("#advantageName", 1, {scaleX:0.2});

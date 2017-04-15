@@ -327,3 +327,12 @@ section {
     border-radius: 0;
     /*text-shadow: 2px 2px 20px  #fff;*/
 }
+.dark{
+    background-color: #eee;
+}
+.partnersImg{
+    width: 80%;
+    position: relative;
+    z-index:0;
+    margin-bottom: 20px;
+}

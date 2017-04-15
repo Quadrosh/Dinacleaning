@@ -43817,8 +43817,6 @@ app
                                    advantagesData){
             $scope.advantagesData = advantagesData;
             $scope.i = 0;
-            //var $advantageName = $("#advantageName");
-            //$advantageName.html( $demoText.html().replace(/./g, "<span>$&amp;</span>").replace(/\s/g, " "));
 
             $scope.goNextAdvantage = function(){
                 //TweenLite.to("#advantageName", 1, {scaleX:0.2});
@@ -43865,14 +43863,113 @@ app
         '$scope',
         'homeData',
         'pageData',
-        'allPages', function($scope,
+        'allPages',
+        '$timeout',
+        'advantagesData',
+        'partnersData',
+        'reviewData',
+        'orderData',
+        'OrderService', function($scope,
                              homeData,
                              pageData,
-                             allPages){
+                             allPages,
+                             $timeout,
+                             advantagesData,
+                             partnersData,
+                             reviewData,
+                             orderData,
+                             OrderService){
             $scope.homeData = homeData;
             $scope.pageData = pageData;
             $scope.allPages = allPages;
+            $scope.advantagesData = advantagesData;
+            $scope.partnersData = partnersData;
+            $scope.reviewData = reviewData;
+            $scope.orderData = orderData;
 
+            $scope.i = 0;
+            $scope.piter = 0;
+            $scope.riter = 0;
+
+            $scope.goNextAdvantage = function(){
+                var tlIn = new TimelineMax({paused:true});
+                tlIn.to("#advantageName", 2, {autoAlpha:0}, "clearWorkspace")
+                    .to("#advantageText", 2, {autoAlpha:0}, "clearWorkspace")
+                ;
+                var newI= $scope.i+1;
+                var goNext = function(){
+                    if (newI < $scope.advantagesData.length) {
+                        $scope.i = newI;
+                    } else {
+                        $scope.i = 0;
+                    }
+                };
+                $timeout(goNext,2000);
+                var tlOut = new TimelineMax({paused:true});
+                tlOut.to("#advantageName", 2, {autoAlpha:1}, "Start")
+                    .to("#advantageText", 2, {autoAlpha:1}, "Start")
+                ;
+                var masterTl = new TimelineMax()
+                    .add(tlIn.play(),"in")
+                    .add(tlOut.play(),"out")
+                    ;
+            };
+            $scope.goNextPartner = function(){
+                var tlIn = new TimelineMax({paused:true});
+                tlIn.to("#partnerName", 2, {autoAlpha:0}, "clearWorkspace")
+                    .to("#partnerText", 2, {autoAlpha:0}, "clearWorkspace")
+                    .to("#partnerImage", 2, {autoAlpha:0}, "clearWorkspace")
+                ;
+                var newI= $scope.piter+1;
+                var goNext = function(){
+                    if (newI < $scope.partnersData.length) {
+                        $scope.piter = newI;
+                    } else {
+                        $scope.piter = 0;
+                    }
+                };
+                $timeout(goNext,2000);
+                var tlOut = new TimelineMax({paused:true});
+                tlOut.to("#partnerName", 2, {autoAlpha:1}, "Start")
+                    .to("#partnerText", 2, {autoAlpha:1}, "Start")
+                    .to("#partnerImage", 2, {autoAlpha:1}, "Start")
+                ;
+                var masterTl = new TimelineMax()
+                    .add(tlIn.play(),"in")
+                    .add(tlOut.play(),"out")
+                    ;
+            };
+
+            $scope.goNextReview = function(){
+                var tlIn = new TimelineMax({paused:true});
+                tlIn.to("#reviewName", 2, {autoAlpha:0}, "clearWorkspace")
+                    .to("#reviewText", 2, {autoAlpha:0}, "clearWorkspace")
+                ;
+                var newI= $scope.riter+1;
+                var goNext = function(){
+                    if (newI < $scope.reviewData.length) {
+                        $scope.riter = newI;
+                    } else {
+                        $scope.riter = 0;
+                    }
+                };
+                $timeout(goNext,2000);
+                var tlOut = new TimelineMax({paused:true});
+                tlOut.to("#reviewName", 2, {autoAlpha:1}, "Start")
+                    .to("#reviewText", 2, {autoAlpha:1}, "Start")
+                ;
+                var masterTl = new TimelineMax()
+                    .add(tlIn.play(),"in")
+                    .add(tlOut.play(),"out")
+                    ;
+            };
+            $scope.newOrder = function(data){
+                OrderService.post(data).then(function(){
+                    alert('заказ отправлен');
+                }).catch(function(){
+                    alert('неполучилось');
+                });
+            }
 
 
         }
@@ -43885,6 +43982,29 @@ app
         return $resource(apiHost + 'homeslides');
 
     }]);
+'use strict';
+
+//app
+//    .factory('OrderService', ['$resource', function ($resource) {
+//        return $resource(apiHost + 'orders');
+//    }]);
+
+
+app.service('OrderService', function($http){
+    this.get = function(){
+        return $http.get(apiHost + 'orders');
+    };
+    this.post = function(data){
+        return $http.post(apiHost + 'orders', data);
+    };
+    this.put = function(id,data){
+        return $http.put(apiHost + 'orders/'+id, data);
+    };
+    this.delete = function(id){
+        return $http.delete(apiHost + 'orders/'+id);
+    };
+});
+
 'use strict';
 
 app
@@ -43901,6 +44021,22 @@ app
     .factory('PageService', ['$resource', function ($resource) {
 
         return $resource(apiHost + 'pages/:id', {id:'@id'});
+
+    }]);
+'use strict';
+
+app
+    .factory('PartnersService', ['$resource', function ($resource) {
+
+        return $resource(apiHost + 'partners');
+
+    }]);
+'use strict';
+
+app
+    .factory('ReviewService', ['$resource', function ($resource) {
+
+        return $resource(apiHost + 'review');
 
     }]);
 'use strict';
@@ -43993,7 +44129,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             //},
             resolve: {
                 homeData: function(HomeService, $stateParams){
-      //              console.log('homeData = '+ $stateParams.hrurl);
                     return new HomeService.query();
                 },
                 pageData: function(PageService){
@@ -44001,7 +44136,28 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 allPages: function(PageService){
                     return new PageService.query();
+                },
+                advantagesData: function(AdvantagesService){
+                    return new AdvantagesService.query();
+                },
+                partnersData: function(PartnersService){
+                    return new PartnersService.query();
+                },
+                reviewData: function(ReviewService){
+                    return new ReviewService.query();
+                },
+                orderData: function(OrderService){
+                    //return new OrderService.query();
+                    return new OrderService.get().then(function(data) {
+                        if (data.status == 200) {
+                            return data.data;
+                        }
+                      },function(err){
+                        console.log(err);
+                      }
+                    );
                 }
+
             },
             controller:'HomeCtrl',
         })
@@ -44136,27 +44292,47 @@ app.config(function($stateProvider, $urlRouterProvider){
                 TweenLite.to(window, 2, {scrollTo:"#advantagesSection"});
             },
 
-            //templateUrl: templatesPath + 'home.html',
-            resolve: {
-                //pageData: function(PageService){
-                //    return new PageService.get({id:'6'});
-                //
-                //},
+            templateUrl: templatesPath + 'home.html',
+            //resolve: {
+            //
+            //    advantagesData: function(AdvantagesService){
+            //        return new AdvantagesService.query();
+            //    }
+            //
+            //},
+            //views:{
+            //    'advantages':{
+            //        templateUrl: templatesPath +'home.advantages.html',
+            //        controller:'AdvantagesCtrl',
+            //    }
+            //}
 
-                //nextAdvatage: function(){
-                //alert('nextAdvatage !!!');
-                //},
-                advantagesData: function(AdvantagesService){
-                    return new AdvantagesService.query();
-                }
-
+        })
+        .state('home.partners', {
+            url:'/partners',
+            onEnter: function () {
+                TweenLite.to(window, 2, {scrollTo:"#partnersSection"});
             },
-            views:{
-                'advantages':{
-                    templateUrl: templatesPath +'home.advantages.html',
-                    controller:'AdvantagesCtrl',
-                }
-            }
+
+            templateUrl: templatesPath + 'home.html',
+
+        })
+        .state('home.review', {
+            url:'/otzivy',
+            onEnter: function () {
+                TweenLite.to(window, 2, {scrollTo:"#reviewSection"});
+            },
+
+            templateUrl: templatesPath + 'home.html',
+
+        })
+        .state('home.zakaz', {
+            url:'/zakaz',
+            onEnter: function () {
+                TweenLite.to(window, 2, {scrollTo:"#orderSection"});
+            },
+
+            templateUrl: templatesPath + 'home.html',
 
         })
 

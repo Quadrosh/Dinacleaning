@@ -46,7 +46,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             //},
             resolve: {
                 homeData: function(HomeService, $stateParams){
-      //              console.log('homeData = '+ $stateParams.hrurl);
                     return new HomeService.query();
                 },
                 pageData: function(PageService){
@@ -54,7 +53,28 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 allPages: function(PageService){
                     return new PageService.query();
+                },
+                advantagesData: function(AdvantagesService){
+                    return new AdvantagesService.query();
+                },
+                partnersData: function(PartnersService){
+                    return new PartnersService.query();
+                },
+                reviewData: function(ReviewService){
+                    return new ReviewService.query();
+                },
+                orderData: function(OrderService){
+                    //return new OrderService.query();
+                    return new OrderService.get().then(function(data) {
+                        if (data.status == 200) {
+                            return data.data;
+                        }
+                      },function(err){
+                        console.log(err);
+                      }
+                    );
                 }
+
             },
             controller:'HomeCtrl',
         })
@@ -189,27 +209,47 @@ app.config(function($stateProvider, $urlRouterProvider){
                 TweenLite.to(window, 2, {scrollTo:"#advantagesSection"});
             },
 
-            //templateUrl: templatesPath + 'home.html',
-            resolve: {
-                //pageData: function(PageService){
-                //    return new PageService.get({id:'6'});
-                //
-                //},
+            templateUrl: templatesPath + 'home.html',
+            //resolve: {
+            //
+            //    advantagesData: function(AdvantagesService){
+            //        return new AdvantagesService.query();
+            //    }
+            //
+            //},
+            //views:{
+            //    'advantages':{
+            //        templateUrl: templatesPath +'home.advantages.html',
+            //        controller:'AdvantagesCtrl',
+            //    }
+            //}
 
-                //nextAdvatage: function(){
-                //alert('nextAdvatage !!!');
-                //},
-                advantagesData: function(AdvantagesService){
-                    return new AdvantagesService.query();
-                }
-
+        })
+        .state('home.partners', {
+            url:'/partners',
+            onEnter: function () {
+                TweenLite.to(window, 2, {scrollTo:"#partnersSection"});
             },
-            views:{
-                'advantages':{
-                    templateUrl: templatesPath +'home.advantages.html',
-                    controller:'AdvantagesCtrl',
-                }
-            }
+
+            templateUrl: templatesPath + 'home.html',
+
+        })
+        .state('home.review', {
+            url:'/otzivy',
+            onEnter: function () {
+                TweenLite.to(window, 2, {scrollTo:"#reviewSection"});
+            },
+
+            templateUrl: templatesPath + 'home.html',
+
+        })
+        .state('home.zakaz', {
+            url:'/zakaz',
+            onEnter: function () {
+                TweenLite.to(window, 2, {scrollTo:"#orderSection"});
+            },
+
+            templateUrl: templatesPath + 'home.html',
 
         })
 
