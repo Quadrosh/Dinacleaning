@@ -135,13 +135,29 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="work_date">Дата уборки</label>
-                                <input id="work_date" name="work_date" type="text" class="form-control" ng-model="order.work_date" required />
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <!--  -->
+                                    <datepicker  date-format="EEEE d MMMM h:mm" datepicker-show="{{DPvisibility}}" datepicker-toggle="false">
+                                        <input ng-model="order.work_date"  class="form-control"  type="text"/>
+                                    </datepicker>
+                                    <!--<input type='text' id="work_date" name="work_date" class="form-control" ng-model="order.work_date" />-->
+                    <span class="input-group-addon" ng-click="toggleDatePicker()">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                                </div>
+                                <!--<script type="text/javascript">-->
+                                    <!--$(function () {-->
+                                        <!--$('#datetimepicker1').datetimepicker();-->
+                                    <!--});-->
+                                <!--</script>-->
+
+                                <!--<input id="work_date" name="work_date" type="text" class="form-control" ng-model="order.work_date" required />-->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="work_type">Вид уборки</label>
-                                <input id="work_type" name="work_type" type="text" class="form-control" ng-model="order.work_type" required />
+                                <select id="work_type" class="form-control" name="work_type"  ng-model="order.work_type" ng-options="y for (x,y) in cleanTypeOptions"></select>
                             </div>
                         </div>
                     </div>
@@ -149,18 +165,14 @@
                         <div class="col-sm-8">
                             <div class="form-group">
                                 <label for="workplace">Помещение</label>
-                                <select id="workplace" name="workplace"  ng-model="order.workplace">
-                                    <option value="flat">квартира</option>
-                                    <option value="home">коттедж</option>
-                                    <option value="other">другое</option>
-                                </select>
-                                <!--<input id="workplace" name="workplace" type="text" class="form-control" ng-model="order.workplace" required />-->
+                                <select id="workplace" class="form-control" name="workplace"  ng-model="order.workplace" ng-options="y for (x,y) in workPlaceOptions"></select>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="area">Площадь (м<sup>2</sup>)</label>
-                                <input id="area" name="area" type="number" class="form-control" ng-model="order.area"  />
+                                <select id="area" class="form-control" name="area"  ng-model="order.area" ng-options="y for (x,y) in areaOptions"></select>
+                                <!--<input id="area" name="area" type="number" class="form-control" ng-model="order.area"  />-->
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -172,7 +184,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="comment">Комментарий</label>
-                                <input id="comment" name="comment" type="text" class="form-control" ng-model="order.comment" required />
+                                <input id="comment" name="comment" type="text" class="form-control" ng-model="order.comment" />
                             </div>
                         </div>
                     </div>
@@ -184,3 +196,5 @@
     </div>
 
 </section>
+<!--<div id="backfilter" class="menufilter backfilterOff"></div>-->
+<div id="backfilter" ng-click="myHideCalendar()" ng-class="backFilter"></div>

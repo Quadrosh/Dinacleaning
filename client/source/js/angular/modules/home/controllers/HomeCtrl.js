@@ -3,6 +3,7 @@
 app
     .controller('HomeCtrl', [
         '$scope',
+        '$interval',
         'homeData',
         'pageData',
         'allPages',
@@ -12,6 +13,7 @@ app
         'reviewData',
         'orderData',
         'OrderService', function($scope,
+                                 $interval,
                              homeData,
                              pageData,
                              allPages,
@@ -111,7 +113,68 @@ app
                 }).catch(function(error){
                     alert('неполучилось, ошибка '+ error);
                 });
-            }
+            };
+            $scope.workPlaceOptions = {
+                type1:'квартира',
+                type2:'коттедж',
+                type3:'другое',
+            };
+            $scope.cleanTypeOptions = {
+                type1:'поддерживающая',
+                type2:'генеральная',
+                type3:'после ремонта',
+            };
+            $scope.areaOptions = {
+                1:'меньше 10-ти',
+                2:'10',
+                3:'15',
+                4:'20',
+                5:'25',
+                6:'30',
+                7:'35',
+                8:'40',
+                9:'45',
+                10:'50',
+                11:'60',
+                12:'70',
+                13:'80',
+                14:'90',
+                15:'100',
+                16:'120',
+                17:'150',
+                18:'200',
+                19:'больше 200 кв.м.',
+            };
+            $scope.order = {
+                workplace:$scope.workPlaceOptions['type1'],
+                work_type:$scope.cleanTypeOptions['type1'],
+                area:$scope.areaOptions['7'],
+            };
+
+            $scope.DPvisibility = false;
+            $scope.backFilter = 'backfilterOff';
+
+            $scope.toggleDatePicker = function(){
+                $scope.DPvisibility = !$scope.DPvisibility;
+                if ($scope.DPvisibility == true) {
+                    $scope.backFilter = 'backfilterOn';
+                } else {
+                    $scope.backFilter = 'backfilterOff';
+                }
+            };
+            $scope.myHideCalendar = function(){
+                $scope.DPvisibility = false;
+                $scope.backFilter = 'backfilterOff';
+            };
+
+
+            //$interval(function setInterval() {
+            //    //toggling manually everytime
+            //    $scope.DPvisibility = !$scope.DPvisibility;
+            //}, 3500);
+
+
+
 
 
         }

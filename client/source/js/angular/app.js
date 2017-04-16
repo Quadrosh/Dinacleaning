@@ -20,6 +20,7 @@ var app = angular.module('dinaApp', [
     'ui.router',
     //'ui.router.stateHelper',
     'ngTouch',
+    '720kb.datepicker',
     'angular-carousel',
 
 

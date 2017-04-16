@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 		            'components/gsap/ScrollToPlugin.min.js',
 		            'components/gsap/TweenMax.min.js',
 		            'components/angular/angular.js',
+		            'components/angular/angular-locale_ru-ru.js',
+		            'components/angular-datepicker/angular-datepicker.js',
 		            'components/angular-sanitize/angular-sanitize.js',
 		            'components/angular-route/angular-route.js',
 		            'components/angular-ui-router/angular-ui-router.js',
@@ -40,6 +42,7 @@ module.exports = function(grunt) {
 		      files: {
 		        '../../assets/css/app.min.css': [
                     //'components/angular-carousel/angular-carousel.css',
+                    'components/angular-datepicker/angular-datepicker.css',
 			        '../css/style.css',
 		        ]
 		      }

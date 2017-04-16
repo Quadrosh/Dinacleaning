@@ -336,3 +336,91 @@ section {
     z-index:0;
     margin-bottom: 20px;
 }
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;       /* remove default arrow */
+    /*background-image: url(...);   !* add custom arrow *!*/
+}
+select::-ms-expand {
+    display: none; /* hide the default arrow in ie10 and ie11 */
+}
+._720kb-datepicker-calendar-day._720kb-datepicker-today {
+    background: #4ea6d3;
+    color:white;
+}
+._720kb-datepicker-today {
+    background: #4ea6d3;
+    color:white;
+}
+._720kb-datepicker-calendar-day._720kb-datepicker-active {
+    background: #4ea6d3;
+    color:white;
+}
+.input-group-addon{
+    cursor: pointer;
+}
+
+.menufilter , #backfilter {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96,125,139,.8);
+    position: fixed;
+    top: 0px;
+}
+.backfilterOff,
+#backfilter .backfilterOff{
+    height: 0px;
+    animation: backfilter_off 0.8s linear normal;
+    animation-fill-mode:forwards;
+}
+
+
+@keyframes backfilter_off {
+    0% {
+        background-color: rgba(0,0,0,0.4);
+        height: 100%;
+    }
+    90% {
+        background-color: transparent;
+        height: 100%;
+    }
+    100% {
+        background-color: transparent;
+        height: 0px;
+    }
+
+}
+.backfilterOn,
+#backfilter .backfilterOn{
+    display: block;
+    animation: backfilter_on 0.4s linear normal;
+    animation-fill-mode:forwards;
+    z-index: 5;
+}
+
+
+@keyframes backfilter_on {
+    0% {
+        background-color: transparent;
+        height: 100%;
+
+    }
+    100% {
+
+        background-color: rgba(0,0,0,0.4);
+        height: 100%;
+    }
+}
+
+/*select:after {*/
+     /*content:"\e080";*/
+     /*font-family:"Glyphicons Halflings";*/
+     /*position: absolute;*/
+     /*right: 15px;*/
+     /*top: 10px;*/
+ /*}*/
