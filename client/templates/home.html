@@ -2,14 +2,14 @@
     <div class="container">
         <div class="navbar-header">
             <a href="#" class="navbar-brand"><img src="assets/img/dclogo.png" alt="Динаклининг - уборка с заботой"></a>
-            <ul class="navbar-nav navbar-right">
+            <ul class="navbar-nav navbar-right hidden-xs">
                 <li><a data-ui-sref="home" data-ui-sref-active="active">Главная</a></li>
                 <li><a data-ui-sref="home.services" data-ui-sref-active="active">Услуги</a></li>
                 <li><a data-ui-sref="home.clean" data-ui-sref-active="active">Чистота</a></li>
                 <li><a data-ui-sref="home.advantages" data-ui-sref-active="active">Преимущества</a></li>
                 <li><a data-ui-sref="home.partners" data-ui-sref-active="active">Наши заказчики</a></li>
                 <li><a data-ui-sref="home.review" data-ui-sref-active="active">Отзывы</a></li>
-                <li><a data-ui-sref="order" data-ui-sref-active="active">Заказать</a></li>
+                <li><a data-ui-sref="home.zakaz" data-ui-sref-active="active">Заказать</a></li>
             </ul>
         </div>
 
@@ -46,8 +46,31 @@
         <li><a ui-sref="home.generalnaya" ui-sref-active="active">Генеральная уборка</a></li>
         <li><a ui-sref="home.remont" ui-sref-active="active">Уборка после ремонта</a></li>
     </ul>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div ui-view="services">
 
-    <div ui-view="services"><img class="defaultImage" src="/assets/img/services.jpg" alt="Виды уборки"></div>
+                <h1>{{allPages[3].pagehead}}</h1>
+                <p class="pagedescription">{{allPages[3].pagedescription}}</p>
+
+
+
+                <div class="row">
+                    <div class="col-sm-12  text-center ">
+                        <a class="secondlink" ui-sref="home.povsednevnaya.vhodit" ui-sref-active="active">Что входит в поддерживающую уборку</a>
+                    </div>
+                    <div class="col-sm-12 text-center mt10">
+                        <a class="secondlink" href="#">Цены на поддерживающую уборку</a>
+                    </div>
+                    <div class="col-sm-12 text-center mt50">
+                        <a class="btn btn-primary" data-ui-sref="home.zakaz">Заказать поддерживающую уборку</a>
+                    </div>
+                </div>
+                <!--<img class="defaultImage" src="/assets/img/services.png" alt="Виды уборки"></div>-->
+                <img class="defaultBottomImage" src="/assets/img/supporting.png" alt="Поддерживающая уборка в Москве цена">
+        </div>
+    </div>
+
 </section>
 
 
@@ -63,11 +86,11 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
 
-            <h2 id="advantageName" class="lead_">{{advantagesData[i].name}}</h2>
+            <h2 id="advantageName" class="lead_ ">{{advantagesData[i].name}}</h2>
             <p id="advantageText" class="text_" ng-bind-html="advantagesData[i].description|nl2br"></p>
 
             <div class="text-center">
-                <a class="btn btn-primary" ng-click="goNextAdvantage()">Еще</a>
+                <a class="btn btn-primary mt50" ng-click="goNextAdvantage()">ещё</a>
             </div>
 
         </div>
@@ -78,21 +101,29 @@
 
 </section>
 <!-- заказчики -->
-<section id="partnersSection" class="dark" >
-    <h2 class="pagename">{{allPages[7].pagehead}}</h2>
-    <p class="info text-center">{{allPages[7].pagedescription}}</p>
+<section id="partnersSection" class="" >
+    <!--<h2 class="pagename">{{allPages[7].pagehead}}</h2>-->
+    <div class="row">
+        <div id="partnerImage" class="col-sm-8  partnerBgrImg hidden-xs" style="background-image: url(/assets/img/{{partnersData[piter].image}})">
+
+        </div>
+        <div class="col-sm-4 text-center">
+            <p class="info text-center">{{allPages[7].pagedescription}}</p>
+
+            <h2 id="partnerName" class="mt100">{{partnersData[piter].name}}</h2>
+            <p id="partnerText" class="text_" ng-bind-html="partnersData[piter].description|nl2br"></p>
+
+            <div class="text-center">
+                <a  class="btn btn-primary mt50" ng-click="goNextPartner()">ещё</a>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2 text-center">
 
-            <h2 id="partnerName" class="lead_">{{partnersData[piter].name}}</h2>
-            <p id="partnerText" class="text_" ng-bind-html="partnersData[piter].description|nl2br"></p>
 
-            <img id="partnerImage" class="partnersImg" src="/assets/img/{{partnersData[piter].image}}" alt="{{partnersData[piter].name}}"/>
-
-            <div class="text-center">
-                <a  class="btn btn-primary" ng-click="goNextPartner()">Еще</a>
-            </div>
 
         </div>
 
@@ -104,24 +135,25 @@
 </section>
 <!-- отзывы -->
 <section id="reviewSection" >
-    <h2 class="pagename">{{allPages[8].pagehead}}</h2>
-    <p class="info text-center">{{allPages[8].pagedescription}}</p>
+    <!--<h2 class="pagename">{{allPages[8].pagehead}}</h2>-->
+    <h2 class="pagename">{{allPages[8].pagedescription}}</h2>
+    <!--<p class="info text-center">{{allPages[8].pagedescription}}</p>-->
 
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 text-center">
+        <div class="col-sm-6 col-sm-offset-3  text-left">
 
             <p id="reviewText" class="text_" ng-bind-html="reviewData[riter].text|nl2br"></p>
-            <i id="reviewName" class="lead_">{{reviewData[riter].name}}</i>
+            <p id="reviewName" class="lead_">{{reviewData[riter].name}}</p>
             <!--<img id="partnerImage" class="partnersImg" src="/assets/img/{{reviewData[riter].image}}" alt="{{reviewData[riter].name}}"/>-->
 
             <div class="text-center">
-                <a  class="btn btn-primary" ng-click="goNextReview()">Еще</a>
+                <a  class="btn btn-primary mt30" ng-click="goNextReview()">ещё</a>
             </div>
         </div>
     </div>
 
 </section>
-<section id="orderSection" class="dark">
+<section id="orderSection" class="dark" >
     <h2 class="pagename">{{allPages[9].pagehead}}</h2>
     <p class="info text-center">{{allPages[9].pagedescription}}</p>
 
@@ -134,7 +166,19 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="work_date">Дата уборки</label>
+                                <label for="comment">Телефон</label>
+                                <input id="comment" name="comment" type="text" class="form-control" ng-model="order.phone" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="comment">Имя</label>
+                                <input id="comment" name="comment" type="text" class="form-control" ng-model="order.name" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="datetimepicker1">Дата уборки</label>
                                 <div class='input-group date' id='datetimepicker1'>
                                     <!--  -->
                                     <datepicker  date-format="EEEE d MMMM h:mm" datepicker-show="{{DPvisibility}}" datepicker-toggle="false">
@@ -145,13 +189,7 @@
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                                 </div>
-                                <!--<script type="text/javascript">-->
-                                    <!--$(function () {-->
-                                        <!--$('#datetimepicker1').datetimepicker();-->
-                                    <!--});-->
-                                <!--</script>-->
 
-                                <!--<input id="work_date" name="work_date" type="text" class="form-control" ng-model="order.work_date" required />-->
                             </div>
                         </div>
                         <div class="col-sm-6">

@@ -210,19 +210,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             },
 
             templateUrl: templatesPath + 'home.html',
-            //resolve: {
-            //
-            //    advantagesData: function(AdvantagesService){
-            //        return new AdvantagesService.query();
-            //    }
-            //
-            //},
-            //views:{
-            //    'advantages':{
-            //        templateUrl: templatesPath +'home.advantages.html',
-            //        controller:'AdvantagesCtrl',
-            //    }
-            //}
 
         })
         .state('home.partners', {
