@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/clean2.jpg" afterPath="$PROJECT_DIR$/client/assets/img/clean2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/dclogo.png" afterPath="$PROJECT_DIR$/client/assets/img/dclogo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/freetime.png" afterPath="$PROJECT_DIR$/client/assets/img/freetime.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/handshake.jpg" afterPath="$PROJECT_DIR$/client/assets/img/handshake.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/handshake.png" afterPath="$PROJECT_DIR$/client/assets/img/handshake.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/services.png" afterPath="$PROJECT_DIR$/client/assets/img/services.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/clean2.png" afterPath="$PROJECT_DIR$/client/assets/img/clean2.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest" afterPath="$PROJECT_DIR$/rest" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/css/app.min.css" afterPath="$PROJECT_DIR$/client/assets/css/app.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.js" afterPath="$PROJECT_DIR$/client/assets/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/js/angular/router.js" afterPath="$PROJECT_DIR$/client/source/js/angular/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/home.html" afterPath="$PROJECT_DIR$/client/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.general.html" afterPath="$PROJECT_DIR$/client/templates/services.general.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.repair.html" afterPath="$PROJECT_DIR$/client/templates/services.repair.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.supporting.html" afterPath="$PROJECT_DIR$/client/templates/services.supporting.html" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -169,14 +155,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3594306">
+            <state vertical-scroll-proportion="0.0">
               <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rest/config/db.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3202847">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -198,7 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/source/js/angular/services/AsyncService.js" />
         <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/services/HomeService.js" />
         <option value="$PROJECT_DIR$/client/templates/serviceEveryday.html" />
         <option value="$PROJECT_DIR$/client/templates/services.html" />
@@ -249,6 +244,7 @@
         <option value="$PROJECT_DIR$/rest/modules/admin/views/orders/index.php" />
         <option value="$PROJECT_DIR$/client/source/css/style.css" />
         <option value="$PROJECT_DIR$/client/templates/home.html" />
+        <option value="$PROJECT_DIR$/rest/config/db.php" />
       </list>
     </option>
   </component>
@@ -262,8 +258,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="91" />
-    <option name="y" value="498" />
+    <option name="x" value="61" />
+    <option name="y" value="421" />
     <option name="width" value="1217" />
     <option name="height" value="378" />
   </component>
@@ -339,93 +335,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dinacleaning" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dinacleaning" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dinacleaning" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dinacleaning" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="orders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dinacleaning" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dinacleaning" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rest" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -571,7 +481,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="91" y="498" width="1217" height="378" extended-state="0" />
+    <frame x="61" y="421" width="1217" height="378" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -632,13 +542,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/rest/modules/admin/views/Homeslidecrud/_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.46075085">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/modules/admin/views/tasks/_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7440273">
@@ -1002,11 +905,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3594306">
+        <state vertical-scroll-proportion="0.0">
           <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/config/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3202847">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
