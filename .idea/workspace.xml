@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/clean2.png" afterPath="$PROJECT_DIR$/client/assets/img/clean2.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest" afterPath="$PROJECT_DIR$/rest" />
     </list>
     <ignored path="dinacleaning.iws" />
@@ -170,8 +169,8 @@
       <file leaf-file-name="db.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/config/db.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3202847">
-              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.37366548">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -915,8 +914,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/config/db.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3202847">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.37366548">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="22" />
           <folding />
         </state>
       </provider>
