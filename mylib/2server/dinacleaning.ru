@@ -1,7 +1,7 @@
 #user 'dinacleaning' virtual host 'dinacleaning.ru' configuration file
 <VirtualHost 82.146.47.91:80>
 	ServerName dinacleaning.ru
-	DocumentRoot /var/www/dinacleaning/data/www/dinacleaning.ru/client
+	DocumentRoot "/var/www/dinacleaning/data/www/dinacleaning.ru/client"
 	ServerAdmin webmaster@dinacleaning.ru
 	AddDefaultCharset UTF-8
 	AssignUserID dinacleaning dinacleaning
@@ -17,10 +17,11 @@
 	DirectoryIndex index.html
 
 </VirtualHost>
-<Directory /var/www/dinacleaning/data/www/dinacleaning.ru/client>
+<Directory "/var/www/dinacleaning/data/www/dinacleaning.ru/client">
 	Options +Includes -ExecCGI
 	RewriteEngine on
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
+    DirectoryIndex index.html
     RewriteRule . index.html
 </Directory>
