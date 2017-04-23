@@ -1,13 +1,13 @@
 #user 'dinacleaning' virtual host 'api.dinacleaning.ru' configuration file
 <VirtualHost 82.146.47.91:80>
 	ServerName api.dinacleaning.ru
-	AddDefaultCharset off
+	DocumentRoot /var/www/dinacleaning/data/www/dinacleaning.ru/rest/web
+	AddDefaultCharset UTF-8
 	AssignUserID dinacleaning dinacleaning
-	DocumentRoot /var/www/dinacleaning/data/www/api.dinacleaning.ru/rest/web
 	ServerAdmin webmaster@api.dinacleaning.ru
 	ServerAlias www.api.dinacleaning.ru
 	DirectoryIndex index.html index.php
-	ScriptAlias /cgi-bin/ /var/www/dinacleaning/data/www/dinacleaning.ru/cgi-bin/
+	ScriptAlias /cgi-bin/ /var/www/dinacleaning/data/www/api.dinacleaning.ru/cgi-bin/
 	<FilesMatch "\.ph(p[3-5]?|tml)$">
 		SetHandler application/x-httpd-php
 	</FilesMatch>

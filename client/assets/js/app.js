@@ -44886,6 +44886,9 @@ angular.module('ngResource', ['ng']).
 if (document.location.host == 'dc.dev' || document.location.host == 'dcadmin.dev') {
     var apiHost = 'http://dcrest.dev/';
 }
+if (document.location.host == 'dinacleaning.ru') {
+    var apiHost = 'http://api.dinacleaning.ru/';
+}
 
 /**
  * Инициализация ангуляра
