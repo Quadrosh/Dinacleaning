@@ -178,7 +178,7 @@ ul[rn-carousel-transition="hexagon"] {
     font-size:18px;
     line-height: 1.2;
     /*text-shadow: 2px 2px 20px  #000;*/
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.3);
     border: none;
     border-radius: 0;
     /*text-shadow: 2px 2px 20px  #fff;*/
@@ -268,7 +268,7 @@ div.rn-carousel-indicator span.active {
 }
 .uslugi h1 {
     /*color:grey;*/
-    color:rgba(0,0,0,0.2);
+    color:rgba(0,0,0,0.5);
     text-transform: uppercase;
     /*color: #FFD155;*/
     font-size:32px;
@@ -540,4 +540,13 @@ select::-ms-expand {
 }
 #orderSection .info {
     margin: 10px 0 20px;
+}
+/*svg*/
+.svg_arrow {
+    stroke: white;
+    stroke-width: 2px;
+}
+.btn_right_arrow {
+    line-height: 1;
+    padding: 4px 7px 1px;
 }
