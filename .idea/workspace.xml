@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/dclogo.png" afterPath="$PROJECT_DIR$/client/assets/img/dclogo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/css/app.min.css" afterPath="$PROJECT_DIR$/client/assets/css/app.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/index.html" afterPath="$PROJECT_DIR$/client/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/home.html" afterPath="$PROJECT_DIR$/client/templates/home.html" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,20 +26,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.42704627">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6405694">
+            <state vertical-scroll-proportion="0.0">
               <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
               <folding />
             </state>
@@ -160,7 +160,7 @@
         <entry file="file://$PROJECT_DIR$/client/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
+              <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
               </folding>
@@ -230,7 +230,6 @@
         <option value="$PROJECT_DIR$/rest/models/Orders.php" />
         <option value="$PROJECT_DIR$/rest/config/web.php" />
         <option value="$PROJECT_DIR$/rest/controllers/OrdersController.php" />
-        <option value="$PROJECT_DIR$/client/index.html" />
         <option value="$PROJECT_DIR$/client/source/js/angular/modules/orders/services/OrderService.js" />
         <option value="$PROJECT_DIR$/client/source/js/components/angular-datepicker/angular-datepicker.js" />
         <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
@@ -241,11 +240,12 @@
         <option value="$PROJECT_DIR$/client/templates/services.repair.html" />
         <option value="$PROJECT_DIR$/client/templates/services.supporting.html" />
         <option value="$PROJECT_DIR$/rest/modules/admin/views/orders/index.php" />
-        <option value="$PROJECT_DIR$/client/templates/home.html" />
         <option value="$PROJECT_DIR$/rest/config/db.php" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/client/source/js/angular/app.js" />
         <option value="$PROJECT_DIR$/client/source/css/style.css" />
+        <option value="$PROJECT_DIR$/client/templates/home.html" />
+        <option value="$PROJECT_DIR$/client/index.html" />
       </list>
     </option>
   </component>
@@ -792,14 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -824,20 +816,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
+          <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
+    <entry file="file://$PROJECT_DIR$/client/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6405694">
-          <caret line="239" column="20" selection-start-line="239" selection-start-column="20" selection-end-line="239" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.42704627">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
