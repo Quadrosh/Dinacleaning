@@ -14,6 +14,11 @@ $config = [
             'layout' => 'admin',
 //            'defaultRoute' => 'order/index',
         ],
+        'sms' => [
+            'class' => 'app\modules\sms\Module',
+            'layout' => 'sms',
+//            'defaultRoute' => 'order/index',
+        ],
     ],
     'components' => [
         'request' => [

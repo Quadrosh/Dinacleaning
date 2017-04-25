@@ -45091,12 +45091,22 @@ app
                     .add(tlOut.play(),"out")
                     ;
             };
+            //$scope.newOrder = function(data){
+            //    OrderService.post(data).then(function(){
+            //        alert('заказ отправлен');
+            //    }).catch(function(error){
+            //        alert('неполучилось, ошибка '+ error);
+            //    });
+            //};
             $scope.newOrder = function(data){
-                OrderService.post(data).then(function(){
-                    alert('заказ отправлен');
-                }).catch(function(error){
-                    alert('неполучилось, ошибка '+ error);
-                });
+                OrderService.post(data).then(
+                    function(){
+                        alert('заказ отправлен');
+                    },
+                    function(error){
+                        alert('неполучилось отправить, ошибка - '+ error);
+                    }
+                );
             };
             $scope.workPlaceOptions = {
                 type1:'квартира',
@@ -45307,6 +45317,7 @@ app.run(['$rootScope', function ($rootScope) {
 var templatesPath = '../../templates/';
 
 app.config(function($stateProvider, $urlRouterProvider){
+
     $urlRouterProvider.otherwise('/home');
     $stateProvider
         .state('home', {

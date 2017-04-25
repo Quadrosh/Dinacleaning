@@ -28,7 +28,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Dinacleaning '. Yii::$app->user->identity['username'],
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => '/admin/hash',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],

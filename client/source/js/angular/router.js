@@ -35,6 +35,7 @@ app.run(['$rootScope', function ($rootScope) {
 var templatesPath = '../../templates/';
 
 app.config(function($stateProvider, $urlRouterProvider){
+
     $urlRouterProvider.otherwise('/home');
     $stateProvider
         .state('home', {
