@@ -57,33 +57,33 @@ class OrdersController extends ActiveController
 
     public function createAction($id)
     {
-        if (!empty(\Yii::$app->request->post('phone'))) {
-            $workType = \Yii::$app->request->post('work_type');
-            $area = \Yii::$app->request->post('area');
-            $phone = \Yii::$app->request->post('phone');
-            $name = \Yii::$app->request->post('name');
-            $work_date = \Yii::$app->request->post('work_date');
-            $workplace = \Yii::$app->request->post('workplace');
-            $address = \Yii::$app->request->post('address');
-            $comment = \Yii::$app->request->post('comment');
-
-            $ch = curl_init("https://sms.ru/sms/send");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-                "api_id" =>	"4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE",
-            "to"	 =>	"79853461615", //Ya
-//            "to"	 =>	"79092487575", //Гуля
-//            "to"	 =>	"79164497826", //Дина
-//                "to"	 =>	"79606137985", //нефтянка
-                "text"	 =>	$work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment,
-
-            ));
-            $body = curl_exec($ch);
-            curl_close($ch);
-
-
-        }
+//        if (!empty(\Yii::$app->request->post('phone'))) {
+//            $workType = \Yii::$app->request->post('work_type');
+//            $area = \Yii::$app->request->post('area');
+//            $phone = \Yii::$app->request->post('phone');
+//            $name = \Yii::$app->request->post('name');
+//            $work_date = \Yii::$app->request->post('work_date');
+//            $workplace = \Yii::$app->request->post('workplace');
+//            $address = \Yii::$app->request->post('address');
+//            $comment = \Yii::$app->request->post('comment');
+//
+//            $ch = curl_init("https://sms.ru/sms/send");
+//            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+//                "api_id" =>	"4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE",
+//            "to"	 =>	"79853461615", //Ya
+////            "to"	 =>	"79092487575", //Гуля
+////            "to"	 =>	"79164497826", //Дина
+////                "to"	 =>	"79606137985", //нефтянка
+//                "text"	 =>	$work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment,
+//
+//            ));
+//            $body = curl_exec($ch);
+//            curl_close($ch);
+//
+//
+//        }
         return parent::createAction($id);
     }
 

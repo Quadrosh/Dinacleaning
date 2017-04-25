@@ -120,6 +120,7 @@ app
                         alert('заказ отправлен');
                     },
                     function(error){
+                        console.log(error);
                         alert('неполучилось отправить, ошибка - '+ error);
                     }
                 );
