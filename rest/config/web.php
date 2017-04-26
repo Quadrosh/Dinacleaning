@@ -21,6 +21,10 @@ $config = [
         ],
     ],
     'components' => [
+        'sms' => [
+            'class' => 'Zelenin\yii\extensions\Sms',
+            'api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE'
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'mufCCHDCR-DZ6KYrEIktV9G8uOWbxkR0',
