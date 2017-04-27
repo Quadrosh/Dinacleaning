@@ -131,18 +131,25 @@ class OrdersController extends ActiveController
 //                \Yii::$app->session->setFlash('error','что-то пошло не так');
 //            }
 
-            $response = $client->createRequest()
-                ->setMethod('post')
-                ->setUrl('https://sms.ru/sms/send')
-                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615', 'text' => 'seeeend'])
-                ->send();
-            if ($response->isOk) {
-                \Yii::$app->session->setFlash('success','отправлено');
-            } else {
-                \Yii::$app->session->setFlash('error','что-то пошло не так');
-            }
+
+//            $response = $client->createRequest()
+//                ->setMethod('post')
+//                ->setUrl('https://sms.ru/sms/send')
+//                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615', 'text' => 'seeeend'])
+//                ->send();
+//            if ($response->isOk) {
+//                \Yii::$app->session->setFlash('success','отправлено');
+//            } else {
+//                \Yii::$app->session->setFlash('error','что-то пошло не так');
+//            }
 
         }
+
+        $client->createRequest()
+            ->setMethod('post')
+            ->setUrl('https://sms.ru/sms/send')
+            ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615', 'text' => 'seeeend'])
+            ->send();
 
         return parent::createAction($id);
     }
