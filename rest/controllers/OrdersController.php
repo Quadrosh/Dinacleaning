@@ -147,12 +147,12 @@ class OrdersController extends ActiveController
 //            }
 
 //        }
-
-//        $client->createRequest()
-//            ->setMethod('post')
-//            ->setUrl('https://sms.ru/sms/send')
-//            ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615', 'text' => 'seeeend'])
-//            ->send();
+        $client = new Client();
+        $client->createRequest()
+            ->setMethod('post')
+            ->setUrl('https://sms.ru/sms/send')
+            ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615', 'text' => 'seeeend'])
+            ->send();
 
         return parent::createAction($id);
     }
