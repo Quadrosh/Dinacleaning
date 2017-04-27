@@ -45120,6 +45120,7 @@ app
                 type3:'после ремонта',
             };
             $scope.areaOptions = {
+                0:'?',
                 1:'меньше 10-ти',
                 2:'10',
                 3:'15',
@@ -45143,7 +45144,7 @@ app
             $scope.order = {
                 workplace:$scope.workPlaceOptions['type1'],
                 work_type:$scope.cleanTypeOptions['type1'],
-                area:$scope.areaOptions['7'],
+                area:$scope.areaOptions['0'],
             };
 
             $scope.DPvisibility = false;
