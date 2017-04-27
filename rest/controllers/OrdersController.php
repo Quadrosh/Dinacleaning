@@ -98,17 +98,17 @@ class OrdersController extends ActiveController
 //            $body=file_get_contents("https://sms.ru/sms/send?api_id=4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE&to=79853461615&text=".urlencode($work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment));
 //        }
 //                Zelenin sms
-//        if (!empty(\Yii::$app->request->post('phone'))) {
-//            $workType = \Yii::$app->request->post('work_type');
-//            $area = \Yii::$app->request->post('area');
-//            $phone = \Yii::$app->request->post('phone');
-//            $name = \Yii::$app->request->post('name');
-//            $work_date = \Yii::$app->request->post('work_date');
-//            $workplace = \Yii::$app->request->post('workplace');
-//            $address = \Yii::$app->request->post('address');
-//            $comment = \Yii::$app->request->post('comment');
-//            \Yii::$app->sms->sms_send( '79853461615', $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment );
-//        }
+        if (!empty(\Yii::$app->request->post('phone'))) {
+            $workType = \Yii::$app->request->post('work_type');
+            $area = \Yii::$app->request->post('area');
+            $phone = \Yii::$app->request->post('phone');
+            $name = \Yii::$app->request->post('name');
+            $work_date = \Yii::$app->request->post('work_date');
+            $workplace = \Yii::$app->request->post('workplace');
+            $address = \Yii::$app->request->post('address');
+            $comment = \Yii::$app->request->post('comment');
+            \Yii::$app->sms->sms_send( '79853461615', $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment );
+        }
 
         return parent::createAction($id);
     }
