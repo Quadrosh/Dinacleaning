@@ -121,7 +121,7 @@ app
                     },
                     function(error){
                         console.log(error);
-                        alert('неполучилось отправить, ошибка - '+ error);
+                        alert('неполучилось отправить, ошибка - '+ error.statusText);
                     }
                 );
             };
