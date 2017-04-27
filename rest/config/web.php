@@ -14,16 +14,13 @@ $config = [
             'layout' => 'admin',
 //            'defaultRoute' => 'order/index',
         ],
-        'sms' => [
-            'class' => 'app\modules\sms\Module',
-            'layout' => 'sms',
-//            'defaultRoute' => 'order/index',
-        ],
     ],
     'components' => [
         'sms' => [
             'class' => 'Zelenin\yii\extensions\Sms',
-            'api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE'
+            'api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE',
+            'login' => '9853461615',
+            'password' => 'cxzaqwe'
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
