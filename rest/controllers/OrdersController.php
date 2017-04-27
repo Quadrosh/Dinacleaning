@@ -123,7 +123,7 @@ class OrdersController extends ActiveController
             $response = $client->createRequest()
                 ->setMethod('post')
                 ->setUrl('https://sms.ru/sms/send')
-                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615','text'=> $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment])
+                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615','text'=> 'короткий текст'])
                 ->send();
            if ($response->isOk) {
                 \Yii::$app->session->setFlash('success','отправлено');
@@ -136,7 +136,7 @@ class OrdersController extends ActiveController
         return parent::createAction($id);
     }
 
-
+//  ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615','text'=> $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment])
 
 
 
