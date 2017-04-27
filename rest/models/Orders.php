@@ -43,10 +43,10 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'area', 'to_master_id', 'rooms', 'windows', 'windows_qnt'], 'integer'],
+            [['user_id', 'to_master_id', 'rooms', 'windows', 'windows_qnt'], 'integer'],
             [['comment'], 'string'],
             [['date'], 'safe'],
-            [['work_date', 'work_type', 'workplace', 'name', 'phone', 'contacts', 'email', 'status', 'work_time'], 'string', 'max' => 255],
+            [['work_date', 'work_type', 'area', 'workplace', 'name', 'phone', 'contacts', 'email', 'status', 'work_time'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 510],
         ];
     }
