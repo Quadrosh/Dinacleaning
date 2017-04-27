@@ -5,9 +5,11 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\models\Orders;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\httpclient\Client;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -35,6 +37,7 @@ class OrdersController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember();
         $dataProvider = new ActiveDataProvider([
             'query' => Orders::find(),
             'pagination'=> [
@@ -47,9 +50,27 @@ class OrdersController extends Controller
             ]
         ]);
 
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionSms()
+    {
+        $client = new Client();
+        $response = $client->createRequest()
+            ->setMethod('post')
+            ->setUrl('https://sms.ru/sms/send')
+            ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615', 'text' => 'seeeend'])
+            ->send();
+        if ($response->isOk) {
+            Yii::$app->session->setFlash('success','отправлено');
+        } else {
+            Yii::$app->session->setFlash('error','что-то пошло не так');
+        }
+        return $this->redirect(Url::previous());
+
     }
 
     /**

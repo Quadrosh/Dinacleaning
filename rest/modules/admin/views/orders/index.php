@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\widgets\Alert;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -9,12 +10,14 @@ use yii\grid\GridView;
 $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= Alert::widget() ?>
 <div class="orders-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Create Orders', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('sms', ['sms'], ['class' => 'btn btn-danger']) ?>
     </p>
 
     <?= GridView::widget([

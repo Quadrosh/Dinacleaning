@@ -123,12 +123,12 @@ class OrdersController extends ActiveController
             $response = $client->createRequest()
                 ->setMethod('post')
                 ->setUrl('https://sms.ru/sms/send')
-                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615','text'=>'chek'])
+                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615','text'=> $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment])
                 ->send();
 //            if ($response->isOk) {
 //                $newUserId = $response->data['id'];
 //            }
-//            \Yii::$app->sms->sms_send( '79853461615', $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment );
+
         }
 
         return parent::createAction($id);
