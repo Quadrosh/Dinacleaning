@@ -125,9 +125,11 @@ class OrdersController extends ActiveController
                 ->setUrl('https://sms.ru/sms/send')
                 ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615','text'=> $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment])
                 ->send();
-//            if ($response->isOk) {
-//                $newUserId = $response->data['id'];
-//            }
+           if ($response->isOk) {
+                \Yii::$app->session->setFlash('success','отправлено');
+            } else {
+                \Yii::$app->session->setFlash('error','что-то пошло не так');
+            }
 
         }
 
