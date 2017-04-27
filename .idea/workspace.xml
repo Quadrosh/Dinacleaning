@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/composer.json" afterPath="$PROJECT_DIR$/rest/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/composer.lock" afterPath="$PROJECT_DIR$/rest/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/config/web.php" afterPath="$PROJECT_DIR$/rest/config/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/controllers/OrdersController.php" afterPath="$PROJECT_DIR$/rest/controllers/OrdersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylib/2server/cp.dinacleaning.ru" afterPath="$PROJECT_DIR$/mylib/2server/cp.dinacleaning.ru" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylib/2server/dinacleaning.ru" afterPath="$PROJECT_DIR$/mylib/2server/dinacleaning.ru" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />

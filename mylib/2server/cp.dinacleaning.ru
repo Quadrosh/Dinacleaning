@@ -8,6 +8,7 @@
 	ServerAlias www.cp.dinacleaning.ru
 	DirectoryIndex index.html index.php
 	ScriptAlias /cgi-bin/ /var/www/dinacleaning/data/www/cp.dinacleaning.ru/cgi-bin/
+	ScriptAlias /php-bin/ /var/www/php-bin-isp-php70/
 	<FilesMatch "\.ph(p[3-5]?|tml)$">
 		SetHandler application/x-httpd-php
 	</FilesMatch>
