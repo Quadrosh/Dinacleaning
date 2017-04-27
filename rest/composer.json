@@ -18,7 +18,6 @@
         "yiisoft/yii2": "2.0.4",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "zelenin/yii2-sms_ru": "dev-master",
         "yiisoft/yii2-httpclient": "^2.0"
     },
     "require-dev": {
