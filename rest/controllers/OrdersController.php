@@ -110,8 +110,11 @@ class OrdersController extends ActiveController
 //            $comment = \Yii::$app->request->post('comment');
 //            \Yii::$app->sms->sms_send( '79853461615', $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment );
 //        }
-        $client = new Client();
-        if (!empty(\Yii::$app->request->post('phone'))) {
+
+//        $client = new Client();
+
+
+//        if (!empty(\Yii::$app->request->post('phone'))) {
 //            $workType = \Yii::$app->request->post('work_type');
 //            $area = \Yii::$app->request->post('area');
 //            $phone = \Yii::$app->request->post('phone');
@@ -143,7 +146,7 @@ class OrdersController extends ActiveController
 //                \Yii::$app->session->setFlash('error','что-то пошло не так');
 //            }
 
-        }
+//        }
 
 //        $client->createRequest()
 //            ->setMethod('post')
