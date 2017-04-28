@@ -19,11 +19,11 @@
 
 </VirtualHost>
 <Directory "/var/www/dinacleaning/data/www/dinacleaning.ru/client">
-	Options +Includes -ExecCGI
-	RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f [OR]
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ - [L]
-    RewriteRule ^ index.html [L]
+	Options +FollowSymlinks
+    RewriteEngine on
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !^/$
+    RewriteRule (.*) /#!/$1 [NE,L,R=301]
     DirectoryIndex index.html
 </Directory>

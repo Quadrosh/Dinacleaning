@@ -44923,9 +44923,9 @@ app.filter('trustAsResourceUrl', ['$sce', function ($sce) {
     };
 }]);
 
-//app.config(["$locationProvider", function($locationProvider) {
-//    $locationProvider.html5Mode(true);
-//}]);
+app.config(["$locationProvider", function($locationProvider) {
+    $locationProvider.html5Mode(true);
+}]);
 app.filter('nl2br', function($sce){
     return function(msg,is_xhtml) {
         var is_xhtml = is_xhtml || true;
