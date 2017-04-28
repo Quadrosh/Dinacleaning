@@ -21,8 +21,9 @@
 <Directory "/var/www/dinacleaning/data/www/dinacleaning.ru/client">
 	Options +Includes -ExecCGI
 	RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ - [L]
+    RewriteRule ^ index.html [L]
     DirectoryIndex index.html
-    RewriteRule . index.html
 </Directory>
