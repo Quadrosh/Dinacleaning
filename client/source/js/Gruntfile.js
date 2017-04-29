@@ -22,6 +22,9 @@ module.exports = function(grunt) {
 		            'components/angular-carousel/angular-carousel.js',
                     'components/angular-resource/angular-resource.js',
 
+                    //'components/angular-animate/angular-animate.js',
+                    //'components/angular-prompt/angular-prompt.js',
+
                     'angular/**/*.js'
 		        ],
 		        dest: '../../assets/js/app.js'
