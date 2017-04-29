@@ -48,6 +48,7 @@ class Orders extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['work_date', 'work_type', 'area', 'workplace', 'name', 'phone', 'contacts', 'email', 'status', 'work_time'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 510],
+            [['phone','address','work_type'], 'required'],
         ];
     }
 
