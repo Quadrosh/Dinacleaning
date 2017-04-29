@@ -265,6 +265,10 @@ div.rn-carousel-indicator span.active {
 
 .uslugi ul li {
     list-style-type:none;
+
+}
+.uslugi ul li p{
+    margin-top: 25px;
 }
 .uslugi h1 {
     /*color:grey;*/
@@ -285,6 +289,7 @@ div.rn-carousel-indicator span.active {
     /*font-weight:bold;*/
     text-transform: uppercase;
 }
+
 #advantagesSection .info {
     color: #d3d3d3;
     /*font-weight:bold;*/
