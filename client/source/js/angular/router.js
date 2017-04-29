@@ -123,6 +123,20 @@ app.config(function($stateProvider, $urlRouterProvider){
             }
 
         })
+        .state('home.povsednevnaya.price', {
+            url:'/price',
+            resolve: {
+                priceData: function(PriceService){
+                    return new PriceService.query();
+                }
+            },
+            views:{
+                'servicesPovsednevnaya':{
+                    templateUrl: templatesPath +'services.supporting.price.html',
+                    controller:'PriceCtrl',
+                }
+            }
+        })
         .state('home.generalnaya', {
             url:'/services/generalnaya-uborka-v-moskve',
             resolve: {
@@ -137,6 +151,20 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             }
 
+        })
+        .state('home.generalnaya.price', {
+            url:'/price',
+            resolve: {
+                priceData: function(PriceService){
+                    return new PriceService.query();
+                }
+            },
+            views:{
+                'servicesGeneral':{
+                    templateUrl: templatesPath +'services.general.price.html',
+                    controller:'PriceCtrl',
+                }
+            }
         })
         .state('home.generalnaya.vhodit', {
             url:'/vhodit',
@@ -167,6 +195,20 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             }
 
+        })
+        .state('home.remont.price', {
+            url:'/price',
+            resolve: {
+                priceData: function(PriceService){
+                    return new PriceService.query();
+                }
+            },
+            views:{
+                'servicesRepair':{
+                    templateUrl: templatesPath +'services.repair.price.html',
+                    controller:'PriceCtrl',
+                }
+            }
         })
         .state('home.remont.vhodit', {
             url:'/vhodit',

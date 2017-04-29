@@ -41,6 +41,7 @@ AppAsset::register($this);
             ['label' => 'Advantages', 'url' => ['/admin/advantages']],
             ['label' => 'Home Slides', 'url' => ['/admin/homeslidecrud']],
             ['label' => 'Pages', 'url' => ['/admin/pages']],
+            ['label' => 'Prices', 'url' => ['/admin/prices']],
             ['label' => 'Tasks', 'url' => ['/admin/tasks']],
             ['label' => 'Orders', 'url' => ['/admin/orders']],
 
