@@ -45399,6 +45399,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.povsednevnaya', {
             url:'/services/povsednevnaya-uborka-v-moskve',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesSection"});
+            },
             resolve: {
                 pageData: function(PageService){
                     return new PageService.get({id:'4'});
@@ -45414,6 +45417,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.povsednevnaya.vhodit', {
             url:'/vhodit',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+            },
             resolve: {
                 taskData: function(TaskService){
                     return new TaskService.query();
@@ -45429,6 +45435,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.povsednevnaya.price', {
             url:'/price',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+            },
             resolve: {
                 priceData: function(PriceService){
                     return new PriceService.query();
@@ -45443,6 +45452,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.generalnaya', {
             url:'/services/generalnaya-uborka-v-moskve',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesSection"});
+            },
             resolve: {
                 pageData: function(PageService){
                     return new PageService.get({id:'6'});
@@ -45458,6 +45470,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.generalnaya.price', {
             url:'/price',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesGeneralView"});
+            },
             resolve: {
                 priceData: function(PriceService){
                     return new PriceService.query();
@@ -45472,6 +45487,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.generalnaya.vhodit', {
             url:'/vhodit',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesGeneralView"});
+            },
             resolve: {
                 taskData: function(TaskService){
                     return new TaskService.query();
@@ -45487,6 +45505,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.remont', {
             url:'/services/uborka-posle-remonta-v-moskve',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesSection"});
+            },
             resolve: {
                 pageData: function(PageService){
                     return new PageService.get({id:'5'});
@@ -45502,6 +45523,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.remont.price', {
             url:'/price',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesRepairView"});
+            },
             resolve: {
                 priceData: function(PriceService){
                     return new PriceService.query();
@@ -45516,11 +45540,13 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
         .state('home.remont.vhodit', {
             url:'/vhodit',
+            onEnter: function () {
+                TweenLite.to(window, 1, {scrollTo:"#servicesRepairView"});
+            },
             resolve: {
                 taskData: function(TaskService){
                     return new TaskService.query();
                 },
-
 // метод лабра
 //                taskData: ['TaskService', function (TaskService) {
 //                    return new TaskService().$get().then(function (response) {

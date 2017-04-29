@@ -324,15 +324,16 @@ section {
     text-align: center;
 }
 #servicesSection {
-
-    /*height: 600px;*/
-    /*background: #000;*/
     min-height: 600px;
-    /*background-image: url(../img/services.jpg);*/
-    /*background-position: top center;*/
-    /*-webkit-background-size: cover;*/
-    /*-moz-background-size: cover;*/
-    /*background-size: cover;*/
+    padding-bottom: 100px;
+
+}
+
+#servicesSection .secondlink.active,
+#servicesSection .secondlink.active:focus,
+#servicesSection .secondlink.active:hover{
+    color: #ffd155;
+
 }
 #servicesSection .defaultImage{
     position: absolute;
@@ -342,7 +343,7 @@ section {
 }
 .defaultBottomImage{
     position: relative;
-    margin-top:50px;
+    margin:10px 0 60px;
     width: 30%;
     left:35%;
     opacity:0.5;

@@ -2,17 +2,18 @@
 <p class="pagedescription">{{pageData.pagedescription}}</p>
 <!--<p>{{pageData.text}}</p>-->
 
+<div id="servicesRepairView" ui-view="servicesRepair"><img class="defaultBottomImage" src="/assets/img/repair.png" alt="Уборка после ремонта в Москве цены"></div>
+
 <div class="row">
     <div class="col-sm-12 text-center">
         <a class="secondlink"  ui-sref="home.remont.vhodit" ui-sref-active="active">Что входит в уборку после ремонта</a>
     </div>
     <div class="col-sm-12 text-center mt10">
-        <a class="secondlink" data-ui-sref="home.remont.price">Цены на уборку после ремонта</a>
+        <a class="secondlink" ui-sref="home.remont.price" ui-sref-active="active">Цены на уборку после ремонта</a>
     </div>
-    <div class="col-sm-12 text-center mt50">
+    <div class="col-sm-12 text-center mt20">
         <a class="btn btn-primary" data-ui-sref="home.zakaz">Заказать уборку после ремонта</a>
     </div>
 </div>
 
 
-<div ui-view="servicesRepair"><img class="defaultBottomImage" src="/assets/img/repair.png" alt="Уборка после ремонта в Москве цены"></div>
