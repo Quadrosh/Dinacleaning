@@ -21,6 +21,7 @@ module.exports = function(grunt) {
 		            'components/angular-touch/angular-touch.js',
 		            'components/angular-carousel/angular-carousel.js',
                     'components/angular-resource/angular-resource.js',
+                    'components/angular-loading-bar/loading-bar.js',
 
                     //'components/angular-animate/angular-animate.js',
                     //'components/angular-prompt/angular-prompt.js',
@@ -46,7 +47,8 @@ module.exports = function(grunt) {
 		        '../../assets/css/app.min.css': [
                     //'components/angular-carousel/angular-carousel.css',
                     'components/angular-datepicker/angular-datepicker.css',
-			        '../css/style.css',
+					'components/angular-loading-bar/loading-bar.css',
+					'../css/style.css',
 		        ]
 		      }
 		    }

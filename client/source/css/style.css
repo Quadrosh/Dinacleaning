@@ -47,7 +47,11 @@ body {
     /*background-color: #eee;*/
     font-family: "HelveticaRegular",Helvetica,Arial,sans-serif;
 }
-
+.startLoader{
+    color: #4ea6d3;
+    text-align: center;
+    margin-top: 200px;
+}
 .container {
     width: 100%;
     margin:0;
@@ -79,6 +83,7 @@ section {
 .mt150{
     margin-top: 150px;
 }
+
 
 h1{
     color: #000;

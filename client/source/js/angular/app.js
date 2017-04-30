@@ -28,6 +28,7 @@ var app = angular.module('dinaApp', [
     'ngTouch',
     '720kb.datepicker',
     'angular-carousel',
+    'angular-loading-bar',
 
 
 ]);
