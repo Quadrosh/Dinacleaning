@@ -474,10 +474,13 @@ select::-ms-expand {
 
 .menufilter , #backfilter {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     background-color: rgba(96,125,139,.8);
     position: fixed;
     top: 0px;
+
+    height: 0;
+    display: none;
 }
 .backfilterOff,
 #backfilter .backfilterOff{
@@ -504,10 +507,11 @@ select::-ms-expand {
 }
 .backfilterOn,
 #backfilter .backfilterOn{
-    display: block;
+    display: block !important;
     animation: backfilter_on 0.4s linear normal;
     animation-fill-mode:forwards;
     z-index: 5;
+    height: 100%;
 }
 
 
