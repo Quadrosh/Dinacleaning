@@ -559,7 +559,7 @@ select::-ms-expand {
     font-style: italic;
 }
 #orderSection {
-    padding: 50px;
+    padding: 50px 0;
 }
 #orderSection .pagename {
     margin: 30px 0 30px;
