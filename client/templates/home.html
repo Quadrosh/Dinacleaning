@@ -29,9 +29,11 @@
     rn-carousel-pause-on-hover
     class="top-carousel">
     <li ng-repeat="slide in homeData">
-        <img src="/assets/img/{{slide.image}}" alt=""/>
-        <h2 class="lead">{{slide.lead}}</h2>
-        <p class="text" ng-bind-html="slide.text|nl2br"></p>
+        <div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{slide.image}})'}">
+            <!--<img src="/assets/img/{{slide.image}}" alt=""/>-->
+            <h2 class="lead">{{slide.lead}}</h2>
+            <p class="text" ng-bind-html="slide.text|nl2br"></p>
+        </div>
     </li>
     <div class="carousel-indicators" rn-carousel-indicators ng-if="homeData.length > 1" slides="homeData" rn-carousel-index="carouselIndex"></div>
 

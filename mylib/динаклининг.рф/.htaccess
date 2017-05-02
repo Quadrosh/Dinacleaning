@@ -1,0 +1,4 @@
+RewriteEngine on
+
+      RewriteCond %{HTTP_HOST} ^xn--80agbqbamipeb\.xn--p1ai$ [NC]
+      RewriteRule ^(.*)$ http://dinacleaning.ru/$1 [R=301,L]
