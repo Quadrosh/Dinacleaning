@@ -612,6 +612,12 @@ select::-ms-expand {
         top:80px;
         font-size: 36px;
     }
+    #clearSection .lead {
+        font-size: 36px;
+    }
+    #advantageName {
+        font-size: 36px;
+    }
     .top-carousel .text {
         top: 250px;
     }
@@ -650,8 +656,24 @@ select::-ms-expand {
         font-size:12px;
         background-color: rgba(0,0,0,.4);
     }
+    #clearSection .text {
+        top: 150px;
+        padding:5px 5px;
+        font-size: 16px;
+        background-color: rgba(0,0,0,.4);
+    }
     ul[rn-carousel] {
         height:300px;
+    }
+    .btn-primary {
+        font-size: 14px;
+    }
+    .vhoditItems {
+        padding-left: 0;
+    }
+    #clearSection .lead {
+        padding: 5px 5px;
+        font-size: 36px;
     }
 }
 
@@ -663,6 +685,9 @@ select::-ms-expand {
     }
     .top-carousel .text {
         top: 120px;
+        background-color: rgba(0,0,0,.5);
+    }
+    #clearSection .text {
         background-color: rgba(0,0,0,.5);
     }
 }
