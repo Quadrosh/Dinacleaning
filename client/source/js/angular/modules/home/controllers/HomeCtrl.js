@@ -117,6 +117,7 @@ app
             $scope.newOrder = function(data){
                 OrderService.post(data).then(
                     function(){
+                        yaCounter44480872.reachGoal('sendOrder');
                         alert('заказ отправлен');
                     },
                     function(error){

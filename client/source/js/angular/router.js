@@ -114,7 +114,8 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.povsednevnaya.vhodit', {
             url:'/vhodit',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+                var tl = new TimelineLite()
+                .to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
             },
             resolve: {
                 taskData: function(TaskService){
@@ -132,7 +133,19 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.povsednevnaya.price', {
             url:'/price',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+                //var view = angular.element( document.querySelector( '#servicesPovsednevnayaViewContainer' ) );
+                //alert(view.innerHeight);
+
+
+                var tl = new TimelineLite()
+                    .set('#servicesPovsednevnayaViewContainer', {height:"auto"})
+                    //.to('#servicesPovsednevnayaViewContainer', 1, {height:0,})
+
+                    //.to('#servicesPovsednevnayaViewContainer', 1, {autoAlpha:0,})
+                    .from('#servicesPovsednevnayaViewContainer', 1, {height:0,immediateRender:false})
+                    //.to('#servicesPovsednevnayaViewContainer', 1, {autoAlpha:1,})
+                    .to(window, 1, {scrollTo:"#servicesPovsednevnayaView",});
+
             },
             resolve: {
                 priceData: function(PriceService){
@@ -303,6 +316,7 @@ app.config(function($stateProvider, $urlRouterProvider){
             url:'/zakaz',
             onEnter: function () {
                 TweenLite.to(window, 2, {scrollTo:"#orderSection"});
+                yaCounter44480872.reachGoal('goToOrder');
             },
 
             templateUrl: templatesPath + 'home.html',
