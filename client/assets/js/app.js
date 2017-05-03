@@ -45727,7 +45727,9 @@ app.config(function($stateProvider, $urlRouterProvider){
             //abstract:false,
             url:'/services',
             onEnter: function () {
-                TweenLite.to(window, 2, {scrollTo:"#servicesSection"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 2, {scrollTo:"#servicesSection"});
             },
             templateUrl: templatesPath +'home.html',
             resolve: {
@@ -45740,7 +45742,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.povsednevnaya', {
             url:'/services/povsednevnaya-uborka-v-moskve',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesSection"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesSection"});
             },
             resolve: {
                 pageData: function(PageService){
@@ -45759,7 +45763,9 @@ app.config(function($stateProvider, $urlRouterProvider){
             url:'/vhodit',
             onEnter: function () {
                 var tl = new TimelineLite()
-                .to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+
             },
             resolve: {
                 taskData: function(TaskService){
@@ -45782,11 +45788,12 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 
                 var tl = new TimelineLite()
-                    .set('#servicesPovsednevnayaViewContainer', {height:"auto"})
+                    //.set('#servicesPovsednevnayaViewContainer', {height:"auto"})
                     //.to('#servicesPovsednevnayaViewContainer', 1, {height:0,})
 
                     //.to('#servicesPovsednevnayaViewContainer', 1, {autoAlpha:0,})
-                    .from('#servicesPovsednevnayaViewContainer', 1, {height:0,immediateRender:false})
+                    //.from('#servicesPovsednevnayaViewContainer', 1, {height:0,immediateRender:false})
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
                     //.to('#servicesPovsednevnayaViewContainer', 1, {autoAlpha:1,})
                     .to(window, 1, {scrollTo:"#servicesPovsednevnayaView",});
 
@@ -45806,7 +45813,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.generalnaya', {
             url:'/services/generalnaya-uborka-v-moskve',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesSection"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesSection"});
             },
             resolve: {
                 pageData: function(PageService){
@@ -45824,7 +45833,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.generalnaya.price', {
             url:'/price',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesGeneralView"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
             },
             resolve: {
                 priceData: function(PriceService){
@@ -45841,7 +45852,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.generalnaya.vhodit', {
             url:'/vhodit',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesGeneralView"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
             },
             resolve: {
                 taskData: function(TaskService){
@@ -45859,7 +45872,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.remont', {
             url:'/services/uborka-posle-remonta-v-moskve',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesSection"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesSection"});
             },
             resolve: {
                 pageData: function(PageService){
@@ -45877,7 +45892,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.remont.price', {
             url:'/price',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesRepairView"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesRepairView"});
             },
             resolve: {
                 priceData: function(PriceService){
@@ -45894,7 +45911,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.remont.vhodit', {
             url:'/vhodit',
             onEnter: function () {
-                TweenLite.to(window, 1, {scrollTo:"#servicesRepairView"});
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesRepairView"});
             },
             resolve: {
                 taskData: function(TaskService){
@@ -45959,7 +45978,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.zakaz', {
             url:'/zakaz',
             onEnter: function () {
-                TweenLite.to(window, 2, {scrollTo:"#orderSection"});
+                var tl = new TimelineLite()
+                    .from('#orderSection', 1, {autoAlpha:0})
+                    .to(window, 2, {scrollTo:"#orderSection"});
                 yaCounter44480872.reachGoal('goToOrder');
             },
 

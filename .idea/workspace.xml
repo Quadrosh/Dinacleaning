@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.js" afterPath="$PROJECT_DIR$/client/assets/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.min.js" afterPath="$PROJECT_DIR$/client/assets/js/app.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" afterPath="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/js/angular/router.js" afterPath="$PROJECT_DIR$/client/source/js/angular/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/home.html" afterPath="$PROJECT_DIR$/client/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.general.html" afterPath="$PROJECT_DIR$/client/templates/services.general.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.repair.html" afterPath="$PROJECT_DIR$/client/templates/services.repair.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.supporting.html" afterPath="$PROJECT_DIR$/client/templates/services.supporting.html" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,182 +25,162 @@
     <favorites_list name="dinacleaning" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.54787236">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-                  <folding>
-                    <element signature="n#style#0;n#img#0;n#div#0;n#noscript#0;n#html#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="593" column="0" selection-start-line="593" selection-start-column="0" selection-end-line="593" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="services.general.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/services.general.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="services.repair.price.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/services.repair.price.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="4" column="70" selection-start-line="4" selection-start-column="70" selection-end-line="4" selection-end-column="70" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="services.general.price.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/services.general.price.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/source/js/angular/router.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="318" column="57" selection-start-line="318" selection-start-column="57" selection-end-line="318" selection-end-column="57" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="services.repair.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/services.repair.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="38" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="services.supporting.price.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/services.supporting.price.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PriceService.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/price/services/PriceService.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PriceCtrl.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/price/controllers/PriceCtrl.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Prices.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/rest/models/Prices.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="HomeCtrl.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.44510385">
-                  <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/source/js/angular/app.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/home.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="52" column="42" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="42" />
-                  <folding>
-                    <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="services.supporting.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/client/templates/services.supporting.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="45" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/client/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.17804155">
-                  <caret line="65" column="35" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="35" />
-                  <folding>
-                    <element signature="n#style#0;n#img#0;n#div#0;n#noscript#0;n#html#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#noscript#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="593" column="0" selection-start-line="593" selection-start-column="0" selection-end-line="593" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.general.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/services.general.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.repair.price.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/services.repair.price.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="70" selection-start-line="4" selection-start-column="70" selection-end-line="4" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.general.price.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/services.general.price.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/source/js/angular/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="336" column="43" selection-start-line="336" selection-start-column="43" selection-end-line="336" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.repair.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/services.repair.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.supporting.price.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/services.supporting.price.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PriceService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/price/services/PriceService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PriceCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/price/controllers/PriceCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Prices.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rest/models/Prices.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/source/js/angular/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/templates/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.142433">
+              <caret line="52" column="42" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="42" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.supporting.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/templates/services.supporting.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -273,8 +246,8 @@
         <option value="$PROJECT_DIR$/client/templates/services.supporting.html" />
         <option value="$PROJECT_DIR$/client/templates/services.repair.html" />
         <option value="$PROJECT_DIR$/client/templates/services.general.html" />
-        <option value="$PROJECT_DIR$/client/source/js/angular/router.js" />
         <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
+        <option value="$PROJECT_DIR$/client/source/js/angular/router.js" />
       </list>
     </option>
   </component>
@@ -288,8 +261,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="137" />
-    <option name="y" value="462" />
+    <option name="x" value="116" />
+    <option name="y" value="456" />
     <option name="width" value="1303" />
     <option name="height" value="434" />
   </component>
@@ -481,7 +454,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="137" y="462" width="1303" height="434" extended-state="0" />
+    <frame x="116" y="456" width="1303" height="434" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -886,24 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/source/js/angular/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="318" column="57" selection-start-line="318" selection-start-column="57" selection-end-line="318" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="42" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -914,11 +869,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/source/js/angular/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="336" column="43" selection-start-line="336" selection-start-column="43" selection-end-line="336" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44510385">
+        <state vertical-scroll-proportion="0.0">
           <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.142433">
+          <caret line="52" column="42" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#section#3;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
