@@ -240,6 +240,13 @@ div.rn-carousel-indicator span.active {
     list-style-type: none;
     padding: 20px 10px;
 }
+.main_phone {
+    font-size:18px;
+    color: #4ea6d3;
+    position: absolute;
+    top:35px;
+    right:15px;
+}
 .logolead {
     text-transform: uppercase;
     margin-top: 5px;
@@ -644,6 +651,9 @@ select::-ms-expand {
     .top-carousel .text {
         top: 210px;
         font-size:16px;
+    }
+    .main_phone {
+        top:0;
     }
 }
 
