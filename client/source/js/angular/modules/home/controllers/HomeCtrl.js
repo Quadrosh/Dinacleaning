@@ -118,6 +118,7 @@ app
                 OrderService.post(data).then(
                     function(){
                         yaCounter44480872.reachGoal('sendOrder');
+                        ga('send','event','order','send','sendOrder');
                         alert('заказ отправлен');
                     },
                     function(error){
