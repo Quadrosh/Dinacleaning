@@ -45331,6 +45331,7 @@ app
         '$interval',
         'homeData',
         'pageData',
+        'calendarData',
         'allPages',
         '$timeout',
         'advantagesData',
@@ -45341,6 +45342,7 @@ app
                                  $interval,
                              homeData,
                              pageData,
+                             calendarData,
                              allPages,
                              $timeout,
                              advantagesData,
@@ -45462,6 +45464,17 @@ app
                 type2:'генеральная',
                 type3:'после ремонта',
             };
+            //$scope.dateOptions = {
+            //    0:'24 мая',
+            //    1:'25 мая',
+            //    2:'26 мая',
+            //    3:'26 мая',
+            //    4:'26 мая',
+            //    5:'26 мая',
+            //    6:'26 мая',
+            //
+            //};
+            $scope.dateOptions = calendarData;
             $scope.areaOptions = {
                 0:'?',
                 1:'меньше 10-ти',
@@ -45487,24 +45500,25 @@ app
             $scope.order = {
                 workplace:$scope.workPlaceOptions['type1'],
                 work_type:$scope.cleanTypeOptions['type1'],
+                work_date:$scope.dateOptions['1'],
                 area:$scope.areaOptions['0'],
             };
 
             $scope.DPvisibility = false;
             $scope.backFilter = 'backfilterOff';
 
-            $scope.toggleDatePicker = function(){
-                $scope.DPvisibility = !$scope.DPvisibility;
-                if ($scope.DPvisibility == true) {
-                    $scope.backFilter = 'backfilterOn';
-                } else {
-                    $scope.backFilter = 'backfilterOff';
-                }
-            };
-            $scope.myHideCalendar = function(){
-                $scope.DPvisibility = false;
-                $scope.backFilter = 'backfilterOff';
-            };
+            //$scope.toggleDatePicker = function(){
+            //    $scope.DPvisibility = !$scope.DPvisibility;
+            //    if ($scope.DPvisibility == true) {
+            //        $scope.backFilter = 'backfilterOn';
+            //    } else {
+            //        $scope.backFilter = 'backfilterOff';
+            //    }
+            //};
+            //$scope.myHideCalendar = function(){
+            //    $scope.DPvisibility = false;
+            //    $scope.backFilter = 'backfilterOff';
+            //};
 
 
             //$interval(function setInterval() {
@@ -45708,6 +45722,9 @@ app.config(function($stateProvider, $urlRouterProvider){
                 },
                 reviewData: function(ReviewService){
                     return new ReviewService.query();
+                },
+                calendarData: function(CalendarService){
+                    return new CalendarService.query();
                 },
                 orderData: function(OrderService){
                     //return new OrderService.query();
@@ -45988,8 +46005,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             templateUrl: templatesPath + 'home.html',
 
         })
-
-
     ;
 });
 
@@ -46009,3 +46024,11 @@ app.factory('AsyncService', ['$q', function Async($q)
         throw new Error('wrong invocation with ' + ResCall.toString());
     };
 }]);
+'use strict';
+
+app
+    .factory('CalendarService', ['$resource', function ($resource) {
+
+        return $resource(apiHost + 'calendar');
+
+    }]);

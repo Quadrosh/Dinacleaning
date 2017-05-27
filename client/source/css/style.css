@@ -597,8 +597,19 @@ select::-ms-expand {
     color: grey;
 }
 
-
-
+label {
+    opacity: 0.5;
+    text-transform: lowercase;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.select_dropdown {
+    position: absolute;
+    opacity:0.5;
+    right: 20px;
+    top: 34px;
+    font-size: 10px;
+}
 
 
 

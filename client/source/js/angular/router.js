@@ -64,6 +64,9 @@ app.config(function($stateProvider, $urlRouterProvider){
                 reviewData: function(ReviewService){
                     return new ReviewService.query();
                 },
+                calendarData: function(CalendarService){
+                    return new CalendarService.query();
+                },
                 orderData: function(OrderService){
                     //return new OrderService.query();
                     return new OrderService.get().then(function(data) {
@@ -343,8 +346,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             templateUrl: templatesPath + 'home.html',
 
         })
-
-
     ;
 });
 
