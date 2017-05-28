@@ -48,6 +48,7 @@
         <li><a ui-sref="home.povsednevnaya" ui-sref-active="active">Поддерживающая уборка</a></li>
         <li><a ui-sref="home.generalnaya" ui-sref-active="active">Генеральная уборка</a></li>
         <li><a ui-sref="home.remont" ui-sref-active="active">Уборка после ремонта</a></li>
+        <li><a ui-sref="home.windows" ui-sref-active="active">Мойка окон</a></li>
     </ul>
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -55,7 +56,7 @@
                 <div id="servicesView"  ui-view="services">
 
                     <h1>{{allPages[3].pagehead}}</h1>
-                    <p class="pagedescription">{{allPages[3].pagedescription}}</p>
+                    <p class="pagedescription" ng-bind-html="allPages[3].pagedescription|nl2br"></p>
 
                     <img class="defaultBottomImage" src="/assets/img/supporting.png" alt="Поддерживающая уборка в Москве цена">
 
@@ -295,4 +296,4 @@
     </div>
 
 </section>
-<div id="backfilter" ng-click="myHideCalendar()" ng-class="backFilter"></div>
+<!--<div id="backfilter" ng-click="myHideCalendar()" ng-class="backFilter"></div>-->

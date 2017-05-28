@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+        <h2 class="vhoditLead">Цены на мойку окон: </h2>
+        <ul class="priceItems">
+            <li ng-repeat="price in priceData | filter : {type_id : '4'} ">
+                <p ><i class="glyphicon glyphicon-check"></i> <span ng-bind-html="price.name"></span> {{price.name_descr}} - {{price.price}}  <span ng-bind-html="price.price_descr"></span></p>
+            </li>
+        </ul>
+        <p class="pricesInfo">Расценки приведены для информации. <br> Реальная цена зависит от степени загрязненности и наличия сложных загрязнений.</p>
+    </div>
+
+</div>

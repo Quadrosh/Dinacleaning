@@ -45434,13 +45434,6 @@ app
                     .add(tlOut.play(),"out")
                     ;
             };
-            //$scope.newOrder = function(data){
-            //    OrderService.post(data).then(function(){
-            //        alert('заказ отправлен');
-            //    }).catch(function(error){
-            //        alert('неполучилось, ошибка '+ error);
-            //    });
-            //};
             $scope.newOrder = function(data){
                 OrderService.post(data).then(
                     function(){
@@ -45463,17 +45456,9 @@ app
                 type1:'поддерживающая',
                 type2:'генеральная',
                 type3:'после ремонта',
+                type4:'мойка окон',
             };
-            //$scope.dateOptions = {
-            //    0:'24 мая',
-            //    1:'25 мая',
-            //    2:'26 мая',
-            //    3:'26 мая',
-            //    4:'26 мая',
-            //    5:'26 мая',
-            //    6:'26 мая',
-            //
-            //};
+
             $scope.dateOptions = calendarData;
             $scope.areaOptions = {
                 0:'?',
@@ -45504,8 +45489,8 @@ app
                 area:$scope.areaOptions['0'],
             };
 
-            $scope.DPvisibility = false;
-            $scope.backFilter = 'backfilterOff';
+            //$scope.DPvisibility = false;
+            //$scope.backFilter = 'backfilterOff';
 
             //$scope.toggleDatePicker = function(){
             //    $scope.DPvisibility = !$scope.DPvisibility;
@@ -45828,6 +45813,67 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             }
         })
+        .state('home.windows', {
+            url:'/services/moyka-okon-v-moskve',
+            onEnter: function () {
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesSection"});
+            },
+            resolve: {
+                pageData: function(PageService){
+                    return new PageService.get({id:'11'});
+                }
+            },
+            views: {
+                'services':{
+                    templateUrl: templatesPath +'services.windows.html',
+                    controller:'PageCtrl',
+                }
+            }
+
+        })
+        .state('home.windows.price', {
+            url:'/price',
+            onEnter: function () {
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+            },
+            resolve: {
+                priceData: function(PriceService){
+                    return new PriceService.query();
+                }
+            },
+            views:{
+                'servicesGeneral':{
+                    templateUrl: templatesPath +'services.windows.price.html',
+                    controller:'PriceCtrl',
+                }
+            }
+        })
+        .state('home.windows.vhodit', {
+            url:'/vhodit',
+            onEnter: function () {
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+            },
+            resolve: {
+                taskData: function(TaskService){
+                    return new TaskService.query();
+                }
+            },
+            views:{
+                'servicesGeneral':{
+                    templateUrl: templatesPath +'services.windows.tasks.html',
+                    controller:'TaskCtrl',
+                }
+            }
+
+        })
+
+
         .state('home.generalnaya', {
             url:'/services/generalnaya-uborka-v-moskve',
             onEnter: function () {

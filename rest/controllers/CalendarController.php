@@ -78,6 +78,7 @@ class CalendarController extends ActiveController
                 '4'=>$date4,
                 '5'=>$date5,
                 '6'=>$date6,
+                '7'=>'другая дата',
         ];
         return $dataProvider;
     }

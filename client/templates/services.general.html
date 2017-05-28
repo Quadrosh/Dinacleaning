@@ -1,6 +1,5 @@
 <h1>{{pageData.pagehead}}</h1>
-<p class="pagedescription">{{pageData.pagedescription}}</p>
-<!--<p>{{pageData.text}}</p>-->
+<p class="pagedescription" ng-bind-html="pageData.pagedescription|nl2br"></p>
 
 <div id="servicesGeneralViewContainer">
     <div id="servicesGeneralView" ui-view="servicesGeneral">

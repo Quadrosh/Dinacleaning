@@ -169,6 +169,67 @@ app.config(function($stateProvider, $urlRouterProvider){
                 }
             }
         })
+        .state('home.windows', {
+            url:'/services/moyka-okon-v-moskve',
+            onEnter: function () {
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesSection"});
+            },
+            resolve: {
+                pageData: function(PageService){
+                    return new PageService.get({id:'11'});
+                }
+            },
+            views: {
+                'services':{
+                    templateUrl: templatesPath +'services.windows.html',
+                    controller:'PageCtrl',
+                }
+            }
+
+        })
+        .state('home.windows.price', {
+            url:'/price',
+            onEnter: function () {
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+            },
+            resolve: {
+                priceData: function(PriceService){
+                    return new PriceService.query();
+                }
+            },
+            views:{
+                'servicesGeneral':{
+                    templateUrl: templatesPath +'services.windows.price.html',
+                    controller:'PriceCtrl',
+                }
+            }
+        })
+        .state('home.windows.vhodit', {
+            url:'/vhodit',
+            onEnter: function () {
+                var tl = new TimelineLite()
+                    .from('#servicesViewContainer', 1, {autoAlpha:0})
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+            },
+            resolve: {
+                taskData: function(TaskService){
+                    return new TaskService.query();
+                }
+            },
+            views:{
+                'servicesGeneral':{
+                    templateUrl: templatesPath +'services.windows.tasks.html',
+                    controller:'TaskCtrl',
+                }
+            }
+
+        })
+
+
         .state('home.generalnaya', {
             url:'/services/generalnaya-uborka-v-moskve',
             onEnter: function () {

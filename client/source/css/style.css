@@ -368,9 +368,9 @@ section {
 .defaultBottomImage{
     position: relative;
     margin:10px 0 60px;
-    width: 30%;
-    left:35%;
-    opacity:0.5;
+    width: 50%;
+    left:25%;
+    opacity:0.9;
     /*top:0px;*/
 }
 #servicesSection .sideMenu {
@@ -588,7 +588,7 @@ select::-ms-expand {
 }
 .btn_right_arrow {
     line-height: 1;
-    padding: 4px 7px 1px;
+    padding: 4px 7px 0px;
 }
 .pricesInfo {
     font-family:"HelveticaRegular",sans-serif;

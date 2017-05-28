@@ -109,13 +109,6 @@ app
                     .add(tlOut.play(),"out")
                     ;
             };
-            //$scope.newOrder = function(data){
-            //    OrderService.post(data).then(function(){
-            //        alert('заказ отправлен');
-            //    }).catch(function(error){
-            //        alert('неполучилось, ошибка '+ error);
-            //    });
-            //};
             $scope.newOrder = function(data){
                 OrderService.post(data).then(
                     function(){
@@ -138,17 +131,9 @@ app
                 type1:'поддерживающая',
                 type2:'генеральная',
                 type3:'после ремонта',
+                type4:'мойка окон',
             };
-            //$scope.dateOptions = {
-            //    0:'24 мая',
-            //    1:'25 мая',
-            //    2:'26 мая',
-            //    3:'26 мая',
-            //    4:'26 мая',
-            //    5:'26 мая',
-            //    6:'26 мая',
-            //
-            //};
+
             $scope.dateOptions = calendarData;
             $scope.areaOptions = {
                 0:'?',
@@ -179,8 +164,8 @@ app
                 area:$scope.areaOptions['0'],
             };
 
-            $scope.DPvisibility = false;
-            $scope.backFilter = 'backfilterOff';
+            //$scope.DPvisibility = false;
+            //$scope.backFilter = 'backfilterOff';
 
             //$scope.toggleDatePicker = function(){
             //    $scope.DPvisibility = !$scope.DPvisibility;
