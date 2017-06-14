@@ -22,23 +22,50 @@
 
 
 
-<ul rn-carousel
-    rn-carousel-index="carouselIndex"
-    rn-carousel-easing="easeInOutQuad"
-    rn-carousel-duration="1200"
-    rn-carousel-auto-slide="20"
-    rn-carousel-pause-on-hover
-    class="top-carousel">
-    <li ng-repeat="slide in homeData">
-        <div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{slide.image}})'}">
+<!--<ul rn-carousel-->
+    <!--rn-carousel-index="carouselIndex"-->
+    <!--rn-carousel-easing="easeInOutQuad"-->
+    <!--rn-carousel-duration="1200"-->
+    <!--rn-carousel-auto-slide="20"-->
+    <!--rn-carousel-pause-on-hover-->
+    <!--rn-carousel-transition="zoom"-->
+    <!--rn-carousel-controls-allow-loop-->
+    <!--rn-carousel-controls-->
+    <!--class="top-carousel">-->
+    <!--<li ng-repeat="slide in homeData">-->
+        <!--<div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{slide.image}})'}">-->
             <!--<img src="/assets/img/{{slide.image}}" alt=""/>-->
-            <h2 class="lead">{{slide.lead}}</h2>
-            <p class="text" ng-bind-html="slide.text|nl2br"></p>
-        </div>
-    </li>
-    <div class="carousel-indicators" rn-carousel-indicators ng-if="homeData.length > 1" slides="homeData" rn-carousel-index="carouselIndex"></div>
+            <!--<h2 class="lead">{{slide.lead}}</h2>-->
+            <!--<p class="text" ng-bind-html="slide.text|nl2br"></p>-->
+        <!--</div>-->
+    <!--</li>-->
+    <!--<div class="carousel-indicators" _rn-carousel-indicators ng-if="homeData.length > 1" slides="homeData" rn-carousel-index="carouselIndex"></div>-->
 
-</ul>
+<!--</ul>-->
+<section class="top_carousel">
+    <ui-carousel
+            slides="homeData"
+            slides-to-show="1"
+            slides-to-scroll="1"
+            initial-slide="1"
+            autoplay="true"
+            autoplay-speed="8000"
+            dots="false"
+            on-after-change="carouselSlideIn()"
+            on-before-change="carouselSlideOut()">
+
+        <carousel-item>
+
+            <!--<img src="/assets/img/{{item.image}}" alt="" />-->
+            <div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{item.image}})'}">
+            <!--<div class="carouselitemwrap" ng-style="{'background-image':'url(/assets/img/{{item.image}})'}">-->
+                <h2 class="caru_lead">{{ item.lead }}</h2>
+                <p class="text" ng-bind-html="item.text|nl2br"></p>
+        </carousel-item>
+    </ui-carousel>
+</section>
+
+
 
 <section class="uslugi" id="servicesSection">
     <h2 class="pagename">{{allPages[1].pagehead}}</h2>
@@ -297,3 +324,15 @@
 
 </section>
 <!--<div id="backfilter" ng-click="myHideCalendar()" ng-class="backFilter"></div>-->
+
+<!--<script type="text/javascript">-->
+    <!--jQuery(document).ready(function() {-->
+        <!--jQuery('.tp-banner').revolution(-->
+                <!--{-->
+                    <!--delay:9000,-->
+                    <!--startwidth:1170,-->
+                    <!--startheight:500,-->
+                    <!--hideThumbs:10-->
+                <!--});-->
+    <!--});-->
+<!--</script>-->

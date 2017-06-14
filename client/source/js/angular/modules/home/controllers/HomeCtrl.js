@@ -37,6 +37,18 @@ app
             $scope.piter = 0;
             $scope.riter = 0;
 
+            $scope.carouselSlideIn = function(){
+                var slideIn = new TimelineMax();
+                slideIn.fromTo(".caru_lead", 2, {css:{autoAlpha:0,rotationX:360, y:"-600"}, ease:Power1.easeOut},{css:{autoAlpha:1,rotationX:0, y:0}, ease:Power1.easeOut}, "clearWorkspace")
+                    //.to(".caru_lead", 2, {css:{x:0}, ease:Power1.easeOut})
+                ;
+            };
+            $scope.carouselSlideOut = function(){
+                var slideOut = new TimelineMax();
+                slideOut.to(".caru_lead", 0.5, {css:{autoAlpha:0}, ease:Power1.easeIn})
+
+                ;
+            };
             $scope.goNextAdvantage = function(){
                 var tlIn = new TimelineMax({paused:true});
                 tlIn.to("#advantageName", 2, {autoAlpha:0}, "clearWorkspace")
@@ -163,6 +175,9 @@ app
                 work_date:$scope.dateOptions['1'],
                 area:$scope.areaOptions['0'],
             };
+
+
+
 
             //$scope.DPvisibility = false;
             //$scope.backFilter = 'backfilterOff';

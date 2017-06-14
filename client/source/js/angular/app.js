@@ -27,11 +27,18 @@ var app = angular.module('dinaApp', [
     //'ui.router.stateHelper',
     'ngTouch',
     '720kb.datepicker',
-    'angular-carousel',
+    //'angular-carousel',
+    'ui.carousel',
     'angular-loading-bar',
 
 
+
 ]);
+
+
+
+
+
 
 //app.config(['$httpProvider', function ($httpProvider) {
 //    $httpProvider.defaults.useXDomain = true;
@@ -53,3 +60,4 @@ app.filter('trustAsResourceUrl', ['$sce', function ($sce) {
 app.config(["$locationProvider", function($locationProvider) {
     $locationProvider.html5Mode(true);
 }]);
+
