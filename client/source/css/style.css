@@ -249,35 +249,98 @@ div.rn-carousel-indicator span.active {
 
 .top_carousel {
     height:500px;
+    overflow: hidden;
+    text-align: center;
 }
 .caruwrap {
+    position: relative;
     height: 500px;
     width: 100%;
+    z-index: -1;
     -webkit-background-size:cover;
     background-size:cover;
     background-repeat: no-repeat;
 }
 .top_carousel .caru_lead {
     position: relative;
+    z-index: 10;
     top:100px;
-    left:50px;
-    color: rgba(0,0,0,0.4);
+    /*left:50px;*/
+    /*color: rgba(0,0,0,0.4);*/
+    color: #fff;
     font-weight:bold;
     font-size:48px;
     line-height:1;
+    max-width: 100%;
 
 }
-
-.top_carousel .text {
+.top_carousel .caru_text {
     position: relative;
     top:330px;
-    color: #fff;
-    font-size:18px;
-    line-height: 1.2;
-    background-color: rgba(0,0,0,0.3);
-    border: none;
-    border-radius: 0;
+    /*color: #fff;*/
+    /*font-size:18px;*/
+    /*line-height: 1.2;*/
+    /*background-color: rgba(0,0,0,0.3);*/
+    /*border: none;*/
+    /*border-radius: 0;*/
 }
+.carouselControl {
+    position: absolute;
+    top:50%;
+    margin-top: -30px;
+    cursor: pointer;
+}
+.carouselControl svg{
+    width: 60px;
+}
+.slickPrev {
+    left:20px;
+}
+.slickNext {
+    right:20px;
+}
+.slickPrev,
+.slickNext {
+    stroke:#4DA6D3;
+}
+.slickPrev:hover,
+.slickNext:hover {
+    stroke:#121212;
+}
+.caru_bgr_circle {
+    position: absolute;
+    z-index: 0;
+    top: -110px;
+    text-align: center;
+    left:50%;
+    width: 800px;
+    margin-left: -400px;
+
+}
+.the_circle{
+    fill:rgba(0,0,0,0.3);
+}
+/*.carouselControl:after {*/
+    /*font-family: "HelveticaRegular", sans-serif;*/
+    /*content: "●";*/
+    /*font-size: 147px;*/
+    /*position: absolute;*/
+    /*z-index:-1;*/
+    /*top:-73px;*/
+    /*left:-30px;*/
+    /*color: rgba(0,0,0,.4);*/
+
+/*}*/
+/*.top_carousel .text {*/
+    /*position: relative;*/
+    /*top:330px;*/
+    /*color: #fff;*/
+    /*font-size:18px;*/
+    /*line-height: 1.2;*/
+    /*background-color: rgba(0,0,0,0.3);*/
+    /*border: none;*/
+    /*border-radius: 0;*/
+/*}*/
 .ui-carousel .carousel-wrapper {
     position: relative;
 }

@@ -49,6 +49,45 @@ app
 
                 ;
             };
+
+            $scope.slickConfig = {
+                enabled: true,
+                autoplay: true,
+                draggable: false,
+                autoplaySpeed: 8000,
+                method: {},
+                event: {
+                    beforeChange: function (event, slick, currentSlide, nextSlide) {
+                        var slideOut = new TimelineMax()
+                            .set(".caru_lead", {css:{autoAlpha:0}, ease:Power1.easeIn})
+                            .set(".caru_bgr_circle", {css:{autoAlpha:0}, ease:Power1.easeIn})
+                            ;
+                    },
+                    afterChange: function (event, slick, currentSlide, nextSlide) {
+                        var slideIn = new TimelineMax()
+
+                            .fromTo(".caru_bgr_circle", 2,
+                                {css:{autoAlpha:0, scale:0.7, transformOrigin:"50% 50% "}, ease:Power1.easeOut},
+                                {css:{autoAlpha:1, scale:1.0}, ease:Power3.easeOut}
+                                , "circleIn")
+                            .fromTo(".caru_lead", 1,
+                                {css:{autoAlpha:0,rotationX:360, y:"-300"}, ease:Power1.easeOut},
+                                {css:{autoAlpha:1,rotationX:0, y:0}, ease:Power1.easeOut}
+                                , "clearWorkspace")
+                            ;
+                    }
+                }
+            };
+            $scope.number = [{label: 1}, {label: 2}, {label: 3}, {label: 4}, {label: 5}, {label: 6}, {label: 7}, {label: 8}];
+            $scope.numberLoaded = true;
+            $scope.numberUpdate = function(){
+                $scope.numberLoaded = false; // disable slick
+
+                //number update
+
+                $scope.numberLoaded = true; // enable slick
+            };
+
             $scope.goNextAdvantage = function(){
                 var tlIn = new TimelineMax({paused:true});
                 tlIn.to("#advantageName", 2, {autoAlpha:0}, "clearWorkspace")

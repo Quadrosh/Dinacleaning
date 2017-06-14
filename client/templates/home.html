@@ -43,26 +43,70 @@
 
 <!--</ul>-->
 <section class="top_carousel">
-    <ui-carousel
-            slides="homeData"
-            slides-to-show="1"
-            slides-to-scroll="1"
-            initial-slide="1"
-            autoplay="true"
-            autoplay-speed="8000"
-            dots="false"
-            on-after-change="carouselSlideIn()"
-            on-before-change="carouselSlideOut()">
+    <!--<ui-carousel-->
+            <!--slides="homeData"-->
+            <!--slides-to-show="1"-->
+            <!--slides-to-scroll="1"-->
+            <!--initial-slide="1"-->
+            <!--autoplay="true"-->
+            <!--autoplay-speed="8000"-->
+            <!--dots="false"-->
+            <!--on-after-change="carouselSlideIn()"-->
+            <!--on-before-change="carouselSlideOut()">-->
 
-        <carousel-item>
+        <!--<carousel-item>-->
 
-            <!--<img src="/assets/img/{{item.image}}" alt="" />-->
-            <div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{item.image}})'}">
-            <!--<div class="carouselitemwrap" ng-style="{'background-image':'url(/assets/img/{{item.image}})'}">-->
-                <h2 class="caru_lead">{{ item.lead }}</h2>
-                <p class="text" ng-bind-html="item.text|nl2br"></p>
-        </carousel-item>
-    </ui-carousel>
+            <!--<div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{item.image}})'}">-->
+                <!--<h2 class="caru_lead">{{ item.lead }}</h2>-->
+                <!--<p class="text" ng-bind-html="item.text|nl2br"></p>-->
+        <!--</carousel-item>-->
+    <!--</ui-carousel>-->
+
+
+
+    <slick settings="slickConfig" infinite=true slides-to-show=1 slides-to-scroll=1 ng-if="numberLoaded">
+        <div ng-repeat="slide in homeData">
+            <div class="caruwrap" ng-style="{'background-image':'url(/assets/img/{{slide.image}})'}">
+                <div class="caru_bgr_circle">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+                        <g >
+                            <circle class="the_circle" cx="500" cy="500" r="495"/>
+                        </g>
+                    </svg>
+                </div>
+                <h2 class="caru_lead"> {{ slide.lead }}</h2>
+                <p class="caru_text"  ng-bind-html="slide.text|nl2br"></p>
+            </div>
+        </div>
+    </slick>
+    <a class="carouselControl slickPrev" ng-click="slickConfig.method.slickPrev()"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.button_x5F_left_st0{fill:none;stroke-width:3;stroke-miterlimit:10;}
+    .button_x5F_left_st1{fill:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<g id="button_x5F_left">
+	<circle id="button_x5F_left_circle_1_" class="button_x5F_left_st0" cx="49.7" cy="50" r="46.4"/>
+	<line id="button_x5F_left_line1_" class="button_x5F_left_st1" x1="38.9" y1="50" x2="61.5" y2="27.5"/>
+	<line id="button_x5F_left_line2_" class="button_x5F_left_st1" x1="38.9" y1="50.5" x2="61.5" y2="73"/>
+</g>
+</svg></a>
+    <a class="carouselControl slickNext" ng-click="slickConfig.method.slickNext()"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.button_x5F_right_st0{fill:none;stroke-width:3;stroke-miterlimit:10;}
+    .button_x5F_right_st1{fill:none;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<g id="button_x5F_right">
+	<circle id="button_x5F_right_circle_2_" class="button_x5F_right_st0" cx="49.7" cy="50" r="46.4"/>
+	<line id="button_x5F_right_line1_" class="button_x5F_right_st1" x1="61.5" y1="50.5" x2="38.9" y2="73"/>
+	<line id="button_x5F_right_line2_" class="button_x5F_right_st1" x1="61.5" y1="50" x2="38.9" y2="27.5"/>
+</g>
+
+
+</svg></a>
+
 </section>
 
 

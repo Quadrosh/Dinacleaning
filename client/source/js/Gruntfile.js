@@ -13,14 +13,16 @@ module.exports = function(grunt) {
 		            'components/gsap/TweenMax.min.js',
 		            'components/angular/angular.js',
 		            'components/angular/angular-locale_ru-ru.js',
-		            'components/angular-datepicker/angular-datepicker.js',
+		            //'components/angular-datepicker/angular-datepicker.js',
 		            'components/angular-sanitize/angular-sanitize.js',
 		            'components/angular-route/angular-route.js',
 		            'components/angular-ui-router/angular-ui-router.js',
 		            //'components/angular-ui-router/statehelper.js',
 		            'components/angular-touch/angular-touch.js',
 		            //'components/angular-carousel/angular-carousel.js',
-		            'components/angular-ui-carousel/ui-carousel.js',
+		            //'components/angular-ui-carousel/ui-carousel.js',
+		            'components/angular-slick-carousel/slick.js',
+		            'components/angular-slick-carousel/angular-slick.js',
 
 
                     'components/angular-resource/angular-resource.js',
@@ -53,7 +55,9 @@ module.exports = function(grunt) {
                     //'components/angular-carousel/angular-carousel.css',
                     //'components/angular-datepicker/angular-datepicker.css',
 					'components/angular-loading-bar/loading-bar.css',
-                    'components/angular-ui-carousel/ui-carousel.css',
+                    //'components/angular-ui-carousel/ui-carousel.css',
+                    'components/angular-slick-carousel/slick.css',
+                    'components/angular-slick-carousel/slick-theme.css',
 					'../css/style.css',
 		        ]
 		      }

@@ -33516,984 +33516,6 @@ $provide.value("$locale", {
 });
 }]);
 
-/*global angular document navigator*/
-(function withAngular(angular, navigator) {
-
-  'use strict';
-
-  var A_DAY_IN_MILLISECONDS = 86400000
-    , isMobile = (function isMobile() {
-
-      if (navigator.userAgent &&
-        (navigator.userAgent.match(/Android/i) ||
-        navigator.userAgent.match(/webOS/i) ||
-        navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/iPod/i) ||
-        navigator.userAgent.match(/BlackBerry/i) ||
-        navigator.userAgent.match(/Windows Phone/i))) {
-
-        return true;
-      }
-    }())
-    , generateMonthAndYearHeader = function generateMonthAndYearHeader(prevButton, nextButton, preventMobile) {
-
-      if (preventMobile) {
-
-        isMobile = false;
-      }
-
-      if (isMobile) {
-
-        return [
-          '<div class="_720kb-datepicker-calendar-header">',
-            '<div class="_720kb-datepicker-calendar-header-middle _720kb-datepicker-mobile-item _720kb-datepicker-calendar-month">',
-              '<select ng-model="month" title="{{ dateMonthTitle }}" ng-change="selectedMonthHandle(month)">',
-                '<option ng-repeat="item in months" ng-selected="item === month" ng-disabled=\'!isSelectableMaxDate($index + 1 + " " + day + ", " + year) || !isSelectableMinDate($index + 1 + " " + day + ", " + year)\' ng-value="$index + 1" value="$index + 1">',
-                  '{{ item }}',
-                '</option>',
-              '</select>',
-            '</div>',
-          '</div>',
-          '<div class="_720kb-datepicker-calendar-header">',
-            '<div class="_720kb-datepicker-calendar-header-middle _720kb-datepicker-mobile-item _720kb-datepicker-calendar-month">',
-              '<select ng-model="mobileYear" title="{{ dateYearTitle }}" ng-change="setNewYear(mobileYear)">',
-                '<option ng-repeat="item in paginationYears track by $index" ng-selected="year === item" ng-disabled="!isSelectableMinYear(item) || !isSelectableMaxYear(item)" ng-value="item" value="item">',
-                  '{{ item }}',
-                '</option>',
-              '</select>',
-            '</div>',
-          '</div>'
-        ];
-      }
-
-      return [
-        '<div class="_720kb-datepicker-calendar-header">',
-          '<div class="_720kb-datepicker-calendar-header-left">',
-            '<a class="_720kb-datepicker-calendar-month-button" href="javascript:void(0)" ng-class="{\'_720kb-datepicker-item-hidden\': !willPrevMonthBeSelectable()}" ng-click="prevMonth()" title="{{ buttonPrevTitle }}">',
-              prevButton,
-            '</a>',
-          '</div>',
-          '<div class="_720kb-datepicker-calendar-header-middle _720kb-datepicker-calendar-month">',
-            '{{month}}&nbsp;',
-            '<a href="javascript:void(0)" ng-click="paginateYears(year); showYearsPagination = !showYearsPagination;">',
-              '<span>',
-                '{{year}}',
-                '<i ng-class="{\'_720kb-datepicker-calendar-header-closed-pagination\': !showYearsPagination, \'_720kb-datepicker-calendar-header-opened-pagination\': showYearsPagination}"></i>',
-              '</span>',
-            '</a>',
-          '</div>',
-          '<div class="_720kb-datepicker-calendar-header-right">',
-          '<a class="_720kb-datepicker-calendar-month-button" ng-class="{\'_720kb-datepicker-item-hidden\': !willNextMonthBeSelectable()}" href="javascript:void(0)" ng-click="nextMonth()" title="{{ buttonNextTitle }}">',
-            nextButton,
-          '</a>',
-          '</div>',
-        '</div>'
-      ];
-    }
-    , generateYearsPaginationHeader = function generateYearsPaginationHeader(prevButton, nextButton) {
-
-      return [
-        '<div class="_720kb-datepicker-calendar-header" ng-show="showYearsPagination">',
-          '<div class="_720kb-datepicker-calendar-years-pagination">',
-            '<a ng-class="{\'_720kb-datepicker-active\': y === year, \'_720kb-datepicker-disabled\': !isSelectableMaxYear(y) || !isSelectableMinYear(y)}" href="javascript:void(0)" ng-click="setNewYear(y)" ng-repeat="y in paginationYears track by $index">',
-              '{{y}}',
-            '</a>',
-          '</div>',
-          '<div class="_720kb-datepicker-calendar-years-pagination-pages">',
-            '<a href="javascript:void(0)" ng-click="paginateYears(paginationYears[0])" ng-class="{\'_720kb-datepicker-item-hidden\': paginationYearsPrevDisabled}">',
-              prevButton,
-            '</a>',
-            '<a href="javascript:void(0)" ng-click="paginateYears(paginationYears[paginationYears.length -1 ])" ng-class="{\'_720kb-datepicker-item-hidden\': paginationYearsNextDisabled}">',
-              nextButton,
-            '</a>',
-          '</div>',
-        '</div>'
-      ];
-    }
-    , generateDaysColumns = function generateDaysColumns() {
-
-      return [
-      '<div class="_720kb-datepicker-calendar-days-header">',
-        '<div ng-repeat="d in daysInString">',
-          '{{d}}',
-        '</div>',
-      '</div>'
-      ];
-    }
-    , generateDays = function generateDays() {
-
-      return [
-        '<div class="_720kb-datepicker-calendar-body">',
-          '<a href="javascript:void(0)" ng-repeat="px in prevMonthDays" class="_720kb-datepicker-calendar-day _720kb-datepicker-disabled">',
-            '{{px}}',
-          '</a>',
-          '<a href="javascript:void(0)" ng-repeat="item in days" ng-click="setDatepickerDay(item)" ng-class="{\'_720kb-datepicker-active\': selectedDay === item && selectedMonth === monthNumber && selectedYear === year, \'_720kb-datepicker-disabled\': !isSelectableMinDate(year + \'/\' + monthNumber + \'/\' + item ) || !isSelectableMaxDate(year + \'/\' + monthNumber + \'/\' + item) || !isSelectableDate(monthNumber, year, item),\'_720kb-datepicker-today\': item === today.getDate() && monthNumber === (today.getMonth() + 1) && year === today.getFullYear() && !selectedDay}" class="_720kb-datepicker-calendar-day">',
-            '{{item}}',
-          '</a>',
-          '<a href="javascript:void(0)" ng-repeat="nx in nextMonthDays" class="_720kb-datepicker-calendar-day _720kb-datepicker-disabled">',
-            '{{nx}}',
-          '</a>',
-        '</div>'
-      ];
-    }
-    , generateHtmlTemplate = function generateHtmlTemplate(prevButton, nextButton, preventMobile) {
-
-      var toReturn = [
-        '<div class="_720kb-datepicker-calendar {{datepickerClass}} {{datepickerID}}" ng-class="{\'_720kb-datepicker-forced-to-open\': checkVisibility()}" ng-blur="hideCalendar()">',
-        '</div>'
-      ]
-      , monthAndYearHeader = generateMonthAndYearHeader(prevButton, nextButton, preventMobile)
-      , yearsPaginationHeader = generateYearsPaginationHeader(prevButton, nextButton)
-      , daysColumns = generateDaysColumns()
-      , days = generateDays()
-      , iterator = function iterator(aRow) {
-
-        toReturn.splice(toReturn.length - 1, 0, aRow);
-      };
-
-      monthAndYearHeader.forEach(iterator);
-      yearsPaginationHeader.forEach(iterator);
-      daysColumns.forEach(iterator);
-      days.forEach(iterator);
-
-      return toReturn.join('');
-    }
-    , datepickerDirective = function datepickerDirective($window, $compile, $locale, $filter, $interpolate, $timeout) {
-
-      var linkingFunction = function linkingFunction($scope, element, attr) {
-
-        //get child input
-        var selector = attr.selector
-          , thisInput = angular.element(selector ? element[0].querySelector('.' + selector) : element[0].children[0])
-          , theCalendar
-          , defaultPrevButton = '<b class="_720kb-datepicker-default-button">&lang;</b>'
-          , defaultNextButton = '<b class="_720kb-datepicker-default-button">&rang;</b>'
-          , prevButton = attr.buttonPrev || defaultPrevButton
-          , nextButton = attr.buttonNext || defaultNextButton
-          , dateFormat = attr.dateFormat
-          //, dateMinLimit
-          //, dateMaxLimit
-          , dateDisabledDates = $scope.$eval($scope.dateDisabledDates)
-          , date = new Date()
-          , dateString
-          , isMouseOn = false
-          , isMouseOnInput = false
-          , preventMobile = typeof attr.datepickerMobile !== 'undefined' && attr.datepickerMobile !== 'false'
-          , datetime = $locale.DATETIME_FORMATS
-          , pageDatepickers
-          , hours24h = 86400000
-          , htmlTemplate = generateHtmlTemplate(prevButton, nextButton, preventMobile)
-          , n
-          , onClickOnWindow = function onClickOnWindow() {
-
-            if (!isMouseOn &&
-              !isMouseOnInput && theCalendar) {
-
-              $scope.hideCalendar();
-            }
-          }
-          , setDaysInMonth = function setDaysInMonth(month, year) {
-
-            var i
-              , limitDate = new Date(year, month, 0).getDate()
-              , firstDayMonthNumber = new Date(year + '/' + month + '/' + 1).getDay()
-              , lastDayMonthNumber = new Date(year + '/' + month + '/' + limitDate).getDay()
-              , prevMonthDays = []
-              , nextMonthDays = []
-              , howManyNextDays
-              , howManyPreviousDays
-              , monthAlias
-              , dateWeekEndDay;
-
-            $scope.days = [];
-            $scope.dateWeekStartDay = $scope.validateWeekDay($scope.dateWeekStartDay);
-            dateWeekEndDay = ($scope.dateWeekStartDay + 6) % 7;
-
-            for (i = 1; i <= limitDate; i += 1) {
-
-              $scope.days.push(i);
-            }
-
-            //get previous month days if first day in month is not first day in week
-            if (firstDayMonthNumber === $scope.dateWeekStartDay) {
-
-              //no need for it
-              $scope.prevMonthDays = [];
-            } else {
-
-              howManyPreviousDays = firstDayMonthNumber - $scope.dateWeekStartDay;
-
-              if (firstDayMonthNumber < $scope.dateWeekStartDay) {
-
-                howManyPreviousDays += 7;
-              }
-
-              //get previous month
-              if (Number(month) === 1) {
-
-                monthAlias = 12;
-              } else {
-
-                monthAlias = month - 1;
-              }
-              //return previous month days
-              for (i = 1; i <= new Date(year, monthAlias, 0).getDate(); i += 1) {
-
-                prevMonthDays.push(i);
-              }
-              //attach previous month days
-              $scope.prevMonthDays = prevMonthDays.slice(-howManyPreviousDays);
-            }
-
-            //get next month days if last day in month is not last day in week
-            if (lastDayMonthNumber === dateWeekEndDay) {
-              //no need for it
-              $scope.nextMonthDays = [];
-            } else {
-              howManyNextDays = 6 - lastDayMonthNumber + $scope.dateWeekStartDay;
-
-              if (lastDayMonthNumber < $scope.dateWeekStartDay) {
-
-                howManyNextDays -= 7;
-              }
-              //get previous month
-
-              //return next month days
-              for (i = 1; i <= howManyNextDays; i += 1) {
-
-                nextMonthDays.push(i);
-              }
-              //attach previous month days
-              $scope.nextMonthDays = nextMonthDays;
-            }
-          }
-          , resetToMinDate = function resetToMinDate() {
-
-            $scope.month = $filter('date')(new Date($scope.dateMinLimit), 'MMMM');
-            $scope.monthNumber = Number($filter('date')(new Date($scope.dateMinLimit), 'MM'));
-            $scope.day = Number($filter('date')(new Date($scope.dateMinLimit), 'dd'));
-            $scope.year = Number($filter('date')(new Date($scope.dateMinLimit), 'yyyy'));
-
-            setDaysInMonth($scope.monthNumber, $scope.year);
-          }
-          , resetToMaxDate = function resetToMaxDate() {
-
-            $scope.month = $filter('date')(new Date($scope.dateMaxLimit), 'MMMM');
-            $scope.monthNumber = Number($filter('date')(new Date($scope.dateMaxLimit), 'MM'));
-            $scope.day = Number($filter('date')(new Date($scope.dateMaxLimit), 'dd'));
-            $scope.year = Number($filter('date')(new Date($scope.dateMaxLimit), 'yyyy'));
-
-            setDaysInMonth($scope.monthNumber, $scope.year);
-          }
-          , prevYear = function prevYear() {
-
-            $scope.year = Number($scope.year) - 1;
-          }
-          , nextYear = function nextYear() {
-
-            $scope.year = Number($scope.year) + 1;
-          }
-          , localDateTimestamp = function localDateTimestamp(rawDate, dateFormatDefinition) {
-            
-            var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|MMMM|MMM|MM|M|dd?d?|yy?yy?y?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g
-            ,formatDate,dateSplit, m, d, y, index, el, longName, shortName;
-
-            for (index = 0; index < datetime.MONTH.length; index += 1) {
-              longName = datetime.MONTH[index];
-              shortName = datetime.SHORTMONTH[index];
-
-              if (rawDate.indexOf(longName) !== -1) {
-                rawDate = rawDate.replace(longName, index + 1);
-                break;
-              }
-
-              if (rawDate.indexOf(shortName) !== -1) {
-                rawDate = rawDate.replace(shortName, index + 1);
-                break;
-              }              
-            }
-
-            dateSplit = rawDate
-              .split(/\D/)
-              .filter(function dateSplitFilter(item) {
-                return item.length > 0;
-              });
-
-            formatDate = dateFormatDefinition
-              .match(formattingTokens)
-              .filter(function fromatDateFilter(item) {
-                return item.match(/^[a-zA-Z]+$/i) !== null;
-              });
-
-            for (index = 0; index < formatDate.length; index += 1) {
-              el = formatDate[index];
-
-              switch (true) {
-                case el.indexOf('d') !== -1: {
-                  d = dateSplit[index];
-                  break;
-                }
-                case el.indexOf('M') !== -1: {
-                  m = dateSplit[index];
-                  break;
-                }
-                case el.indexOf('y') !== -1: {
-                  y = dateSplit[index];
-                  break; 
-                }
-                default: {
-                  break;  
-                }                                 
-              }
-            }
-
-            return new Date(y + '/' + m + '/' + d);
-          }
-          , setInputValue = function setInputValue() {
-
-            if ($scope.isSelectableMinDate($scope.year + '/' + $scope.monthNumber + '/' + $scope.day) &&
-                $scope.isSelectableMaxDate($scope.year + '/' + $scope.monthNumber + '/' + $scope.day)) {
-
-              var modelDate = new Date($scope.year + '/' + $scope.monthNumber + '/' + $scope.day);
-
-              if (attr.dateFormat) {
-
-                thisInput.val($filter('date')(modelDate, dateFormat));
-              } else {
-
-                thisInput.val(modelDate);
-              }
-
-              thisInput.triggerHandler('input');
-              thisInput.triggerHandler('change');//just to be sure;
-            } else {
-
-              return false;
-            }
-          }
-          , classHelper = {
-            'add': function add(ele, klass) {
-              var classes;
-
-              if (ele.className.indexOf(klass) > -1) {
-
-                return;
-              }
-
-              classes = ele.className.split(' ');
-              classes.push(klass);
-              ele.className = classes.join(' ');
-            },
-            'remove': function remove(ele, klass) {
-              var i
-                , classes;
-
-              if (ele.className.indexOf(klass) === -1) {
-
-                return;
-              }
-
-              classes = ele.className.split(' ');
-              for (i = 0; i < classes.length; i += 1) {
-
-                if (classes[i] === klass) {
-
-                  classes = classes.slice(0, i).concat(classes.slice(i + 1));
-                  break;
-                }
-              }
-              ele.className = classes.join(' ');
-            }
-          }
-          , showCalendar = function showCalendar() {
-            //lets hide all the latest instances of datepicker
-            pageDatepickers = $window.document.getElementsByClassName('_720kb-datepicker-calendar');
-
-            angular.forEach(pageDatepickers, function forEachDatepickerPages(value, key) {
-              if (pageDatepickers[key].classList) {
-
-                pageDatepickers[key].classList.remove('_720kb-datepicker-open');
-              } else {
-
-                classHelper.remove(pageDatepickers[key], '_720kb-datepicker-open');
-              }
-            });
-
-            if (theCalendar.classList) {
-
-              theCalendar.classList.add('_720kb-datepicker-open');
-              dateString = angular.element(angular.element(theCalendar).parent()[0].querySelector('input')).val().replace(/\//g, '-');
-              date = new Date(dateString);
-              $scope.selectedMonth = Number($filter('date')(date, 'MM'));
-              $scope.selectedDay = Number($filter('date')(date, 'dd'));
-              $scope.selectedYear = Number($filter('date')(date, 'yyyy'));
-            } else {
-
-              classHelper.add(theCalendar, '_720kb-datepicker-open');
-            }
-            $scope.today = new Date();
-            $timeout(function timeoutForYears() {
-              if ($scope.selectedDay) {
-                $scope.year = $scope.selectedYear;
-                $scope.monthNumber = $scope.selectedMonth;
-              } else {
-                $scope.year = $scope.today.getFullYear();
-                $scope.monthNumber = $scope.today.getMonth() + 1;
-              }
-              $scope.month = $filter('date')(new Date($scope.year, $scope.monthNumber - 1), 'MMMM');
-              setDaysInMonth($scope.monthNumber, $scope.year);
-            }, 0);
-          }
-          , checkToggle = function checkToggle() {
-            if (!$scope.datepickerToggle) {
-
-              return true;
-            }
-
-            return $scope.$eval($scope.datepickerToggle);
-          }
-          , checkVisibility = function checkVisibility() {
-            if (!$scope.datepickerShow) {
-
-              return false;
-            }
-            return $scope.$eval($scope.datepickerShow);
-          }
-          , unregisterDataSetWatcher = $scope.$watch('dateSet', function dateSetWatcher(newValue) {
-
-            if (newValue && !isNaN(Date.parse(newValue))) {
-
-              date = new Date(newValue);
-
-              $scope.month = $filter('date')(date, 'MMMM');//december-November like
-              $scope.monthNumber = Number($filter('date')(date, 'MM')); // 01-12 like
-              $scope.day = Number($filter('date')(date, 'dd')); //01-31 like
-              $scope.year = Number($filter('date')(date, 'yyyy'));//2014 like
-
-              setDaysInMonth($scope.monthNumber, $scope.year);
-
-              if ($scope.dateSetHidden !== 'true') {
-
-                setInputValue();
-              }
-            }
-          })
-          , unregisterDateMinLimitWatcher = $scope.$watch('dateMinLimit', function dateMinLimitWatcher(newValue) {
-            if (newValue) {
-              resetToMinDate();
-            }
-          })
-          , unregisterDateMaxLimitWatcher = $scope.$watch('dateMaxLimit', function dateMaxLimitWatcher(newValue) {
-            if (newValue) {
-              resetToMaxDate();
-            }
-          })
-          , unregisterDateFormatWatcher = $scope.$watch('dateFormat', function dateFormatWatcher(newValue) {
-            if (newValue) {
-              setInputValue();
-            }
-          });
-
-        $scope.nextMonth = function nextMonth() {
-
-          if ($scope.monthNumber === 12) {
-
-            $scope.monthNumber = 1;
-            //its happy new year
-            nextYear();
-          } else {
-
-            $scope.monthNumber += 1;
-          }
-
-          //check if max date is ok
-          if ($scope.dateMaxLimit) {
-
-            if (!$scope.isSelectableMaxDate($scope.year + '/' + $scope.monthNumber + '/' + $scope.days[0])) {
-
-              resetToMaxDate();
-            }
-          }
-
-          //set next month
-          $scope.month = $filter('date')(new Date($scope.year, $scope.monthNumber - 1), 'MMMM');
-          //reinit days
-          setDaysInMonth($scope.monthNumber, $scope.year);
-          //deactivate selected day
-          $scope.day = undefined;
-        };
-
-        $scope.willPrevMonthBeSelectable = function willPrevMonthBeSelectable() {
-          var monthNumber = $scope.monthNumber
-            , year = $scope.year
-            , prevDay = $filter('date')(new Date(new Date(year + '/' + monthNumber + '/01').getTime() - hours24h), 'dd'); //get last day in previous month
-
-          if (monthNumber === 1) {
-
-            monthNumber = 12;
-            year = year - 1;
-          } else {
-
-            monthNumber -= 1;
-          }
-
-          if ($scope.dateMinLimit) {
-            if (!$scope.isSelectableMinDate(year + '/' + monthNumber + '/' + prevDay)) {
-
-              return false;
-            }
-          }
-
-          return true;
-        };
-
-        $scope.willNextMonthBeSelectable = function willNextMonthBeSelectable() {
-          var monthNumber = $scope.monthNumber
-            , year = $scope.year;
-
-          if (monthNumber === 12) {
-
-            monthNumber = 1;
-            year += 1;
-          } else {
-
-            monthNumber += 1;
-          }
-
-          if ($scope.dateMaxLimit) {
-            if (!$scope.isSelectableMaxDate(year + '/' + monthNumber + '/01')) {
-
-              return false;
-            }
-          }
-
-          return true;
-        };
-
-        $scope.prevMonth = function managePrevMonth() {
-
-          if ($scope.monthNumber === 1) {
-
-            $scope.monthNumber = 12;
-            //its happy new year
-            prevYear();
-          } else {
-
-            $scope.monthNumber -= 1;
-          }
-          //check if min date is ok
-          if ($scope.dateMinLimit) {
-
-            if (!$scope.isSelectableMinDate($scope.year + '/' + $scope.monthNumber + '/' + $scope.days[$scope.days.length - 1])) {
-
-              resetToMinDate();
-            }
-          }
-          //set next month
-          $scope.month = $filter('date')(new Date($scope.year, $scope.monthNumber - 1), 'MMMM');
-          //reinit days
-          setDaysInMonth($scope.monthNumber, $scope.year);
-          //deactivate selected day
-          $scope.day = undefined;
-        };
-
-        $scope.selectedMonthHandle = function manageSelectedMonthHandle(selectedMonthNumber) {
-
-          $scope.monthNumber = Number($filter('date')(new Date(selectedMonthNumber + '/01/2000'), 'MM'));
-          setDaysInMonth($scope.monthNumber, $scope.year);
-          setInputValue();
-        };
-
-        $scope.setNewYear = function setNewYear(year) {
-
-          //deactivate selected day
-          if (!isMobile) {
-            $scope.day = undefined;
-          }
-
-          if ($scope.dateMaxLimit &&
-            $scope.year < Number(year)) {
-
-            if (!$scope.isSelectableMaxYear(year)) {
-
-              return;
-            }
-          } else if ($scope.dateMinLimit &&
-            $scope.year > Number(year)) {
-
-            if (!$scope.isSelectableMinYear(year)) {
-
-              return;
-            }
-          }
-
-          $scope.paginateYears(year);
-          $scope.showYearsPagination = false;
-          $timeout(function timeoutForYears() {
-            $scope.year = Number(year);
-            setDaysInMonth($scope.monthNumber, $scope.year);
-          }, 0);
-        };
-
-        $scope.hideCalendar = function hideCalendar() {
-          if (theCalendar.classList) {
-            theCalendar.classList.remove('_720kb-datepicker-open');
-          } else {
-
-            classHelper.remove(theCalendar, '_720kb-datepicker-open');
-          }
-        };
-
-        $scope.setDatepickerDay = function setDatepickerDay(day) {
-
-          if ($scope.isSelectableDate($scope.monthNumber, $scope.year, day) &&
-              $scope.isSelectableMaxDate($scope.year + '/' + $scope.monthNumber + '/' + day) &&
-              $scope.isSelectableMinDate($scope.year + '/' + $scope.monthNumber + '/' + day)) {
-
-            $scope.day = Number(day);
-            $scope.selectedDay = $scope.day;
-            $scope.selectedMonth = $scope.monthNumber;
-            $scope.selectedYear = $scope.year;
-
-            setInputValue();
-
-            if (attr.hasOwnProperty('dateRefocus')) {
-              thisInput[0].focus();
-            }
-
-            $scope.hideCalendar();
-          }
-          $scope.myHideCalendar();
-        };
-
-        $scope.paginateYears = function paginateYears(startingYear) {
-          var i
-           , theNewYears = []
-           , daysToPrepend = 10
-           , daysToAppend = 10;
-
-          $scope.paginationYears = [];
-          if (isMobile) {
-
-            daysToPrepend = 50;
-            daysToAppend = 50;
-            if ( $scope.dateMinLimit && $scope.dateMaxLimit) {
-
-              startingYear = new Date($scope.dateMaxLimit).getFullYear();
-              daysToPrepend = startingYear - new Date($scope.dateMinLimit).getFullYear();
-              daysToAppend = 1;
-            }
-          }
-
-          for (i = daysToPrepend; i > 0; i -= 1) {
-
-            theNewYears.push(Number(startingYear) - i);
-          }
-
-          for (i = 0; i < daysToAppend; i += 1) {
-
-            theNewYears.push(Number(startingYear) + i);
-          }
-          //date typing in input date-typer
-          if ($scope.dateTyper === 'true') {
-
-            thisInput.on('keyup blur', function onTyping() {
-
-              if (thisInput[0].value &&
-                thisInput[0].value.length &&
-                thisInput[0].value.length > 0) {
-
-                try {
-                  if (dateFormat) {
-                    date = localDateTimestamp(thisInput[0].value.toString(), dateFormat);
-                  } else {
-                    date = new Date(thisInput[0].value.toString());
-                  }
-
-                  if (date.getFullYear() &&
-                   !isNaN(date.getDay()) &&
-                   !isNaN(date.getMonth()) &&
-                   $scope.isSelectableDate(date) &&
-                   $scope.isSelectableMaxDate(date) &&
-                   $scope.isSelectableMinDate(date)) {
-
-                    $scope.$apply(function applyTyping() {
-
-                      $scope.month = $filter('date')(date, 'MMMM');//december-November like
-                      $scope.monthNumber = Number($filter('date')(date, 'MM')); // 01-12 like
-                      $scope.day = Number($filter('date')(date, 'dd')); //01-31 like
-
-                      if (date.getFullYear().toString().length === 4) {
-                        $scope.year = Number($filter('date')(date, 'yyyy'));//2014 like
-                      }
-                      setDaysInMonth($scope.monthNumber, $scope.year);
-                    });
-                  }
-                } catch (e) {
-
-                  return e;
-                }
-              }
-            });
-          }
-          //check range dates
-          if ($scope.dateMaxLimit &&
-            theNewYears &&
-            theNewYears.length &&
-            !$scope.isSelectableMaxYear(Number(theNewYears[theNewYears.length - 1]) + 1)) {
-
-            $scope.paginationYearsNextDisabled = true;
-          } else {
-
-            $scope.paginationYearsNextDisabled = false;
-          }
-
-          if ($scope.dateMinLimit &&
-            theNewYears &&
-            theNewYears.length &&
-            !$scope.isSelectableMinYear(Number(theNewYears[0]) - 1)) {
-
-            $scope.paginationYearsPrevDisabled = true;
-          } else {
-
-            $scope.paginationYearsPrevDisabled = false;
-          }
-
-          $scope.paginationYears = theNewYears;
-        };
-
-        $scope.isSelectableDate = function isSelectableDate(monthNumber, year, day) {
-          var i = 0;
-
-          if (dateDisabledDates &&
-            dateDisabledDates.length > 0) {
-
-            for (i; i <= dateDisabledDates.length; i += 1) {
-
-              if (new Date(dateDisabledDates[i]).getTime() === new Date(monthNumber + '/' + day + '/' + year).getTime()) {
-
-                return false;
-              }
-            }
-          }
-          return true;
-        };
-
-        $scope.isSelectableMinDate = function isSelectableMinDate(aDate) {
-          //if current date
-          if (!!$scope.dateMinLimit &&
-             !!new Date($scope.dateMinLimit) &&
-             new Date(aDate).getTime() < new Date($scope.dateMinLimit).getTime()) {
-
-            return false;
-          }
-
-          return true;
-        };
-
-        $scope.isSelectableMaxDate = function isSelectableMaxDate(aDate) {
-          //if current date
-          if (!!$scope.dateMaxLimit &&
-             !!new Date($scope.dateMaxLimit) &&
-             new Date(aDate).getTime() > new Date($scope.dateMaxLimit).getTime()) {
-
-            return false;
-          }
-
-          return true;
-        };
-
-        $scope.isSelectableMaxYear = function isSelectableMaxYear(year) {
-          if (!!$scope.dateMaxLimit &&
-            year > new Date($scope.dateMaxLimit).getFullYear()) {
-
-            return false;
-          }
-
-          return true;
-        };
-
-        $scope.isSelectableMinYear = function isSelectableMinYear(year) {
-          if (!!$scope.dateMinLimit &&
-            year < new Date($scope.dateMinLimit).getFullYear()) {
-
-            return false;
-          }
-
-          return true;
-        };
-
-        $scope.validateWeekDay = function isValidWeekDay(weekDay) {
-          var validWeekDay = Number(weekDay, 10);
-          // making sure that the given option is valid
-          if (!validWeekDay || validWeekDay < 0 || validWeekDay > 6) {
-
-            validWeekDay = 0;
-          }
-          return validWeekDay;
-        };
-
-        // respect previously configured interpolation symbols.
-        htmlTemplate = htmlTemplate.replace(/{{/g, $interpolate.startSymbol()).replace(/}}/g, $interpolate.endSymbol());
-        $scope.dateMonthTitle = $scope.dateMonthTitle || 'Select month';
-        $scope.dateYearTitle = $scope.dateYearTitle || 'Select year';
-        $scope.buttonNextTitle = $scope.buttonNextTitle || 'Next';
-        $scope.buttonPrevTitle = $scope.buttonPrevTitle || 'Prev';
-        $scope.month = $filter('date')(date, 'MMMM');//december-November like
-        $scope.monthNumber = Number($filter('date')(date, 'MM')); // 01-12 like
-        $scope.day = Number($filter('date')(date, 'dd')); //01-31 like
-        $scope.dateWeekStartDay = $scope.validateWeekDay($scope.dateWeekStartDay);
-
-        if ($scope.dateMaxLimit) {
-
-          $scope.year = Number($filter('date')(new Date($scope.dateMaxLimit), 'yyyy'));//2014 like
-        } else {
-
-          $scope.year = Number($filter('date')(date, 'yyyy'));//2014 like
-        }
-        $scope.months = datetime.MONTH;
-
-        $scope.daysInString = [];
-        for (n = $scope.dateWeekStartDay; n <= $scope.dateWeekStartDay + 6; n += 1) {
-
-          $scope.daysInString.push(n % 7);
-        }
-        $scope.daysInString = $scope.daysInString.map(function mappingFunc(el) {
-
-          return $filter('date')(new Date(new Date('06/08/2014').valueOf() + A_DAY_IN_MILLISECONDS * el), 'EEE');
-        });
-
-        //create the calendar holder and append where needed
-        if ($scope.datepickerAppendTo &&
-          $scope.datepickerAppendTo.indexOf('.') !== -1) {
-
-          $scope.datepickerID = 'datepicker-id-' + new Date().getTime() + (Math.floor(Math.random() * 6) + 8);
-          angular.element(document.getElementsByClassName($scope.datepickerAppendTo.replace('.', ''))[0]).append($compile(angular.element(htmlTemplate))($scope, function afterCompile(el) {
-
-            theCalendar = angular.element(el)[0];
-          }));
-        } else if ($scope.datepickerAppendTo &&
-          $scope.datepickerAppendTo.indexOf('#') !== -1) {
-
-          $scope.datepickerID = 'datepicker-id-' + new Date().getTime() + (Math.floor(Math.random() * 6) + 8);
-          angular.element(document.getElementById($scope.datepickerAppendTo.replace('#', ''))).append($compile(angular.element(htmlTemplate))($scope, function afterCompile(el) {
-
-            theCalendar = angular.element(el)[0];
-          }));
-        } else if ($scope.datepickerAppendTo &&
-          $scope.datepickerAppendTo === 'body') {
-          $scope.datepickerID = 'datepicker-id-' + (new Date().getTime() + (Math.floor(Math.random() * 6) + 8));
-          angular.element(document).find('body').append($compile(angular.element(htmlTemplate))($scope, function afterCompile(el) {
-
-            theCalendar = angular.element(el)[0];
-          }));
-        } else {
-
-          thisInput.after($compile(angular.element(htmlTemplate))($scope));
-          //get the calendar as element
-          theCalendar = element[0].querySelector('._720kb-datepicker-calendar');
-        }
-        //if datepicker-toggle="" is not present or true by default
-        if (checkToggle()) {
-
-          thisInput.on('focus click focusin', function onFocusAndClick() {
-
-            isMouseOnInput = true;
-
-            if (!isMouseOn &&
-            !isMouseOnInput && theCalendar) {
-
-              $scope.hideCalendar();
-            } else {
-
-              showCalendar();
-            }
-          });
-        }
-
-        thisInput.on('focusout blur', function onBlurAndFocusOut() {
-
-          isMouseOnInput = false;
-        });
-        //some tricky dirty events to fire if click is outside of the calendar and show/hide calendar when needed
-        angular.element(theCalendar).on('mouseenter', function onMouseEnter() {
-
-          isMouseOn = true;
-        });
-
-        angular.element(theCalendar).on('mouseleave', function onMouseLeave() {
-
-          isMouseOn = false;
-        });
-
-        angular.element(theCalendar).on('focusin', function onCalendarFocus() {
-
-          isMouseOn = true;
-        });
-
-        angular.element($window).on('click focus focusin', onClickOnWindow);
-
-        //check always if given range of dates is ok
-        if ($scope.dateMinLimit &&
-          !$scope.isSelectableMinYear($scope.year) ||
-          !$scope.isSelectableMinDate($scope.year + '/' + $scope.monthNumber + '/' + $scope.day)) {
-
-          resetToMinDate();
-        }
-
-        if ($scope.dateMaxLimit &&
-          !$scope.isSelectableMaxYear($scope.year) ||
-          !$scope.isSelectableMaxDate($scope.year + '/' + $scope.monthNumber + '/' + $scope.day)) {
-
-          resetToMaxDate();
-        }
-
-        //datepicker boot start
-        $scope.paginateYears($scope.year);
-
-        setDaysInMonth($scope.monthNumber, $scope.year);
-        $scope.checkVisibility = checkVisibility;
-
-        $scope.$on('$destroy', function unregisterListener() {
-
-          unregisterDataSetWatcher();
-          unregisterDateMinLimitWatcher();
-          unregisterDateMaxLimitWatcher();
-          unregisterDateFormatWatcher();
-          thisInput.off('focus click focusout blur');
-          angular.element(theCalendar).off('mouseenter mouseleave focusin');
-          angular.element($window).off('click focus focusin', onClickOnWindow);
-        });
-      };
-
-      return {
-        'restrict': 'AEC',
-        'scope': {
-          'dateSet': '@',
-          'dateMinLimit': '@',
-          'dateMaxLimit': '@',
-          'dateMonthTitle': '@',
-          'dateYearTitle': '@',
-          'buttonNextTitle': '@',
-          'buttonPrevTitle': '@',
-          'dateDisabledDates': '@',
-          'dateSetHidden': '@',
-          'dateTyper': '@',
-          'dateWeekStartDay': '@',
-          'datepickerAppendTo': '@',
-          'datepickerToggle': '@',
-          'datepickerClass': '@',
-          'datepickerShow': '@'
-        },
-        'link': linkingFunction
-      };
-    };
-
-  angular.module('720kb.datepicker', [])
-               .directive('datepicker', ['$window', '$compile', '$locale', '$filter', '$interpolate', '$timeout', datepickerDirective]);
-}(angular, navigator));
-
 /**
  * @license AngularJS v1.6.3
  * (c) 2010-2017 Google, Inc. http://angularjs.org
@@ -41915,744 +40937,3201 @@ makeSwipeDirective('ngSwipeRight', 1, 'swiperight');
 
 })(window, window.angular);
 
-'use strict';
+/*
+     _ _      _       _
+ ___| (_) ___| | __  (_)___
+/ __| | |/ __| |/ /  | / __|
+\__ \ | | (__|   < _ | \__ \
+|___/_|_|\___|_|\_(_)/ |___/
+                   |__/
 
-(function (angular) {
-  // Create all modules and define dependencies to make sure they exist
-  // and are loaded in the correct order to satisfy dependency injection
-  // before all nested files are concatenated by Gulp
+ Version: 1.6.0
+  Author: Ken Wheeler
+ Website: http://kenwheeler.github.io
+    Docs: http://kenwheeler.github.io/slick
+    Repo: http://github.com/kenwheeler/slick
+  Issues: http://github.com/kenwheeler/slick/issues
 
-  // Config
-  angular.module('ui.carousel.config', []).value('ui.carousel.config', {
-    debug: true
-  });
-
-  // Modules
-  angular.module('ui.carousel.providers', []);
-  angular.module('ui.carousel.controllers', []);
-  angular.module('ui.carousel.directives', []);
-  angular.module('ui.carousel', ['ui.carousel.config', 'ui.carousel.directives', 'ui.carousel.controllers', 'ui.carousel.providers']);
-})(angular);
-'use strict';
-
-/**
- * angular-ui-carousel
- * for example:
- * length = 8, show = 4, scroll = 3, current = 0
- *          ---------
- *          |       |
- *  |4|5|6|7|0|1|2|3|4|5|6|7|1|2|3|4
- *          |       |
- *          ---------
- * rectangle is visible for users
  */
-angular.module('ui.carousel.controllers').controller('CarouselController', ['$scope', '$element', '$timeout', '$q', 'Carousel', '$window', function ($scope, $element, $timeout, $q, Carousel, $window) {
-  var _this = this;
-
-  /**
-   * Initial carousel
-   *
-   * Mirgate to angularjs 1.6
-   * @see https://docs.angularjs.org/guide/migration#commit-bcd0d4
-   */
-  this.$onInit = function () {
-    _this.initOptions();
-    _this.initRanges();
-    _this.setProps();
-    _this.setupInfinite();
-  };
-
-  /**
-   * Init option based on directive config
-   */
-  this.initOptions = function () {
-    _this.options = angular.extend({}, Carousel.getOptions());
-
-    // TODO customize attribute from directive
-    if (_this.initialSlide !== undefined) {
-      _this.options.initialSlide = _this.initialSlide;
-    }
-    if (_this.fade !== undefined) {
-      _this.options.fade = _this.fade;
-    }
-    if (_this.autoplay !== undefined) {
-      _this.options.autoplay = _this.autoplay;
-    }
-    if (_this.autoplaySpeed !== undefined) {
-      _this.options.autoplaySpeed = _this.autoplaySpeed;
-    }
-    if (_this.cssEase !== undefined) {
-      _this.options.cssEase = _this.cssEase;
-    }
-    if (_this.speed !== undefined) {
-      _this.options.speed = _this.speed;
-    }
-    if (_this.infinite !== undefined) {
-      _this.options.infinite = _this.infinite;
-    }
-    if (_this.arrows !== undefined) {
-      _this.options.arrows = _this.arrows;
-    }
-    if (_this.dots !== undefined) {
-      _this.options.dots = _this.dots;
-    }
-    if (_this.visiblePrev !== undefined) {
-      _this.options.visiblePrev = _this.visiblePrev;
-    }
-    if (_this.visibleNext !== undefined) {
-      _this.options.visibleNext = _this.visibleNext;
-    }
-
-    // TODO write more options for fade mode
-    // In fade mode we have to setting slides-to-show and slides-to-scroll
-    // to 1 slide
-    if (_this.options.fade) {
-      _this.options.slidesToShow = 1;
-      _this.options.slidesToScroll = 1;
+/* global window, document, define, jQuery, setInterval, clearInterval */
+(function(factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof exports !== 'undefined') {
+        module.exports = factory(require('jquery'));
     } else {
-      if (_this.show) {
-        _this.options.slidesToShow = _this.show;
-      }
-      if (_this.scroll) {
-        _this.options.slidesToScroll = _this.scroll;
-      }
-    }
-  };
-
-  /**
-   * init variables, slides, ..
-   */
-  this.initRanges = function () {
-    if (!_this.slides) {
-      _this.slides = [];
+        factory(jQuery);
     }
 
-    _this.isCarouselReady = false;
-    _this.isTrackMoving = false;
-    _this.track = $element.find('.track');
-    _this.width = 1; // Fake width
-    _this.currentSlide = _this.options.initialSlide;
-    _this.trackStyle = {};
-    _this.slideStyle = {};
+}(function($) {
+    'use strict';
+    var Slick = window.Slick || {};
 
-    _this.isVisibleDots = false;
-    _this.isVisiblePrev = _this.options.visiblePrev;
-    _this.isVisibleNext = _this.options.visibleNext;
+    Slick = (function() {
 
-    _this.isClickablePrev = false;
-    _this.isClickableNext = false;
+        var instanceUid = 0;
 
-    _this.animType = null;
-    _this.transformType = null;
-    _this.transitionType = null;
-  };
+        function Slick(element, settings) {
 
-  /**
-   * Init UI and carousel track
-   */
-  this.initUI = function () {
-    _this.width = $element[0].clientWidth;
+            var _ = this, dataSettings;
 
-    // Update track width first
-    _this.initTrack();
+            _.defaults = {
+                accessibility: true,
+                adaptiveHeight: false,
+                appendArrows: $(element),
+                appendDots: $(element),
+                arrows: true,
+                asNavFor: null,
+                prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="Previous" tabindex="0" role="button">Previous</button>',
+                nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>',
+                autoplay: false,
+                autoplaySpeed: 3000,
+                centerMode: false,
+                centerPadding: '50px',
+                cssEase: 'ease',
+                customPaging: function(slider, i) {
+                    return $('<button type="button" data-role="none" role="button" tabindex="0" />').text(i + 1);
+                },
+                dots: false,
+                dotsClass: 'slick-dots',
+                draggable: true,
+                easing: 'linear',
+                edgeFriction: 0.35,
+                fade: false,
+                focusOnSelect: false,
+                infinite: true,
+                initialSlide: 0,
+                lazyLoad: 'ondemand',
+                mobileFirst: false,
+                pauseOnHover: true,
+                pauseOnFocus: true,
+                pauseOnDotsHover: false,
+                respondTo: 'window',
+                responsive: null,
+                rows: 1,
+                rtl: false,
+                slide: '',
+                slidesPerRow: 1,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                speed: 500,
+                swipe: true,
+                swipeToSlide: false,
+                touchMove: true,
+                touchThreshold: 5,
+                useCSS: true,
+                useTransform: true,
+                variableWidth: false,
+                vertical: false,
+                verticalSwiping: false,
+                waitForAnimate: true,
+                zIndex: 1000
+            };
 
-    // Then item style
-    $timeout(function () {
-      _this.updateItemStyle();
-    }, 200);
-  };
+            _.initials = {
+                animating: false,
+                dragging: false,
+                autoPlayTimer: null,
+                currentDirection: 0,
+                currentLeft: null,
+                currentSlide: 0,
+                direction: 1,
+                $dots: null,
+                listWidth: null,
+                listHeight: null,
+                loadIndex: 0,
+                $nextArrow: null,
+                $prevArrow: null,
+                slideCount: null,
+                slideWidth: null,
+                $slideTrack: null,
+                $slides: null,
+                sliding: false,
+                slideOffset: 0,
+                swipeLeft: null,
+                $list: null,
+                touchObject: {},
+                transformsEnabled: false,
+                unslicked: false
+            };
 
-  /**
-   * update common style for each carousel item
-   */
-  this.updateItemStyle = function () {
-    _this.itemWidth = _this.width / _this.options.slidesToShow;
-    _this.slideStyle = {
-      'width': _this.itemWidth + 'px'
-    };
-  };
+            $.extend(_, _.initials);
 
-  /**
-   * init carousel track
-   * also make Carousel is Ready
-   */
-  this.initTrack = function () {
-    var itemWidth = _this.width / _this.options.slidesToShow;
-    var trackWidth = itemWidth * _this.slidesInTrack.length;
+            _.activeBreakpoint = null;
+            _.animType = null;
+            _.animProp = null;
+            _.breakpoints = [];
+            _.breakpointSettings = [];
+            _.cssTransitions = false;
+            _.focussed = false;
+            _.interrupted = false;
+            _.hidden = 'hidden';
+            _.paused = true;
+            _.positionProp = null;
+            _.respondTo = null;
+            _.rowCount = 1;
+            _.shouldClick = true;
+            _.$slider = $(element);
+            _.$slidesCache = null;
+            _.transformType = null;
+            _.transitionType = null;
+            _.visibilityChange = 'visibilitychange';
+            _.windowWidth = 0;
+            _.windowTimer = null;
 
-    _this.trackStyle.width = trackWidth + 'px';
+            dataSettings = $(element).data('slick') || {};
 
-    _this.slideHandler(_this.currentSlide).finally(function () {
-      _this.isCarouselReady = true;
+            _.options = $.extend({}, _.defaults, settings, dataSettings);
 
-      if (!_this.options.fade) {
-        _this.refreshTrackStyle();
-      }
+            _.currentSlide = _.options.initialSlide;
 
-      // onInit callback
-      if (_this.onInit) {
-        _this.onInit();
-      }
-    }).catch(function () {
-      // Catch err
-    });
-  };
+            _.originalSettings = _.options;
 
-  /**
-   * @see https://github.com/kenwheeler/slick/blob/master/slick/slick.js#L680
-   *
-   * Sync slide to place it should be
-   * for example:
-   * - 9 total, 3 show, 3 scroll, current 1
-   *   => next index = 3 (previous index counted = 0)
-   *
-   * and scroll to next page:
-   * - 6 total, 1 show, 1 scroll, current 0 => next index = 1
-   * - 9 total, 3 show, 3 scroll, current 1 => next index = 3
-   * - 9 total, 3 show, 3 scroll, current 3 => next index = 6
-   * - 9 total, 3 show, 3 scroll, current 8 => next index = 3
-   * - 8 total, 4 show, 3 scroll, current 1 => next index = 4
-   */
-  this.next = function () {
-    if (!_this.isClickableNext) {
-      return false;
-    }
+            if (typeof document.mozHidden !== 'undefined') {
+                _.hidden = 'mozHidden';
+                _.visibilityChange = 'mozvisibilitychange';
+            } else if (typeof document.webkitHidden !== 'undefined') {
+                _.hidden = 'webkitHidden';
+                _.visibilityChange = 'webkitvisibilitychange';
+            }
 
-    var indexOffset = _this.getIndexOffset();
-    var slideOffset = indexOffset === 0 ? _this.options.slidesToScroll : indexOffset;
+            _.autoPlay = $.proxy(_.autoPlay, _);
+            _.autoPlayClear = $.proxy(_.autoPlayClear, _);
+            _.autoPlayIterator = $.proxy(_.autoPlayIterator, _);
+            _.changeSlide = $.proxy(_.changeSlide, _);
+            _.clickHandler = $.proxy(_.clickHandler, _);
+            _.selectHandler = $.proxy(_.selectHandler, _);
+            _.setPosition = $.proxy(_.setPosition, _);
+            _.swipeHandler = $.proxy(_.swipeHandler, _);
+            _.dragHandler = $.proxy(_.dragHandler, _);
+            _.keyHandler = $.proxy(_.keyHandler, _);
 
-    _this.slideHandler(_this.currentSlide + slideOffset).catch(function () {
-      // Catch err
-    });
-  };
+            _.instanceUid = instanceUid++;
 
-  /**
-   * move to previous slide
-   * same calculate with next
-   * @see next function
-   */
-  this.prev = function () {
-    if (!_this.isClickablePrev) {
-      return false;
-    }
+            // A simple way to check for HTML strings
+            // Strict HTML recognition (must start with <)
+            // Extracted from jQuery v1.11 source
+            _.htmlExpr = /^(?:\s*(<[\w\W]+>)[^>]*)$/;
 
-    var indexOffset = _this.getIndexOffset();
-    var slideOffset = indexOffset === 0 ? _this.options.slidesToScroll : _this.options.slidesToShow - indexOffset;
 
-    _this.slideHandler(_this.currentSlide - slideOffset).catch(function () {
-      // Catch err
-    });
-  };
+            _.registerBreakpoints();
+            _.init(true);
 
-  /**
-   * Get index offset
-   */
-  this.getIndexOffset = function () {
-    var scrollOffset = _this.slides.length % _this.options.slidesToScroll !== 0;
-    var indexOffset = scrollOffset ? 0 : (_this.slides.length - _this.currentSlide) % _this.options.slidesToScroll;
-
-    return indexOffset;
-  };
-
-  /**
-   * move to page
-   * @params int page
-   * Page counter from 0 (start = 0)
-   */
-  this.movePage = function (page) {
-    var target = _this.options.slidesToScroll * page;
-    _this.slideHandler(target).catch(function () {
-      // Catch err
-    });
-  };
-
-  /**
-   * hanlder carousel
-   * @description move carousel to correct page
-   *
-   * @params int index
-   */
-  this.slideHandler = function (index) {
-    // TODO prevent when slides not exists
-    if (!_this.slides) {
-      return $q.reject('Carousel not fully setup');
-    }
-
-    // TODO Prevent when track is moving
-    if (_this.isTrackMoving) {
-      return $q.reject('Track is moving');
-    }
-
-    var len = _this.slides.length;
-    var show = _this.options.slidesToShow;
-
-    if (len <= show) {
-      _this.correctTrack();
-      return $q.reject('Length of slides smaller than slides to show');
-    }
-
-    // We need target to destination
-    // and a anim slide to translate track
-    //
-    // anim = animSlide (which we use to move)
-    // target = targetSlide
-    var anim = index;
-    var target = null;
-
-    if (anim < 0) {
-      if (len % _this.options.slidesToScroll !== 0) {
-        target = len - len % _this.options.slidesToScroll;
-      } else {
-        target = len + anim;
-      }
-    } else if (anim >= len) {
-      if (len % _this.options.slidesToScroll !== 0) {
-        target = 0;
-      } else {
-        target = anim - len;
-      }
-    } else {
-      target = anim;
-    }
-
-    if (_this.onBeforeChange) {
-      // @see https://docs.angularjs.org/guide/directive
-      _this.onBeforeChange({ currentSlide: _this.currentSlide, target: target });
-    }
-
-    // Fade handler
-    if (_this.options.fade) {
-      _this.currentSlide = target;
-
-      // XXX
-      // afterChange method
-      // fire after faded
-      // Should be revised
-      $timeout(function () {
-        _this.autoplayTrack();
-
-        if (_this.onAfterChange) {
-          _this.onAfterChange({ currentSlide: _this.currentSlide });
-        }
-      }, _this.options.speed);
-      return $q.when('Handler fade');
-    }
-
-    // No-fade handler
-    var left = -1 * target * _this.itemWidth;
-    if (_this.options.infinite) {
-      left = -1 * (anim + show) * _this.itemWidth;
-    }
-
-    _this.isTrackMoving = true;
-    return _this.moveTrack(left).then(function () {
-      _this.isTrackMoving = false;
-      _this.currentSlide = target;
-      _this.autoplayTrack();
-
-      if (target !== anim) {
-        _this.correctTrack();
-      }
-
-      if (!_this.options.infinite) {
-        if (_this.currentSlide === 0) {
-          _this.isClickablePrev = false;
-          _this.isClickableNext = true;
-        } else if (_this.currentSlide === _this.slidesInTrack.length - _this.options.slidesToShow) {
-          _this.isClickableNext = false;
-          _this.isClickablePrev = true;
-        } else {
-          _this.isClickablePrev = true;
-          _this.isClickableNext = true;
-        }
-      }
-
-      // XXX
-      // afterChange method
-      // fire after 200ms wakeup and correct track
-      // Should be revised
-      $timeout(function () {
-        if (_this.onAfterChange) {
-          _this.onAfterChange({ currentSlide: _this.currentSlide });
-        }
-      }, 200);
-    });
-  };
-
-  /**
-   * moveTrack
-   * move track to left position using css3 translate
-   * for example left: -1000px
-   */
-  this.moveTrack = function (left) {
-    var deferred = $q.defer();
-    if (_this.options.vertical === false) {
-      _this.trackStyle[_this.animType] = 'translate3d(' + left + 'px, 0px, 0px)';
-    } else {
-      _this.trackStyle[_this.animType] = 'translate3d(0px, ' + left + 'px, 0px)';
-    }
-
-    $timeout(function () {
-      deferred.resolve('Track moved');
-    }, _this.options.speed);
-
-    return deferred.promise;
-  };
-
-  /**
-   * correctTrack
-   * @description correct track after move to animSlide we have to move track
-   * to exactly its position
-   */
-  this.correctTrack = function () {
-    if (_this.options.infinite) {
-      (function () {
-        var left = 0;
-        if (_this.slides.length > _this.options.slidesToShow) {
-          left = -1 * (_this.currentSlide + _this.options.slidesToShow) * _this.itemWidth;
         }
 
-        // Move without anim
-        _this.trackStyle[_this.transitionType] = _this.transformType + ' ' + 0 + 'ms ' + _this.options.cssEase;
+        return Slick;
 
-        _this.isTrackMoving = true;
-        $timeout(function () {
-          _this.trackStyle[_this.animType] = 'translate3d(' + left + 'px, 0, 0px)';
+    }());
 
-          // Revert animation
-          $timeout(function () {
-            _this.refreshTrackStyle();
-            _this.isTrackMoving = false;
-          }, 200);
+    Slick.prototype.activateADA = function() {
+        var _ = this;
+
+        _.$slideTrack.find('.slick-active').attr({
+            'aria-hidden': 'false'
+        }).find('a, input, button, select').attr({
+            'tabindex': '0'
         });
-      })();
-    }
-  };
 
-  /**
-   * Refresh track style
-   */
-  this.refreshTrackStyle = function () {
-    _this.trackStyle[_this.transitionType] = _this.transformType + ' ' + _this.options.speed + 'ms ' + _this.options.cssEase;
-  };
-
-  /**
-   * autoplay track
-   * @description autoplay = true
-   */
-  this.autoplayTrack = function () {
-    if (_this.options.autoplay) {
-      if (_this.timeout) {
-        $timeout.cancel(_this.timeout);
-      }
-
-      _this.timeout = $timeout(function () {
-        _this.next();
-
-        $timeout.cancel(_this.timeout);
-        _this.timeout = null;
-      }, _this.options.autoplaySpeed);
-    }
-  };
-
-  this.getSlideStyle = function (index) {
-    var style = _this.slideStyle;
-    if (_this.options.fade) {
-      var left = -1 * index * _this.itemWidth;
-      var uniqueStyle = {
-        position: 'relative',
-        top: '0px',
-        left: left + 'px',
-        'z-index': index === _this.currentSlide ? 10 : 9,
-        opacity: index === _this.currentSlide ? 1 : 0
-      };
-
-      if (index >= _this.currentSlide - 1 && index <= _this.currentSlide + 1) {
-        uniqueStyle.transition = 'opacity 250ms linear';
-      }
-
-      style = angular.extend(style, uniqueStyle);
-    }
-
-    return style;
-  };
-
-  /**
-   * setupInfinite
-   * To make carouse infinite we need close number of slidesToShow elements to
-   * previous elements and to after elements
-   *
-   * length = 8, show = 4, scroll = 3, current = 0
-   *          ---------
-   *          |       |
-   *  |4|5|6|7|0|1|2|3|4|5|6|7|1|2|3|4
-   *          |       |
-   *          ---------
-   */
-  this.setupInfinite = function () {
-    // Clone
-    var len = _this.slides.length;
-    var show = _this.options.slidesToShow;
-
-    var tmpTrack = angular.copy(_this.slides);
-
-    if (_this.options.infinite && _this.options.fade === false) {
-      if (len > show) {
-        var number = show;
-        for (var i = 0; i < number; i++) {
-          tmpTrack.push(angular.copy(_this.slides[i]));
-        }
-        for (var _i = len - 1; _i >= len - show; _i--) {
-          tmpTrack.unshift(angular.copy(_this.slides[_i]));
-        }
-      }
-    }
-
-    _this.slidesInTrack = tmpTrack;
-  };
-
-  /**
-   * get number of dosts
-   *
-   * @return Array
-   */
-  this.getDots = function () {
-    if (!_this.slides) {
-      return [];
-    }
-
-    var dots = Math.ceil(_this.slides.length / _this.options.slidesToScroll);
-
-    var res = [];
-    for (var i = 0; i < dots; i++) {
-      res.push(i);
-    }
-    return res;
-  };
-
-  /**
-   * set carousel property
-   *
-   * - animType
-   * - transformType
-   * - transitionType
-   */
-  this.setProps = function () {
-    var bodyStyle = document.body.style;
-
-    /* eslint-disable */
-    if (bodyStyle.OTransform !== undefined) {
-      _this.animType = 'OTransform';
-      _this.transformType = '-o-transform';
-      _this.transitionType = 'OTransition';
-    }
-    if (bodyStyle.MozTransform !== undefined) {
-      _this.animType = 'MozTransform';
-      _this.transformType = '-moz-transform';
-      _this.transitionType = 'MozTransition';
-    }
-    if (bodyStyle.webkitTransform !== undefined) {
-      _this.animType = 'webkitTransform';
-      _this.transformType = '-webkit-transform';
-      _this.transitionType = 'webkitTransition';
-    }
-    if (bodyStyle.msTransform !== undefined) {
-      _this.animType = 'msTransform';
-      _this.transformType = '-ms-transform';
-      _this.transitionType = 'msTransition';
-    }
-    if (bodyStyle.transform !== undefined && _this.animType !== false) {
-      _this.animType = 'transform';
-      _this.transformType = 'transform';
-      _this.transitionType = 'transition';
-    }
-    /* eslint-enable */
-
-    _this.transformsEnabled = true;
-  };
-
-  /**
-   * Refresh carousel
-   */
-  this.refreshCarousel = function () {
-    if (_this.slides && _this.slides.length && _this.slides.length > _this.options.slidesToShow) {
-      _this.isVisibleDots = true;
-      _this.isVisiblePrev = true;
-      _this.isVisibleNext = true;
-      _this.isClickablePrev = true;
-      _this.isClickableNext = true;
-    } else {
-      _this.isVisibleDots = false;
-      _this.isVisiblePrev = _this.options.visiblePrev || false;
-      _this.isVisibleNext = _this.options.visibleNext || false;
-      _this.isClickablePrev = false;
-      _this.isClickableNext = false;
-    }
-
-    // Re-init UI
-    _this.initUI();
-  };
-
-  /**
-   * refresh model
-   */
-  $scope.$watchCollection('ctrl.slides', function (slides) {
-    if (!slides) {
-      return;
-    }
-
-    // Init carousel
-    if (_this.currentSlide > slides.length - 1) {
-      _this.currentSlide = slides.length - 1;
-    }
-
-    _this.setupInfinite();
-    _this.refreshCarousel();
-  });
-
-  /**
-   * update when resize
-   *
-   * @see https://github.com/mihnsen/ui-carousel/issues/10
-   * @author tarkant
-   */
-  angular.element($window).on('resize', this.refreshCarousel);
-
-  /**
-   * cleanup when done
-   *
-   * @see https://github.com/mihnsen/ui-carousel/issues/10
-   * @author tarkant
-   */
-  $scope.$on('$destroy', function () {
-    angular.element($window).off('resize');
-  });
-
-  // Prior to v1.5, we need to call `$onInit()` manually.
-  // (Bindings will always be pre-assigned in these versions.)
-  if (angular.version.major === 1 && angular.version.minor < 5) {
-    this.$onInit();
-  }
-}]);
-'use strict';
-
-angular.module('ui.carousel.directives').directive('uiCarousel', ['$compile', '$templateCache', '$sce', function ($compile, $templateCache, $sce) {
-
-  return { restrict: 'AE',
-    bindToController: true,
-    scope: {
-      name: '=?',
-      slides: '=',
-      show: '=?slidesToShow',
-      scroll: '=?slidesToScroll',
-      classes: '@',
-      fade: '=?',
-      onChange: '=?',
-      disableArrow: '=?',
-      autoplay: '=?',
-      autoplaySpeed: '=?',
-      cssEase: '=?',
-      speed: '=?',
-      infinite: '=?',
-      arrows: '=?',
-      dots: '=?',
-      initialSlide: '=?',
-      visibleNext: '=?',
-      visiblePrev: '=?',
-
-      // Method
-      onBeforeChange: '&',
-      onAfterChange: '&',
-      onInit: '&'
-    },
-    link: function link($scope, el) {
-      var template = angular.element($templateCache.get('ui-carousel/carousel.template.html'));
-
-      // dynamic injections to override the inner layers' components
-      var injectComponentMap = {
-        'carousel-item': '.carousel-item',
-        'carousel-prev': '.carousel-prev',
-        'carousel-next': '.carousel-next'
-      };
-
-      var templateInstance = template.clone();
-      angular.forEach(injectComponentMap, function (innerSelector, outerSelector) {
-        var outerElement = el[0].querySelector(outerSelector);
-        if (outerElement) {
-          angular.element(templateInstance[0].querySelector(innerSelector)).html(outerElement.innerHTML);
-        }
-      });
-
-      var compiledElement = $compile(templateInstance)($scope);
-      el.addClass('ui-carousel').html('').append(compiledElement);
-    },
-
-
-    controller: 'CarouselController',
-    controllerAs: 'ctrl'
-  };
-}]);
-'use strict';
-
-angular.module('ui.carousel.providers').provider('Carousel', function () {
-  var _this = this;
-
-  this.options = {
-    // Init like Slick carousel
-    // XXX Should be revised
-    arrows: true,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    cssEase: 'ease',
-    dots: false,
-
-    easing: 'linear',
-    fade: false,
-    infinite: true,
-    initialSlide: 0,
-
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    speed: 500,
-
-    visiblePrev: false,
-    visibleNext: false,
-
-    // Not available right now
-    draggable: true,
-
-    lazyLoad: 'ondemand',
-
-    swipe: true,
-    swipeToSlide: false,
-    touchMove: true,
-
-    vertical: false,
-    verticalSwiping: false
-  };
-  this.$get = [function () {
-    return {
-      setOptions: function setOptions(options) {
-        _this.options = angular.extend(_this.options, options);
-      },
-      getOptions: function getOptions() {
-        return _this.options;
-      }
     };
-  }];
-});
+
+    Slick.prototype.addSlide = Slick.prototype.slickAdd = function(markup, index, addBefore) {
+
+        var _ = this;
+
+        if (typeof(index) === 'boolean') {
+            addBefore = index;
+            index = null;
+        } else if (index < 0 || (index >= _.slideCount)) {
+            return false;
+        }
+
+        _.unload();
+
+        if (typeof(index) === 'number') {
+            if (index === 0 && _.$slides.length === 0) {
+                $(markup).appendTo(_.$slideTrack);
+            } else if (addBefore) {
+                $(markup).insertBefore(_.$slides.eq(index));
+            } else {
+                $(markup).insertAfter(_.$slides.eq(index));
+            }
+        } else {
+            if (addBefore === true) {
+                $(markup).prependTo(_.$slideTrack);
+            } else {
+                $(markup).appendTo(_.$slideTrack);
+            }
+        }
+
+        _.$slides = _.$slideTrack.children(this.options.slide);
+
+        _.$slideTrack.children(this.options.slide).detach();
+
+        _.$slideTrack.append(_.$slides);
+
+        _.$slides.each(function(index, element) {
+            $(element).attr('data-slick-index', index);
+        });
+
+        _.$slidesCache = _.$slides;
+
+        _.reinit();
+
+    };
+
+    Slick.prototype.animateHeight = function() {
+        var _ = this;
+        if (_.options.slidesToShow === 1 && _.options.adaptiveHeight === true && _.options.vertical === false) {
+            var targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
+            _.$list.animate({
+                height: targetHeight
+            }, _.options.speed);
+        }
+    };
+
+    Slick.prototype.animateSlide = function(targetLeft, callback) {
+
+        var animProps = {},
+            _ = this;
+
+        _.animateHeight();
+
+        if (_.options.rtl === true && _.options.vertical === false) {
+            targetLeft = -targetLeft;
+        }
+        if (_.transformsEnabled === false) {
+            if (_.options.vertical === false) {
+                _.$slideTrack.animate({
+                    left: targetLeft
+                }, _.options.speed, _.options.easing, callback);
+            } else {
+                _.$slideTrack.animate({
+                    top: targetLeft
+                }, _.options.speed, _.options.easing, callback);
+            }
+
+        } else {
+
+            if (_.cssTransitions === false) {
+                if (_.options.rtl === true) {
+                    _.currentLeft = -(_.currentLeft);
+                }
+                $({
+                    animStart: _.currentLeft
+                }).animate({
+                    animStart: targetLeft
+                }, {
+                    duration: _.options.speed,
+                    easing: _.options.easing,
+                    step: function(now) {
+                        now = Math.ceil(now);
+                        if (_.options.vertical === false) {
+                            animProps[_.animType] = 'translate(' +
+                                now + 'px, 0px)';
+                            _.$slideTrack.css(animProps);
+                        } else {
+                            animProps[_.animType] = 'translate(0px,' +
+                                now + 'px)';
+                            _.$slideTrack.css(animProps);
+                        }
+                    },
+                    complete: function() {
+                        if (callback) {
+                            callback.call();
+                        }
+                    }
+                });
+
+            } else {
+
+                _.applyTransition();
+                targetLeft = Math.ceil(targetLeft);
+
+                if (_.options.vertical === false) {
+                    animProps[_.animType] = 'translate3d(' + targetLeft + 'px, 0px, 0px)';
+                } else {
+                    animProps[_.animType] = 'translate3d(0px,' + targetLeft + 'px, 0px)';
+                }
+                _.$slideTrack.css(animProps);
+
+                if (callback) {
+                    setTimeout(function() {
+
+                        _.disableTransition();
+
+                        callback.call();
+                    }, _.options.speed);
+                }
+
+            }
+
+        }
+
+    };
+
+    Slick.prototype.getNavTarget = function() {
+
+        var _ = this,
+            asNavFor = _.options.asNavFor;
+
+        if ( asNavFor && asNavFor !== null ) {
+            asNavFor = $(asNavFor).not(_.$slider);
+        }
+
+        return asNavFor;
+
+    };
+
+    Slick.prototype.asNavFor = function(index) {
+
+        var _ = this,
+            asNavFor = _.getNavTarget();
+
+        if ( asNavFor !== null && typeof asNavFor === 'object' ) {
+            asNavFor.each(function() {
+                var target = $(this).slick('getSlick');
+                if(!target.unslicked) {
+                    target.slideHandler(index, true);
+                }
+            });
+        }
+
+    };
+
+    Slick.prototype.applyTransition = function(slide) {
+
+        var _ = this,
+            transition = {};
+
+        if (_.options.fade === false) {
+            transition[_.transitionType] = _.transformType + ' ' + _.options.speed + 'ms ' + _.options.cssEase;
+        } else {
+            transition[_.transitionType] = 'opacity ' + _.options.speed + 'ms ' + _.options.cssEase;
+        }
+
+        if (_.options.fade === false) {
+            _.$slideTrack.css(transition);
+        } else {
+            _.$slides.eq(slide).css(transition);
+        }
+
+    };
+
+    Slick.prototype.autoPlay = function() {
+
+        var _ = this;
+
+        _.autoPlayClear();
+
+        if ( _.slideCount > _.options.slidesToShow ) {
+            _.autoPlayTimer = setInterval( _.autoPlayIterator, _.options.autoplaySpeed );
+        }
+
+    };
+
+    Slick.prototype.autoPlayClear = function() {
+
+        var _ = this;
+
+        if (_.autoPlayTimer) {
+            clearInterval(_.autoPlayTimer);
+        }
+
+    };
+
+    Slick.prototype.autoPlayIterator = function() {
+
+        var _ = this,
+            slideTo = _.currentSlide + _.options.slidesToScroll;
+
+        if ( !_.paused && !_.interrupted && !_.focussed ) {
+
+            if ( _.options.infinite === false ) {
+
+                if ( _.direction === 1 && ( _.currentSlide + 1 ) === ( _.slideCount - 1 )) {
+                    _.direction = 0;
+                }
+
+                else if ( _.direction === 0 ) {
+
+                    slideTo = _.currentSlide - _.options.slidesToScroll;
+
+                    if ( _.currentSlide - 1 === 0 ) {
+                        _.direction = 1;
+                    }
+
+                }
+
+            }
+
+            _.slideHandler( slideTo );
+
+        }
+
+    };
+
+    Slick.prototype.buildArrows = function() {
+
+        var _ = this;
+
+        if (_.options.arrows === true ) {
+
+            _.$prevArrow = $(_.options.prevArrow).addClass('slick-arrow');
+            _.$nextArrow = $(_.options.nextArrow).addClass('slick-arrow');
+
+            if( _.slideCount > _.options.slidesToShow ) {
+
+                _.$prevArrow.removeClass('slick-hidden').removeAttr('aria-hidden tabindex');
+                _.$nextArrow.removeClass('slick-hidden').removeAttr('aria-hidden tabindex');
+
+                if (_.htmlExpr.test(_.options.prevArrow)) {
+                    _.$prevArrow.prependTo(_.options.appendArrows);
+                }
+
+                if (_.htmlExpr.test(_.options.nextArrow)) {
+                    _.$nextArrow.appendTo(_.options.appendArrows);
+                }
+
+                if (_.options.infinite !== true) {
+                    _.$prevArrow
+                        .addClass('slick-disabled')
+                        .attr('aria-disabled', 'true');
+                }
+
+            } else {
+
+                _.$prevArrow.add( _.$nextArrow )
+
+                    .addClass('slick-hidden')
+                    .attr({
+                        'aria-disabled': 'true',
+                        'tabindex': '-1'
+                    });
+
+            }
+
+        }
+
+    };
+
+    Slick.prototype.buildDots = function() {
+
+        var _ = this,
+            i, dot;
+
+        if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
+
+            _.$slider.addClass('slick-dotted');
+
+            dot = $('<ul />').addClass(_.options.dotsClass);
+
+            for (i = 0; i <= _.getDotCount(); i += 1) {
+                dot.append($('<li />').append(_.options.customPaging.call(this, _, i)));
+            }
+
+            _.$dots = dot.appendTo(_.options.appendDots);
+
+            _.$dots.find('li').first().addClass('slick-active').attr('aria-hidden', 'false');
+
+        }
+
+    };
+
+    Slick.prototype.buildOut = function() {
+
+        var _ = this;
+
+        _.$slides =
+            _.$slider
+                .children( _.options.slide + ':not(.slick-cloned)')
+                .addClass('slick-slide');
+
+        _.slideCount = _.$slides.length;
+
+        _.$slides.each(function(index, element) {
+            $(element)
+                .attr('data-slick-index', index)
+                .data('originalStyling', $(element).attr('style') || '');
+        });
+
+        _.$slider.addClass('slick-slider');
+
+        _.$slideTrack = (_.slideCount === 0) ?
+            $('<div class="slick-track"/>').appendTo(_.$slider) :
+            _.$slides.wrapAll('<div class="slick-track"/>').parent();
+
+        _.$list = _.$slideTrack.wrap(
+            '<div aria-live="polite" class="slick-list"/>').parent();
+        _.$slideTrack.css('opacity', 0);
+
+        if (_.options.centerMode === true || _.options.swipeToSlide === true) {
+            _.options.slidesToScroll = 1;
+        }
+
+        $('img[data-lazy]', _.$slider).not('[src]').addClass('slick-loading');
+
+        _.setupInfinite();
+
+        _.buildArrows();
+
+        _.buildDots();
+
+        _.updateDots();
+
+
+        _.setSlideClasses(typeof _.currentSlide === 'number' ? _.currentSlide : 0);
+
+        if (_.options.draggable === true) {
+            _.$list.addClass('draggable');
+        }
+
+    };
+
+    Slick.prototype.buildRows = function() {
+
+        var _ = this, a, b, c, newSlides, numOfSlides, originalSlides,slidesPerSection;
+
+        newSlides = document.createDocumentFragment();
+        originalSlides = _.$slider.children();
+
+        if(_.options.rows > 1) {
+
+            slidesPerSection = _.options.slidesPerRow * _.options.rows;
+            numOfSlides = Math.ceil(
+                originalSlides.length / slidesPerSection
+            );
+
+            for(a = 0; a < numOfSlides; a++){
+                var slide = document.createElement('div');
+                for(b = 0; b < _.options.rows; b++) {
+                    var row = document.createElement('div');
+                    for(c = 0; c < _.options.slidesPerRow; c++) {
+                        var target = (a * slidesPerSection + ((b * _.options.slidesPerRow) + c));
+                        if (originalSlides.get(target)) {
+                            row.appendChild(originalSlides.get(target));
+                        }
+                    }
+                    slide.appendChild(row);
+                }
+                newSlides.appendChild(slide);
+            }
+
+            _.$slider.empty().append(newSlides);
+            _.$slider.children().children().children()
+                .css({
+                    'width':(100 / _.options.slidesPerRow) + '%',
+                    'display': 'inline-block'
+                });
+
+        }
+
+    };
+
+    Slick.prototype.checkResponsive = function(initial, forceUpdate) {
+
+        var _ = this,
+            breakpoint, targetBreakpoint, respondToWidth, triggerBreakpoint = false;
+        var sliderWidth = _.$slider.width();
+        var windowWidth = window.innerWidth || $(window).width();
+
+        if (_.respondTo === 'window') {
+            respondToWidth = windowWidth;
+        } else if (_.respondTo === 'slider') {
+            respondToWidth = sliderWidth;
+        } else if (_.respondTo === 'min') {
+            respondToWidth = Math.min(windowWidth, sliderWidth);
+        }
+
+        if ( _.options.responsive &&
+            _.options.responsive.length &&
+            _.options.responsive !== null) {
+
+            targetBreakpoint = null;
+
+            for (breakpoint in _.breakpoints) {
+                if (_.breakpoints.hasOwnProperty(breakpoint)) {
+                    if (_.originalSettings.mobileFirst === false) {
+                        if (respondToWidth < _.breakpoints[breakpoint]) {
+                            targetBreakpoint = _.breakpoints[breakpoint];
+                        }
+                    } else {
+                        if (respondToWidth > _.breakpoints[breakpoint]) {
+                            targetBreakpoint = _.breakpoints[breakpoint];
+                        }
+                    }
+                }
+            }
+
+            if (targetBreakpoint !== null) {
+                if (_.activeBreakpoint !== null) {
+                    if (targetBreakpoint !== _.activeBreakpoint || forceUpdate) {
+                        _.activeBreakpoint =
+                            targetBreakpoint;
+                        if (_.breakpointSettings[targetBreakpoint] === 'unslick') {
+                            _.unslick(targetBreakpoint);
+                        } else {
+                            _.options = $.extend({}, _.originalSettings,
+                                _.breakpointSettings[
+                                    targetBreakpoint]);
+                            if (initial === true) {
+                                _.currentSlide = _.options.initialSlide;
+                            }
+                            _.refresh(initial);
+                        }
+                        triggerBreakpoint = targetBreakpoint;
+                    }
+                } else {
+                    _.activeBreakpoint = targetBreakpoint;
+                    if (_.breakpointSettings[targetBreakpoint] === 'unslick') {
+                        _.unslick(targetBreakpoint);
+                    } else {
+                        _.options = $.extend({}, _.originalSettings,
+                            _.breakpointSettings[
+                                targetBreakpoint]);
+                        if (initial === true) {
+                            _.currentSlide = _.options.initialSlide;
+                        }
+                        _.refresh(initial);
+                    }
+                    triggerBreakpoint = targetBreakpoint;
+                }
+            } else {
+                if (_.activeBreakpoint !== null) {
+                    _.activeBreakpoint = null;
+                    _.options = _.originalSettings;
+                    if (initial === true) {
+                        _.currentSlide = _.options.initialSlide;
+                    }
+                    _.refresh(initial);
+                    triggerBreakpoint = targetBreakpoint;
+                }
+            }
+
+            // only trigger breakpoints during an actual break. not on initialize.
+            if( !initial && triggerBreakpoint !== false ) {
+                _.$slider.trigger('breakpoint', [_, triggerBreakpoint]);
+            }
+        }
+
+    };
+
+    Slick.prototype.changeSlide = function(event, dontAnimate) {
+
+        var _ = this,
+            $target = $(event.currentTarget),
+            indexOffset, slideOffset, unevenOffset;
+
+        // If target is a link, prevent default action.
+        if($target.is('a')) {
+            event.preventDefault();
+        }
+
+        // If target is not the <li> element (ie: a child), find the <li>.
+        if(!$target.is('li')) {
+            $target = $target.closest('li');
+        }
+
+        unevenOffset = (_.slideCount % _.options.slidesToScroll !== 0);
+        indexOffset = unevenOffset ? 0 : (_.slideCount - _.currentSlide) % _.options.slidesToScroll;
+
+        switch (event.data.message) {
+
+            case 'previous':
+                slideOffset = indexOffset === 0 ? _.options.slidesToScroll : _.options.slidesToShow - indexOffset;
+                if (_.slideCount > _.options.slidesToShow) {
+                    _.slideHandler(_.currentSlide - slideOffset, false, dontAnimate);
+                }
+                break;
+
+            case 'next':
+                slideOffset = indexOffset === 0 ? _.options.slidesToScroll : indexOffset;
+                if (_.slideCount > _.options.slidesToShow) {
+                    _.slideHandler(_.currentSlide + slideOffset, false, dontAnimate);
+                }
+                break;
+
+            case 'index':
+                var index = event.data.index === 0 ? 0 :
+                    event.data.index || $target.index() * _.options.slidesToScroll;
+
+                _.slideHandler(_.checkNavigable(index), false, dontAnimate);
+                $target.children().trigger('focus');
+                break;
+
+            default:
+                return;
+        }
+
+    };
+
+    Slick.prototype.checkNavigable = function(index) {
+
+        var _ = this,
+            navigables, prevNavigable;
+
+        navigables = _.getNavigableIndexes();
+        prevNavigable = 0;
+        if (index > navigables[navigables.length - 1]) {
+            index = navigables[navigables.length - 1];
+        } else {
+            for (var n in navigables) {
+                if (index < navigables[n]) {
+                    index = prevNavigable;
+                    break;
+                }
+                prevNavigable = navigables[n];
+            }
+        }
+
+        return index;
+    };
+
+    Slick.prototype.cleanUpEvents = function() {
+
+        var _ = this;
+
+        if (_.options.dots && _.$dots !== null) {
+
+            $('li', _.$dots)
+                .off('click.slick', _.changeSlide)
+                .off('mouseenter.slick', $.proxy(_.interrupt, _, true))
+                .off('mouseleave.slick', $.proxy(_.interrupt, _, false));
+
+        }
+
+        _.$slider.off('focus.slick blur.slick');
+
+        if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
+            _.$prevArrow && _.$prevArrow.off('click.slick', _.changeSlide);
+            _.$nextArrow && _.$nextArrow.off('click.slick', _.changeSlide);
+        }
+
+        _.$list.off('touchstart.slick mousedown.slick', _.swipeHandler);
+        _.$list.off('touchmove.slick mousemove.slick', _.swipeHandler);
+        _.$list.off('touchend.slick mouseup.slick', _.swipeHandler);
+        _.$list.off('touchcancel.slick mouseleave.slick', _.swipeHandler);
+
+        _.$list.off('click.slick', _.clickHandler);
+
+        $(document).off(_.visibilityChange, _.visibility);
+
+        _.cleanUpSlideEvents();
+
+        if (_.options.accessibility === true) {
+            _.$list.off('keydown.slick', _.keyHandler);
+        }
+
+        if (_.options.focusOnSelect === true) {
+            $(_.$slideTrack).children().off('click.slick', _.selectHandler);
+        }
+
+        $(window).off('orientationchange.slick.slick-' + _.instanceUid, _.orientationChange);
+
+        $(window).off('resize.slick.slick-' + _.instanceUid, _.resize);
+
+        $('[draggable!=true]', _.$slideTrack).off('dragstart', _.preventDefault);
+
+        $(window).off('load.slick.slick-' + _.instanceUid, _.setPosition);
+        $(document).off('ready.slick.slick-' + _.instanceUid, _.setPosition);
+
+    };
+
+    Slick.prototype.cleanUpSlideEvents = function() {
+
+        var _ = this;
+
+        _.$list.off('mouseenter.slick', $.proxy(_.interrupt, _, true));
+        _.$list.off('mouseleave.slick', $.proxy(_.interrupt, _, false));
+
+    };
+
+    Slick.prototype.cleanUpRows = function() {
+
+        var _ = this, originalSlides;
+
+        if(_.options.rows > 1) {
+            originalSlides = _.$slides.children().children();
+            originalSlides.removeAttr('style');
+            _.$slider.empty().append(originalSlides);
+        }
+
+    };
+
+    Slick.prototype.clickHandler = function(event) {
+
+        var _ = this;
+
+        if (_.shouldClick === false) {
+            event.stopImmediatePropagation();
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+    };
+
+    Slick.prototype.destroy = function(refresh) {
+
+        var _ = this;
+
+        _.autoPlayClear();
+
+        _.touchObject = {};
+
+        _.cleanUpEvents();
+
+        $('.slick-cloned', _.$slider).detach();
+
+        if (_.$dots) {
+            _.$dots.remove();
+        }
+
+
+        if ( _.$prevArrow && _.$prevArrow.length ) {
+
+            _.$prevArrow
+                .removeClass('slick-disabled slick-arrow slick-hidden')
+                .removeAttr('aria-hidden aria-disabled tabindex')
+                .css('display','');
+
+            if ( _.htmlExpr.test( _.options.prevArrow )) {
+                _.$prevArrow.remove();
+            }
+        }
+
+        if ( _.$nextArrow && _.$nextArrow.length ) {
+
+            _.$nextArrow
+                .removeClass('slick-disabled slick-arrow slick-hidden')
+                .removeAttr('aria-hidden aria-disabled tabindex')
+                .css('display','');
+
+            if ( _.htmlExpr.test( _.options.nextArrow )) {
+                _.$nextArrow.remove();
+            }
+
+        }
+
+
+        if (_.$slides) {
+
+            _.$slides
+                .removeClass('slick-slide slick-active slick-center slick-visible slick-current')
+                .removeAttr('aria-hidden')
+                .removeAttr('data-slick-index')
+                .each(function(){
+                    $(this).attr('style', $(this).data('originalStyling'));
+                });
+
+            _.$slideTrack.children(this.options.slide).detach();
+
+            _.$slideTrack.detach();
+
+            _.$list.detach();
+
+            _.$slider.append(_.$slides);
+        }
+
+        _.cleanUpRows();
+
+        _.$slider.removeClass('slick-slider');
+        _.$slider.removeClass('slick-initialized');
+        _.$slider.removeClass('slick-dotted');
+
+        _.unslicked = true;
+
+        if(!refresh) {
+            _.$slider.trigger('destroy', [_]);
+        }
+
+    };
+
+    Slick.prototype.disableTransition = function(slide) {
+
+        var _ = this,
+            transition = {};
+
+        transition[_.transitionType] = '';
+
+        if (_.options.fade === false) {
+            _.$slideTrack.css(transition);
+        } else {
+            _.$slides.eq(slide).css(transition);
+        }
+
+    };
+
+    Slick.prototype.fadeSlide = function(slideIndex, callback) {
+
+        var _ = this;
+
+        if (_.cssTransitions === false) {
+
+            _.$slides.eq(slideIndex).css({
+                zIndex: _.options.zIndex
+            });
+
+            _.$slides.eq(slideIndex).animate({
+                opacity: 1
+            }, _.options.speed, _.options.easing, callback);
+
+        } else {
+
+            _.applyTransition(slideIndex);
+
+            _.$slides.eq(slideIndex).css({
+                opacity: 1,
+                zIndex: _.options.zIndex
+            });
+
+            if (callback) {
+                setTimeout(function() {
+
+                    _.disableTransition(slideIndex);
+
+                    callback.call();
+                }, _.options.speed);
+            }
+
+        }
+
+    };
+
+    Slick.prototype.fadeSlideOut = function(slideIndex) {
+
+        var _ = this;
+
+        if (_.cssTransitions === false) {
+
+            _.$slides.eq(slideIndex).animate({
+                opacity: 0,
+                zIndex: _.options.zIndex - 2
+            }, _.options.speed, _.options.easing);
+
+        } else {
+
+            _.applyTransition(slideIndex);
+
+            _.$slides.eq(slideIndex).css({
+                opacity: 0,
+                zIndex: _.options.zIndex - 2
+            });
+
+        }
+
+    };
+
+    Slick.prototype.filterSlides = Slick.prototype.slickFilter = function(filter) {
+
+        var _ = this;
+
+        if (filter !== null) {
+
+            _.$slidesCache = _.$slides;
+
+            _.unload();
+
+            _.$slideTrack.children(this.options.slide).detach();
+
+            _.$slidesCache.filter(filter).appendTo(_.$slideTrack);
+
+            _.reinit();
+
+        }
+
+    };
+
+    Slick.prototype.focusHandler = function() {
+
+        var _ = this;
+
+        _.$slider
+            .off('focus.slick blur.slick')
+            .on('focus.slick blur.slick',
+                '*:not(.slick-arrow)', function(event) {
+
+            event.stopImmediatePropagation();
+            var $sf = $(this);
+
+            setTimeout(function() {
+
+                if( _.options.pauseOnFocus ) {
+                    _.focussed = $sf.is(':focus');
+                    _.autoPlay();
+                }
+
+            }, 0);
+
+        });
+    };
+
+    Slick.prototype.getCurrent = Slick.prototype.slickCurrentSlide = function() {
+
+        var _ = this;
+        return _.currentSlide;
+
+    };
+
+    Slick.prototype.getDotCount = function() {
+
+        var _ = this;
+
+        var breakPoint = 0;
+        var counter = 0;
+        var pagerQty = 0;
+
+        if (_.options.infinite === true) {
+            while (breakPoint < _.slideCount) {
+                ++pagerQty;
+                breakPoint = counter + _.options.slidesToScroll;
+                counter += _.options.slidesToScroll <= _.options.slidesToShow ? _.options.slidesToScroll : _.options.slidesToShow;
+            }
+        } else if (_.options.centerMode === true) {
+            pagerQty = _.slideCount;
+        } else if(!_.options.asNavFor) {
+            pagerQty = 1 + Math.ceil((_.slideCount - _.options.slidesToShow) / _.options.slidesToScroll);
+        }else {
+            while (breakPoint < _.slideCount) {
+                ++pagerQty;
+                breakPoint = counter + _.options.slidesToScroll;
+                counter += _.options.slidesToScroll <= _.options.slidesToShow ? _.options.slidesToScroll : _.options.slidesToShow;
+            }
+        }
+
+        return pagerQty - 1;
+
+    };
+
+    Slick.prototype.getLeft = function(slideIndex) {
+
+        var _ = this,
+            targetLeft,
+            verticalHeight,
+            verticalOffset = 0,
+            targetSlide;
+
+        _.slideOffset = 0;
+        verticalHeight = _.$slides.first().outerHeight(true);
+
+        if (_.options.infinite === true) {
+            if (_.slideCount > _.options.slidesToShow) {
+                _.slideOffset = (_.slideWidth * _.options.slidesToShow) * -1;
+                verticalOffset = (verticalHeight * _.options.slidesToShow) * -1;
+            }
+            if (_.slideCount % _.options.slidesToScroll !== 0) {
+                if (slideIndex + _.options.slidesToScroll > _.slideCount && _.slideCount > _.options.slidesToShow) {
+                    if (slideIndex > _.slideCount) {
+                        _.slideOffset = ((_.options.slidesToShow - (slideIndex - _.slideCount)) * _.slideWidth) * -1;
+                        verticalOffset = ((_.options.slidesToShow - (slideIndex - _.slideCount)) * verticalHeight) * -1;
+                    } else {
+                        _.slideOffset = ((_.slideCount % _.options.slidesToScroll) * _.slideWidth) * -1;
+                        verticalOffset = ((_.slideCount % _.options.slidesToScroll) * verticalHeight) * -1;
+                    }
+                }
+            }
+        } else {
+            if (slideIndex + _.options.slidesToShow > _.slideCount) {
+                _.slideOffset = ((slideIndex + _.options.slidesToShow) - _.slideCount) * _.slideWidth;
+                verticalOffset = ((slideIndex + _.options.slidesToShow) - _.slideCount) * verticalHeight;
+            }
+        }
+
+        if (_.slideCount <= _.options.slidesToShow) {
+            _.slideOffset = 0;
+            verticalOffset = 0;
+        }
+
+        if (_.options.centerMode === true && _.options.infinite === true) {
+            _.slideOffset += _.slideWidth * Math.floor(_.options.slidesToShow / 2) - _.slideWidth;
+        } else if (_.options.centerMode === true) {
+            _.slideOffset = 0;
+            _.slideOffset += _.slideWidth * Math.floor(_.options.slidesToShow / 2);
+        }
+
+        if (_.options.vertical === false) {
+            targetLeft = ((slideIndex * _.slideWidth) * -1) + _.slideOffset;
+        } else {
+            targetLeft = ((slideIndex * verticalHeight) * -1) + verticalOffset;
+        }
+
+        if (_.options.variableWidth === true) {
+
+            if (_.slideCount <= _.options.slidesToShow || _.options.infinite === false) {
+                targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
+            } else {
+                targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex + _.options.slidesToShow);
+            }
+
+            if (_.options.rtl === true) {
+                if (targetSlide[0]) {
+                    targetLeft = (_.$slideTrack.width() - targetSlide[0].offsetLeft - targetSlide.width()) * -1;
+                } else {
+                    targetLeft =  0;
+                }
+            } else {
+                targetLeft = targetSlide[0] ? targetSlide[0].offsetLeft * -1 : 0;
+            }
+
+            if (_.options.centerMode === true) {
+                if (_.slideCount <= _.options.slidesToShow || _.options.infinite === false) {
+                    targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
+                } else {
+                    targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex + _.options.slidesToShow + 1);
+                }
+
+                if (_.options.rtl === true) {
+                    if (targetSlide[0]) {
+                        targetLeft = (_.$slideTrack.width() - targetSlide[0].offsetLeft - targetSlide.width()) * -1;
+                    } else {
+                        targetLeft =  0;
+                    }
+                } else {
+                    targetLeft = targetSlide[0] ? targetSlide[0].offsetLeft * -1 : 0;
+                }
+
+                targetLeft += (_.$list.width() - targetSlide.outerWidth()) / 2;
+            }
+        }
+
+        return targetLeft;
+
+    };
+
+    Slick.prototype.getOption = Slick.prototype.slickGetOption = function(option) {
+
+        var _ = this;
+
+        return _.options[option];
+
+    };
+
+    Slick.prototype.getNavigableIndexes = function() {
+
+        var _ = this,
+            breakPoint = 0,
+            counter = 0,
+            indexes = [],
+            max;
+
+        if (_.options.infinite === false) {
+            max = _.slideCount;
+        } else {
+            breakPoint = _.options.slidesToScroll * -1;
+            counter = _.options.slidesToScroll * -1;
+            max = _.slideCount * 2;
+        }
+
+        while (breakPoint < max) {
+            indexes.push(breakPoint);
+            breakPoint = counter + _.options.slidesToScroll;
+            counter += _.options.slidesToScroll <= _.options.slidesToShow ? _.options.slidesToScroll : _.options.slidesToShow;
+        }
+
+        return indexes;
+
+    };
+
+    Slick.prototype.getSlick = function() {
+
+        return this;
+
+    };
+
+    Slick.prototype.getSlideCount = function() {
+
+        var _ = this,
+            slidesTraversed, swipedSlide, centerOffset;
+
+        centerOffset = _.options.centerMode === true ? _.slideWidth * Math.floor(_.options.slidesToShow / 2) : 0;
+
+        if (_.options.swipeToSlide === true) {
+            _.$slideTrack.find('.slick-slide').each(function(index, slide) {
+                if (slide.offsetLeft - centerOffset + ($(slide).outerWidth() / 2) > (_.swipeLeft * -1)) {
+                    swipedSlide = slide;
+                    return false;
+                }
+            });
+
+            slidesTraversed = Math.abs($(swipedSlide).attr('data-slick-index') - _.currentSlide) || 1;
+
+            return slidesTraversed;
+
+        } else {
+            return _.options.slidesToScroll;
+        }
+
+    };
+
+    Slick.prototype.goTo = Slick.prototype.slickGoTo = function(slide, dontAnimate) {
+
+        var _ = this;
+
+        _.changeSlide({
+            data: {
+                message: 'index',
+                index: parseInt(slide)
+            }
+        }, dontAnimate);
+
+    };
+
+    Slick.prototype.init = function(creation) {
+
+        var _ = this;
+
+        if (!$(_.$slider).hasClass('slick-initialized')) {
+
+            $(_.$slider).addClass('slick-initialized');
+
+            _.buildRows();
+            _.buildOut();
+            _.setProps();
+            _.startLoad();
+            _.loadSlider();
+            _.initializeEvents();
+            _.updateArrows();
+            _.updateDots();
+            _.checkResponsive(true);
+            _.focusHandler();
+
+        }
+
+        if (creation) {
+            _.$slider.trigger('init', [_]);
+        }
+
+        if (_.options.accessibility === true) {
+            _.initADA();
+        }
+
+        if ( _.options.autoplay ) {
+
+            _.paused = false;
+            _.autoPlay();
+
+        }
+
+    };
+
+    Slick.prototype.initADA = function() {
+        var _ = this;
+        _.$slides.add(_.$slideTrack.find('.slick-cloned')).attr({
+            'aria-hidden': 'true',
+            'tabindex': '-1'
+        }).find('a, input, button, select').attr({
+            'tabindex': '-1'
+        });
+
+        _.$slideTrack.attr('role', 'listbox');
+
+        _.$slides.not(_.$slideTrack.find('.slick-cloned')).each(function(i) {
+            $(this).attr({
+                'role': 'option',
+                'aria-describedby': 'slick-slide' + _.instanceUid + i + ''
+            });
+        });
+
+        if (_.$dots !== null) {
+            _.$dots.attr('role', 'tablist').find('li').each(function(i) {
+                $(this).attr({
+                    'role': 'presentation',
+                    'aria-selected': 'false',
+                    'aria-controls': 'navigation' + _.instanceUid + i + '',
+                    'id': 'slick-slide' + _.instanceUid + i + ''
+                });
+            })
+                .first().attr('aria-selected', 'true').end()
+                .find('button').attr('role', 'button').end()
+                .closest('div').attr('role', 'toolbar');
+        }
+        _.activateADA();
+
+    };
+
+    Slick.prototype.initArrowEvents = function() {
+
+        var _ = this;
+
+        if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
+            _.$prevArrow
+               .off('click.slick')
+               .on('click.slick', {
+                    message: 'previous'
+               }, _.changeSlide);
+            _.$nextArrow
+               .off('click.slick')
+               .on('click.slick', {
+                    message: 'next'
+               }, _.changeSlide);
+        }
+
+    };
+
+    Slick.prototype.initDotEvents = function() {
+
+        var _ = this;
+
+        if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
+            $('li', _.$dots).on('click.slick', {
+                message: 'index'
+            }, _.changeSlide);
+        }
+
+        if ( _.options.dots === true && _.options.pauseOnDotsHover === true ) {
+
+            $('li', _.$dots)
+                .on('mouseenter.slick', $.proxy(_.interrupt, _, true))
+                .on('mouseleave.slick', $.proxy(_.interrupt, _, false));
+
+        }
+
+    };
+
+    Slick.prototype.initSlideEvents = function() {
+
+        var _ = this;
+
+        if ( _.options.pauseOnHover ) {
+
+            _.$list.on('mouseenter.slick', $.proxy(_.interrupt, _, true));
+            _.$list.on('mouseleave.slick', $.proxy(_.interrupt, _, false));
+
+        }
+
+    };
+
+    Slick.prototype.initializeEvents = function() {
+
+        var _ = this;
+
+        _.initArrowEvents();
+
+        _.initDotEvents();
+        _.initSlideEvents();
+
+        _.$list.on('touchstart.slick mousedown.slick', {
+            action: 'start'
+        }, _.swipeHandler);
+        _.$list.on('touchmove.slick mousemove.slick', {
+            action: 'move'
+        }, _.swipeHandler);
+        _.$list.on('touchend.slick mouseup.slick', {
+            action: 'end'
+        }, _.swipeHandler);
+        _.$list.on('touchcancel.slick mouseleave.slick', {
+            action: 'end'
+        }, _.swipeHandler);
+
+        _.$list.on('click.slick', _.clickHandler);
+
+        $(document).on(_.visibilityChange, $.proxy(_.visibility, _));
+
+        if (_.options.accessibility === true) {
+            _.$list.on('keydown.slick', _.keyHandler);
+        }
+
+        if (_.options.focusOnSelect === true) {
+            $(_.$slideTrack).children().on('click.slick', _.selectHandler);
+        }
+
+        $(window).on('orientationchange.slick.slick-' + _.instanceUid, $.proxy(_.orientationChange, _));
+
+        $(window).on('resize.slick.slick-' + _.instanceUid, $.proxy(_.resize, _));
+
+        $('[draggable!=true]', _.$slideTrack).on('dragstart', _.preventDefault);
+
+        $(window).on('load.slick.slick-' + _.instanceUid, _.setPosition);
+        $(document).on('ready.slick.slick-' + _.instanceUid, _.setPosition);
+
+    };
+
+    Slick.prototype.initUI = function() {
+
+        var _ = this;
+
+        if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
+
+            _.$prevArrow.show();
+            _.$nextArrow.show();
+
+        }
+
+        if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
+
+            _.$dots.show();
+
+        }
+
+    };
+
+    Slick.prototype.keyHandler = function(event) {
+
+        var _ = this;
+         //Dont slide if the cursor is inside the form fields and arrow keys are pressed
+        if(!event.target.tagName.match('TEXTAREA|INPUT|SELECT')) {
+            if (event.keyCode === 37 && _.options.accessibility === true) {
+                _.changeSlide({
+                    data: {
+                        message: _.options.rtl === true ? 'next' :  'previous'
+                    }
+                });
+            } else if (event.keyCode === 39 && _.options.accessibility === true) {
+                _.changeSlide({
+                    data: {
+                        message: _.options.rtl === true ? 'previous' : 'next'
+                    }
+                });
+            }
+        }
+
+    };
+
+    Slick.prototype.lazyLoad = function() {
+
+        var _ = this,
+            loadRange, cloneRange, rangeStart, rangeEnd;
+
+        function loadImages(imagesScope) {
+
+            $('img[data-lazy]', imagesScope).each(function() {
+
+                var image = $(this),
+                    imageSource = $(this).attr('data-lazy'),
+                    imageToLoad = document.createElement('img');
+
+                imageToLoad.onload = function() {
+
+                    image
+                        .animate({ opacity: 0 }, 100, function() {
+                            image
+                                .attr('src', imageSource)
+                                .animate({ opacity: 1 }, 200, function() {
+                                    image
+                                        .removeAttr('data-lazy')
+                                        .removeClass('slick-loading');
+                                });
+                            _.$slider.trigger('lazyLoaded', [_, image, imageSource]);
+                        });
+
+                };
+
+                imageToLoad.onerror = function() {
+
+                    image
+                        .removeAttr( 'data-lazy' )
+                        .removeClass( 'slick-loading' )
+                        .addClass( 'slick-lazyload-error' );
+
+                    _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
+
+                };
+
+                imageToLoad.src = imageSource;
+
+            });
+
+        }
+
+        if (_.options.centerMode === true) {
+            if (_.options.infinite === true) {
+                rangeStart = _.currentSlide + (_.options.slidesToShow / 2 + 1);
+                rangeEnd = rangeStart + _.options.slidesToShow + 2;
+            } else {
+                rangeStart = Math.max(0, _.currentSlide - (_.options.slidesToShow / 2 + 1));
+                rangeEnd = 2 + (_.options.slidesToShow / 2 + 1) + _.currentSlide;
+            }
+        } else {
+            rangeStart = _.options.infinite ? _.options.slidesToShow + _.currentSlide : _.currentSlide;
+            rangeEnd = Math.ceil(rangeStart + _.options.slidesToShow);
+            if (_.options.fade === true) {
+                if (rangeStart > 0) rangeStart--;
+                if (rangeEnd <= _.slideCount) rangeEnd++;
+            }
+        }
+
+        loadRange = _.$slider.find('.slick-slide').slice(rangeStart, rangeEnd);
+        loadImages(loadRange);
+
+        if (_.slideCount <= _.options.slidesToShow) {
+            cloneRange = _.$slider.find('.slick-slide');
+            loadImages(cloneRange);
+        } else
+        if (_.currentSlide >= _.slideCount - _.options.slidesToShow) {
+            cloneRange = _.$slider.find('.slick-cloned').slice(0, _.options.slidesToShow);
+            loadImages(cloneRange);
+        } else if (_.currentSlide === 0) {
+            cloneRange = _.$slider.find('.slick-cloned').slice(_.options.slidesToShow * -1);
+            loadImages(cloneRange);
+        }
+
+    };
+
+    Slick.prototype.loadSlider = function() {
+
+        var _ = this;
+
+        _.setPosition();
+
+        _.$slideTrack.css({
+            opacity: 1
+        });
+
+        _.$slider.removeClass('slick-loading');
+
+        _.initUI();
+
+        if (_.options.lazyLoad === 'progressive') {
+            _.progressiveLazyLoad();
+        }
+
+    };
+
+    Slick.prototype.next = Slick.prototype.slickNext = function() {
+
+        var _ = this;
+
+        _.changeSlide({
+            data: {
+                message: 'next'
+            }
+        });
+
+    };
+
+    Slick.prototype.orientationChange = function() {
+
+        var _ = this;
+
+        _.checkResponsive();
+        _.setPosition();
+
+    };
+
+    Slick.prototype.pause = Slick.prototype.slickPause = function() {
+
+        var _ = this;
+
+        _.autoPlayClear();
+        _.paused = true;
+
+    };
+
+    Slick.prototype.play = Slick.prototype.slickPlay = function() {
+
+        var _ = this;
+
+        _.autoPlay();
+        _.options.autoplay = true;
+        _.paused = false;
+        _.focussed = false;
+        _.interrupted = false;
+
+    };
+
+    Slick.prototype.postSlide = function(index) {
+
+        var _ = this;
+
+        if( !_.unslicked ) {
+
+            _.$slider.trigger('afterChange', [_, index]);
+
+            _.animating = false;
+
+            _.setPosition();
+
+            _.swipeLeft = null;
+
+            if ( _.options.autoplay ) {
+                _.autoPlay();
+            }
+
+            if (_.options.accessibility === true) {
+                _.initADA();
+            }
+
+        }
+
+    };
+
+    Slick.prototype.prev = Slick.prototype.slickPrev = function() {
+
+        var _ = this;
+
+        _.changeSlide({
+            data: {
+                message: 'previous'
+            }
+        });
+
+    };
+
+    Slick.prototype.preventDefault = function(event) {
+
+        event.preventDefault();
+
+    };
+
+    Slick.prototype.progressiveLazyLoad = function( tryCount ) {
+
+        tryCount = tryCount || 1;
+
+        var _ = this,
+            $imgsToLoad = $( 'img[data-lazy]', _.$slider ),
+            image,
+            imageSource,
+            imageToLoad;
+
+        if ( $imgsToLoad.length ) {
+
+            image = $imgsToLoad.first();
+            imageSource = image.attr('data-lazy');
+            imageToLoad = document.createElement('img');
+
+            imageToLoad.onload = function() {
+
+                image
+                    .attr( 'src', imageSource )
+                    .removeAttr('data-lazy')
+                    .removeClass('slick-loading');
+
+                if ( _.options.adaptiveHeight === true ) {
+                    _.setPosition();
+                }
+
+                _.$slider.trigger('lazyLoaded', [ _, image, imageSource ]);
+                _.progressiveLazyLoad();
+
+            };
+
+            imageToLoad.onerror = function() {
+
+                if ( tryCount < 3 ) {
+
+                    /**
+                     * try to load the image 3 times,
+                     * leave a slight delay so we don't get
+                     * servers blocking the request.
+                     */
+                    setTimeout( function() {
+                        _.progressiveLazyLoad( tryCount + 1 );
+                    }, 500 );
+
+                } else {
+
+                    image
+                        .removeAttr( 'data-lazy' )
+                        .removeClass( 'slick-loading' )
+                        .addClass( 'slick-lazyload-error' );
+
+                    _.$slider.trigger('lazyLoadError', [ _, image, imageSource ]);
+
+                    _.progressiveLazyLoad();
+
+                }
+
+            };
+
+            imageToLoad.src = imageSource;
+
+        } else {
+
+            _.$slider.trigger('allImagesLoaded', [ _ ]);
+
+        }
+
+    };
+
+    Slick.prototype.refresh = function( initializing ) {
+
+        var _ = this, currentSlide, lastVisibleIndex;
+
+        lastVisibleIndex = _.slideCount - _.options.slidesToShow;
+
+        // in non-infinite sliders, we don't want to go past the
+        // last visible index.
+        if( !_.options.infinite && ( _.currentSlide > lastVisibleIndex )) {
+            _.currentSlide = lastVisibleIndex;
+        }
+
+        // if less slides than to show, go to start.
+        if ( _.slideCount <= _.options.slidesToShow ) {
+            _.currentSlide = 0;
+
+        }
+
+        currentSlide = _.currentSlide;
+
+        _.destroy(true);
+
+        $.extend(_, _.initials, { currentSlide: currentSlide });
+
+        _.init();
+
+        if( !initializing ) {
+
+            _.changeSlide({
+                data: {
+                    message: 'index',
+                    index: currentSlide
+                }
+            }, false);
+
+        }
+
+    };
+
+    Slick.prototype.registerBreakpoints = function() {
+
+        var _ = this, breakpoint, currentBreakpoint, l,
+            responsiveSettings = _.options.responsive || null;
+
+        if ( $.type(responsiveSettings) === 'array' && responsiveSettings.length ) {
+
+            _.respondTo = _.options.respondTo || 'window';
+
+            for ( breakpoint in responsiveSettings ) {
+
+                l = _.breakpoints.length-1;
+                currentBreakpoint = responsiveSettings[breakpoint].breakpoint;
+
+                if (responsiveSettings.hasOwnProperty(breakpoint)) {
+
+                    // loop through the breakpoints and cut out any existing
+                    // ones with the same breakpoint number, we don't want dupes.
+                    while( l >= 0 ) {
+                        if( _.breakpoints[l] && _.breakpoints[l] === currentBreakpoint ) {
+                            _.breakpoints.splice(l,1);
+                        }
+                        l--;
+                    }
+
+                    _.breakpoints.push(currentBreakpoint);
+                    _.breakpointSettings[currentBreakpoint] = responsiveSettings[breakpoint].settings;
+
+                }
+
+            }
+
+            _.breakpoints.sort(function(a, b) {
+                return ( _.options.mobileFirst ) ? a-b : b-a;
+            });
+
+        }
+
+    };
+
+    Slick.prototype.reinit = function() {
+
+        var _ = this;
+
+        _.$slides =
+            _.$slideTrack
+                .children(_.options.slide)
+                .addClass('slick-slide');
+
+        _.slideCount = _.$slides.length;
+
+        if (_.currentSlide >= _.slideCount && _.currentSlide !== 0) {
+            _.currentSlide = _.currentSlide - _.options.slidesToScroll;
+        }
+
+        if (_.slideCount <= _.options.slidesToShow) {
+            _.currentSlide = 0;
+        }
+
+        _.registerBreakpoints();
+
+        _.setProps();
+        _.setupInfinite();
+        _.buildArrows();
+        _.updateArrows();
+        _.initArrowEvents();
+        _.buildDots();
+        _.updateDots();
+        _.initDotEvents();
+        _.cleanUpSlideEvents();
+        _.initSlideEvents();
+
+        _.checkResponsive(false, true);
+
+        if (_.options.focusOnSelect === true) {
+            $(_.$slideTrack).children().on('click.slick', _.selectHandler);
+        }
+
+        _.setSlideClasses(typeof _.currentSlide === 'number' ? _.currentSlide : 0);
+
+        _.setPosition();
+        _.focusHandler();
+
+        _.paused = !_.options.autoplay;
+        _.autoPlay();
+
+        _.$slider.trigger('reInit', [_]);
+
+    };
+
+    Slick.prototype.resize = function() {
+
+        var _ = this;
+
+        if ($(window).width() !== _.windowWidth) {
+            clearTimeout(_.windowDelay);
+            _.windowDelay = window.setTimeout(function() {
+                _.windowWidth = $(window).width();
+                _.checkResponsive();
+                if( !_.unslicked ) { _.setPosition(); }
+            }, 50);
+        }
+    };
+
+    Slick.prototype.removeSlide = Slick.prototype.slickRemove = function(index, removeBefore, removeAll) {
+
+        var _ = this;
+
+        if (typeof(index) === 'boolean') {
+            removeBefore = index;
+            index = removeBefore === true ? 0 : _.slideCount - 1;
+        } else {
+            index = removeBefore === true ? --index : index;
+        }
+
+        if (_.slideCount < 1 || index < 0 || index > _.slideCount - 1) {
+            return false;
+        }
+
+        _.unload();
+
+        if (removeAll === true) {
+            _.$slideTrack.children().remove();
+        } else {
+            _.$slideTrack.children(this.options.slide).eq(index).remove();
+        }
+
+        _.$slides = _.$slideTrack.children(this.options.slide);
+
+        _.$slideTrack.children(this.options.slide).detach();
+
+        _.$slideTrack.append(_.$slides);
+
+        _.$slidesCache = _.$slides;
+
+        _.reinit();
+
+    };
+
+    Slick.prototype.setCSS = function(position) {
+
+        var _ = this,
+            positionProps = {},
+            x, y;
+
+        if (_.options.rtl === true) {
+            position = -position;
+        }
+        x = _.positionProp == 'left' ? Math.ceil(position) + 'px' : '0px';
+        y = _.positionProp == 'top' ? Math.ceil(position) + 'px' : '0px';
+
+        positionProps[_.positionProp] = position;
+
+        if (_.transformsEnabled === false) {
+            _.$slideTrack.css(positionProps);
+        } else {
+            positionProps = {};
+            if (_.cssTransitions === false) {
+                positionProps[_.animType] = 'translate(' + x + ', ' + y + ')';
+                _.$slideTrack.css(positionProps);
+            } else {
+                positionProps[_.animType] = 'translate3d(' + x + ', ' + y + ', 0px)';
+                _.$slideTrack.css(positionProps);
+            }
+        }
+
+    };
+
+    Slick.prototype.setDimensions = function() {
+
+        var _ = this;
+
+        if (_.options.vertical === false) {
+            if (_.options.centerMode === true) {
+                _.$list.css({
+                    padding: ('0px ' + _.options.centerPadding)
+                });
+            }
+        } else {
+            _.$list.height(_.$slides.first().outerHeight(true) * _.options.slidesToShow);
+            if (_.options.centerMode === true) {
+                _.$list.css({
+                    padding: (_.options.centerPadding + ' 0px')
+                });
+            }
+        }
+
+        _.listWidth = _.$list.width();
+        _.listHeight = _.$list.height();
+
+
+        if (_.options.vertical === false && _.options.variableWidth === false) {
+            _.slideWidth = Math.ceil(_.listWidth / _.options.slidesToShow);
+            _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.children('.slick-slide').length)));
+
+        } else if (_.options.variableWidth === true) {
+            _.$slideTrack.width(5000 * _.slideCount);
+        } else {
+            _.slideWidth = Math.ceil(_.listWidth);
+            _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
+        }
+
+        var offset = _.$slides.first().outerWidth(true) - _.$slides.first().width();
+        if (_.options.variableWidth === false) _.$slideTrack.children('.slick-slide').width(_.slideWidth - offset);
+
+    };
+
+    Slick.prototype.setFade = function() {
+
+        var _ = this,
+            targetLeft;
+
+        _.$slides.each(function(index, element) {
+            targetLeft = (_.slideWidth * index) * -1;
+            if (_.options.rtl === true) {
+                $(element).css({
+                    position: 'relative',
+                    right: targetLeft,
+                    top: 0,
+                    zIndex: _.options.zIndex - 2,
+                    opacity: 0
+                });
+            } else {
+                $(element).css({
+                    position: 'relative',
+                    left: targetLeft,
+                    top: 0,
+                    zIndex: _.options.zIndex - 2,
+                    opacity: 0
+                });
+            }
+        });
+
+        _.$slides.eq(_.currentSlide).css({
+            zIndex: _.options.zIndex - 1,
+            opacity: 1
+        });
+
+    };
+
+    Slick.prototype.setHeight = function() {
+
+        var _ = this;
+
+        if (_.options.slidesToShow === 1 && _.options.adaptiveHeight === true && _.options.vertical === false) {
+            var targetHeight = _.$slides.eq(_.currentSlide).outerHeight(true);
+            _.$list.css('height', targetHeight);
+        }
+
+    };
+
+    Slick.prototype.setOption =
+    Slick.prototype.slickSetOption = function() {
+
+        /**
+         * accepts arguments in format of:
+         *
+         *  - for changing a single option's value:
+         *     .slick("setOption", option, value, refresh )
+         *
+         *  - for changing a set of responsive options:
+         *     .slick("setOption", 'responsive', [{}, ...], refresh )
+         *
+         *  - for updating multiple values at once (not responsive)
+         *     .slick("setOption", { 'option': value, ... }, refresh )
+         */
+
+        var _ = this, l, item, option, value, refresh = false, type;
+
+        if( $.type( arguments[0] ) === 'object' ) {
+
+            option =  arguments[0];
+            refresh = arguments[1];
+            type = 'multiple';
+
+        } else if ( $.type( arguments[0] ) === 'string' ) {
+
+            option =  arguments[0];
+            value = arguments[1];
+            refresh = arguments[2];
+
+            if ( arguments[0] === 'responsive' && $.type( arguments[1] ) === 'array' ) {
+
+                type = 'responsive';
+
+            } else if ( typeof arguments[1] !== 'undefined' ) {
+
+                type = 'single';
+
+            }
+
+        }
+
+        if ( type === 'single' ) {
+
+            _.options[option] = value;
+
+
+        } else if ( type === 'multiple' ) {
+
+            $.each( option , function( opt, val ) {
+
+                _.options[opt] = val;
+
+            });
+
+
+        } else if ( type === 'responsive' ) {
+
+            for ( item in value ) {
+
+                if( $.type( _.options.responsive ) !== 'array' ) {
+
+                    _.options.responsive = [ value[item] ];
+
+                } else {
+
+                    l = _.options.responsive.length-1;
+
+                    // loop through the responsive object and splice out duplicates.
+                    while( l >= 0 ) {
+
+                        if( _.options.responsive[l].breakpoint === value[item].breakpoint ) {
+
+                            _.options.responsive.splice(l,1);
+
+                        }
+
+                        l--;
+
+                    }
+
+                    _.options.responsive.push( value[item] );
+
+                }
+
+            }
+
+        }
+
+        if ( refresh ) {
+
+            _.unload();
+            _.reinit();
+
+        }
+
+    };
+
+    Slick.prototype.setPosition = function() {
+
+        var _ = this;
+
+        _.setDimensions();
+
+        _.setHeight();
+
+        if (_.options.fade === false) {
+            _.setCSS(_.getLeft(_.currentSlide));
+        } else {
+            _.setFade();
+        }
+
+        _.$slider.trigger('setPosition', [_]);
+
+    };
+
+    Slick.prototype.setProps = function() {
+
+        var _ = this,
+            bodyStyle = document.body.style;
+
+        _.positionProp = _.options.vertical === true ? 'top' : 'left';
+
+        if (_.positionProp === 'top') {
+            _.$slider.addClass('slick-vertical');
+        } else {
+            _.$slider.removeClass('slick-vertical');
+        }
+
+        if (bodyStyle.WebkitTransition !== undefined ||
+            bodyStyle.MozTransition !== undefined ||
+            bodyStyle.msTransition !== undefined) {
+            if (_.options.useCSS === true) {
+                _.cssTransitions = true;
+            }
+        }
+
+        if ( _.options.fade ) {
+            if ( typeof _.options.zIndex === 'number' ) {
+                if( _.options.zIndex < 3 ) {
+                    _.options.zIndex = 3;
+                }
+            } else {
+                _.options.zIndex = _.defaults.zIndex;
+            }
+        }
+
+        if (bodyStyle.OTransform !== undefined) {
+            _.animType = 'OTransform';
+            _.transformType = '-o-transform';
+            _.transitionType = 'OTransition';
+            if (bodyStyle.perspectiveProperty === undefined && bodyStyle.webkitPerspective === undefined) _.animType = false;
+        }
+        if (bodyStyle.MozTransform !== undefined) {
+            _.animType = 'MozTransform';
+            _.transformType = '-moz-transform';
+            _.transitionType = 'MozTransition';
+            if (bodyStyle.perspectiveProperty === undefined && bodyStyle.MozPerspective === undefined) _.animType = false;
+        }
+        if (bodyStyle.webkitTransform !== undefined) {
+            _.animType = 'webkitTransform';
+            _.transformType = '-webkit-transform';
+            _.transitionType = 'webkitTransition';
+            if (bodyStyle.perspectiveProperty === undefined && bodyStyle.webkitPerspective === undefined) _.animType = false;
+        }
+        if (bodyStyle.msTransform !== undefined) {
+            _.animType = 'msTransform';
+            _.transformType = '-ms-transform';
+            _.transitionType = 'msTransition';
+            if (bodyStyle.msTransform === undefined) _.animType = false;
+        }
+        if (bodyStyle.transform !== undefined && _.animType !== false) {
+            _.animType = 'transform';
+            _.transformType = 'transform';
+            _.transitionType = 'transition';
+        }
+        _.transformsEnabled = _.options.useTransform && (_.animType !== null && _.animType !== false);
+    };
+
+
+    Slick.prototype.setSlideClasses = function(index) {
+
+        var _ = this,
+            centerOffset, allSlides, indexOffset, remainder;
+
+        allSlides = _.$slider
+            .find('.slick-slide')
+            .removeClass('slick-active slick-center slick-current')
+            .attr('aria-hidden', 'true');
+
+        _.$slides
+            .eq(index)
+            .addClass('slick-current');
+
+        if (_.options.centerMode === true) {
+
+            centerOffset = Math.floor(_.options.slidesToShow / 2);
+
+            if (_.options.infinite === true) {
+
+                if (index >= centerOffset && index <= (_.slideCount - 1) - centerOffset) {
+
+                    _.$slides
+                        .slice(index - centerOffset, index + centerOffset + 1)
+                        .addClass('slick-active')
+                        .attr('aria-hidden', 'false');
+
+                } else {
+
+                    indexOffset = _.options.slidesToShow + index;
+                    allSlides
+                        .slice(indexOffset - centerOffset + 1, indexOffset + centerOffset + 2)
+                        .addClass('slick-active')
+                        .attr('aria-hidden', 'false');
+
+                }
+
+                if (index === 0) {
+
+                    allSlides
+                        .eq(allSlides.length - 1 - _.options.slidesToShow)
+                        .addClass('slick-center');
+
+                } else if (index === _.slideCount - 1) {
+
+                    allSlides
+                        .eq(_.options.slidesToShow)
+                        .addClass('slick-center');
+
+                }
+
+            }
+
+            _.$slides
+                .eq(index)
+                .addClass('slick-center');
+
+        } else {
+
+            if (index >= 0 && index <= (_.slideCount - _.options.slidesToShow)) {
+
+                _.$slides
+                    .slice(index, index + _.options.slidesToShow)
+                    .addClass('slick-active')
+                    .attr('aria-hidden', 'false');
+
+            } else if (allSlides.length <= _.options.slidesToShow) {
+
+                allSlides
+                    .addClass('slick-active')
+                    .attr('aria-hidden', 'false');
+
+            } else {
+
+                remainder = _.slideCount % _.options.slidesToShow;
+                indexOffset = _.options.infinite === true ? _.options.slidesToShow + index : index;
+
+                if (_.options.slidesToShow == _.options.slidesToScroll && (_.slideCount - index) < _.options.slidesToShow) {
+
+                    allSlides
+                        .slice(indexOffset - (_.options.slidesToShow - remainder), indexOffset + remainder)
+                        .addClass('slick-active')
+                        .attr('aria-hidden', 'false');
+
+                } else {
+
+                    allSlides
+                        .slice(indexOffset, indexOffset + _.options.slidesToShow)
+                        .addClass('slick-active')
+                        .attr('aria-hidden', 'false');
+
+                }
+
+            }
+
+        }
+
+        if (_.options.lazyLoad === 'ondemand') {
+            _.lazyLoad();
+        }
+
+    };
+
+    Slick.prototype.setupInfinite = function() {
+
+        var _ = this,
+            i, slideIndex, infiniteCount;
+
+        if (_.options.fade === true) {
+            _.options.centerMode = false;
+        }
+
+        if (_.options.infinite === true && _.options.fade === false) {
+
+            slideIndex = null;
+
+            if (_.slideCount > _.options.slidesToShow) {
+
+                if (_.options.centerMode === true) {
+                    infiniteCount = _.options.slidesToShow + 1;
+                } else {
+                    infiniteCount = _.options.slidesToShow;
+                }
+
+                for (i = _.slideCount; i > (_.slideCount -
+                        infiniteCount); i -= 1) {
+                    slideIndex = i - 1;
+                    $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                        .attr('data-slick-index', slideIndex - _.slideCount)
+                        .prependTo(_.$slideTrack).addClass('slick-cloned');
+                }
+                for (i = 0; i < infiniteCount; i += 1) {
+                    slideIndex = i;
+                    $(_.$slides[slideIndex]).clone(true).attr('id', '')
+                        .attr('data-slick-index', slideIndex + _.slideCount)
+                        .appendTo(_.$slideTrack).addClass('slick-cloned');
+                }
+                _.$slideTrack.find('.slick-cloned').find('[id]').each(function() {
+                    $(this).attr('id', '');
+                });
+
+            }
+
+        }
+
+    };
+
+    Slick.prototype.interrupt = function( toggle ) {
+
+        var _ = this;
+
+        if( !toggle ) {
+            _.autoPlay();
+        }
+        _.interrupted = toggle;
+
+    };
+
+    Slick.prototype.selectHandler = function(event) {
+
+        var _ = this;
+
+        var targetElement =
+            $(event.target).is('.slick-slide') ?
+                $(event.target) :
+                $(event.target).parents('.slick-slide');
+
+        var index = parseInt(targetElement.attr('data-slick-index'));
+
+        if (!index) index = 0;
+
+        if (_.slideCount <= _.options.slidesToShow) {
+
+            _.setSlideClasses(index);
+            _.asNavFor(index);
+            return;
+
+        }
+
+        _.slideHandler(index);
+
+    };
+
+    Slick.prototype.slideHandler = function(index, sync, dontAnimate) {
+
+        var targetSlide, animSlide, oldSlide, slideLeft, targetLeft = null,
+            _ = this, navTarget;
+
+        sync = sync || false;
+
+        if (_.animating === true && _.options.waitForAnimate === true) {
+            return;
+        }
+
+        if (_.options.fade === true && _.currentSlide === index) {
+            return;
+        }
+
+        if (_.slideCount <= _.options.slidesToShow) {
+            return;
+        }
+
+        if (sync === false) {
+            _.asNavFor(index);
+        }
+
+        targetSlide = index;
+        targetLeft = _.getLeft(targetSlide);
+        slideLeft = _.getLeft(_.currentSlide);
+
+        _.currentLeft = _.swipeLeft === null ? slideLeft : _.swipeLeft;
+
+        if (_.options.infinite === false && _.options.centerMode === false && (index < 0 || index > _.getDotCount() * _.options.slidesToScroll)) {
+            if (_.options.fade === false) {
+                targetSlide = _.currentSlide;
+                if (dontAnimate !== true) {
+                    _.animateSlide(slideLeft, function() {
+                        _.postSlide(targetSlide);
+                    });
+                } else {
+                    _.postSlide(targetSlide);
+                }
+            }
+            return;
+        } else if (_.options.infinite === false && _.options.centerMode === true && (index < 0 || index > (_.slideCount - _.options.slidesToScroll))) {
+            if (_.options.fade === false) {
+                targetSlide = _.currentSlide;
+                if (dontAnimate !== true) {
+                    _.animateSlide(slideLeft, function() {
+                        _.postSlide(targetSlide);
+                    });
+                } else {
+                    _.postSlide(targetSlide);
+                }
+            }
+            return;
+        }
+
+        if ( _.options.autoplay ) {
+            clearInterval(_.autoPlayTimer);
+        }
+
+        if (targetSlide < 0) {
+            if (_.slideCount % _.options.slidesToScroll !== 0) {
+                animSlide = _.slideCount - (_.slideCount % _.options.slidesToScroll);
+            } else {
+                animSlide = _.slideCount + targetSlide;
+            }
+        } else if (targetSlide >= _.slideCount) {
+            if (_.slideCount % _.options.slidesToScroll !== 0) {
+                animSlide = 0;
+            } else {
+                animSlide = targetSlide - _.slideCount;
+            }
+        } else {
+            animSlide = targetSlide;
+        }
+
+        _.animating = true;
+
+        _.$slider.trigger('beforeChange', [_, _.currentSlide, animSlide]);
+
+        oldSlide = _.currentSlide;
+        _.currentSlide = animSlide;
+
+        _.setSlideClasses(_.currentSlide);
+
+        if ( _.options.asNavFor ) {
+
+            navTarget = _.getNavTarget();
+            navTarget = navTarget.slick('getSlick');
+
+            if ( navTarget.slideCount <= navTarget.options.slidesToShow ) {
+                navTarget.setSlideClasses(_.currentSlide);
+            }
+
+        }
+
+        _.updateDots();
+        _.updateArrows();
+
+        if (_.options.fade === true) {
+            if (dontAnimate !== true) {
+
+                _.fadeSlideOut(oldSlide);
+
+                _.fadeSlide(animSlide, function() {
+                    _.postSlide(animSlide);
+                });
+
+            } else {
+                _.postSlide(animSlide);
+            }
+            _.animateHeight();
+            return;
+        }
+
+        if (dontAnimate !== true) {
+            _.animateSlide(targetLeft, function() {
+                _.postSlide(animSlide);
+            });
+        } else {
+            _.postSlide(animSlide);
+        }
+
+    };
+
+    Slick.prototype.startLoad = function() {
+
+        var _ = this;
+
+        if (_.options.arrows === true && _.slideCount > _.options.slidesToShow) {
+
+            _.$prevArrow.hide();
+            _.$nextArrow.hide();
+
+        }
+
+        if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
+
+            _.$dots.hide();
+
+        }
+
+        _.$slider.addClass('slick-loading');
+
+    };
+
+    Slick.prototype.swipeDirection = function() {
+
+        var xDist, yDist, r, swipeAngle, _ = this;
+
+        xDist = _.touchObject.startX - _.touchObject.curX;
+        yDist = _.touchObject.startY - _.touchObject.curY;
+        r = Math.atan2(yDist, xDist);
+
+        swipeAngle = Math.round(r * 180 / Math.PI);
+        if (swipeAngle < 0) {
+            swipeAngle = 360 - Math.abs(swipeAngle);
+        }
+
+        if ((swipeAngle <= 45) && (swipeAngle >= 0)) {
+            return (_.options.rtl === false ? 'left' : 'right');
+        }
+        if ((swipeAngle <= 360) && (swipeAngle >= 315)) {
+            return (_.options.rtl === false ? 'left' : 'right');
+        }
+        if ((swipeAngle >= 135) && (swipeAngle <= 225)) {
+            return (_.options.rtl === false ? 'right' : 'left');
+        }
+        if (_.options.verticalSwiping === true) {
+            if ((swipeAngle >= 35) && (swipeAngle <= 135)) {
+                return 'down';
+            } else {
+                return 'up';
+            }
+        }
+
+        return 'vertical';
+
+    };
+
+    Slick.prototype.swipeEnd = function(event) {
+
+        var _ = this,
+            slideCount,
+            direction;
+
+        _.dragging = false;
+        _.interrupted = false;
+        _.shouldClick = ( _.touchObject.swipeLength > 10 ) ? false : true;
+
+        if ( _.touchObject.curX === undefined ) {
+            return false;
+        }
+
+        if ( _.touchObject.edgeHit === true ) {
+            _.$slider.trigger('edge', [_, _.swipeDirection() ]);
+        }
+
+        if ( _.touchObject.swipeLength >= _.touchObject.minSwipe ) {
+
+            direction = _.swipeDirection();
+
+            switch ( direction ) {
+
+                case 'left':
+                case 'down':
+
+                    slideCount =
+                        _.options.swipeToSlide ?
+                            _.checkNavigable( _.currentSlide + _.getSlideCount() ) :
+                            _.currentSlide + _.getSlideCount();
+
+                    _.currentDirection = 0;
+
+                    break;
+
+                case 'right':
+                case 'up':
+
+                    slideCount =
+                        _.options.swipeToSlide ?
+                            _.checkNavigable( _.currentSlide - _.getSlideCount() ) :
+                            _.currentSlide - _.getSlideCount();
+
+                    _.currentDirection = 1;
+
+                    break;
+
+                default:
+
+
+            }
+
+            if( direction != 'vertical' ) {
+
+                _.slideHandler( slideCount );
+                _.touchObject = {};
+                _.$slider.trigger('swipe', [_, direction ]);
+
+            }
+
+        } else {
+
+            if ( _.touchObject.startX !== _.touchObject.curX ) {
+
+                _.slideHandler( _.currentSlide );
+                _.touchObject = {};
+
+            }
+
+        }
+
+    };
+
+    Slick.prototype.swipeHandler = function(event) {
+
+        var _ = this;
+
+        if ((_.options.swipe === false) || ('ontouchend' in document && _.options.swipe === false)) {
+            return;
+        } else if (_.options.draggable === false && event.type.indexOf('mouse') !== -1) {
+            return;
+        }
+
+        _.touchObject.fingerCount = event.originalEvent && event.originalEvent.touches !== undefined ?
+            event.originalEvent.touches.length : 1;
+
+        _.touchObject.minSwipe = _.listWidth / _.options
+            .touchThreshold;
+
+        if (_.options.verticalSwiping === true) {
+            _.touchObject.minSwipe = _.listHeight / _.options
+                .touchThreshold;
+        }
+
+        switch (event.data.action) {
+
+            case 'start':
+                _.swipeStart(event);
+                break;
+
+            case 'move':
+                _.swipeMove(event);
+                break;
+
+            case 'end':
+                _.swipeEnd(event);
+                break;
+
+        }
+
+    };
+
+    Slick.prototype.swipeMove = function(event) {
+
+        var _ = this,
+            edgeWasHit = false,
+            curLeft, swipeDirection, swipeLength, positionOffset, touches;
+
+        touches = event.originalEvent !== undefined ? event.originalEvent.touches : null;
+
+        if (!_.dragging || touches && touches.length !== 1) {
+            return false;
+        }
+
+        curLeft = _.getLeft(_.currentSlide);
+
+        _.touchObject.curX = touches !== undefined ? touches[0].pageX : event.clientX;
+        _.touchObject.curY = touches !== undefined ? touches[0].pageY : event.clientY;
+
+        _.touchObject.swipeLength = Math.round(Math.sqrt(
+            Math.pow(_.touchObject.curX - _.touchObject.startX, 2)));
+
+        if (_.options.verticalSwiping === true) {
+            _.touchObject.swipeLength = Math.round(Math.sqrt(
+                Math.pow(_.touchObject.curY - _.touchObject.startY, 2)));
+        }
+
+        swipeDirection = _.swipeDirection();
+
+        if (swipeDirection === 'vertical') {
+            return;
+        }
+
+        if (event.originalEvent !== undefined && _.touchObject.swipeLength > 4) {
+            event.preventDefault();
+        }
+
+        positionOffset = (_.options.rtl === false ? 1 : -1) * (_.touchObject.curX > _.touchObject.startX ? 1 : -1);
+        if (_.options.verticalSwiping === true) {
+            positionOffset = _.touchObject.curY > _.touchObject.startY ? 1 : -1;
+        }
+
+
+        swipeLength = _.touchObject.swipeLength;
+
+        _.touchObject.edgeHit = false;
+
+        if (_.options.infinite === false) {
+            if ((_.currentSlide === 0 && swipeDirection === 'right') || (_.currentSlide >= _.getDotCount() && swipeDirection === 'left')) {
+                swipeLength = _.touchObject.swipeLength * _.options.edgeFriction;
+                _.touchObject.edgeHit = true;
+            }
+        }
+
+        if (_.options.vertical === false) {
+            _.swipeLeft = curLeft + swipeLength * positionOffset;
+        } else {
+            _.swipeLeft = curLeft + (swipeLength * (_.$list.height() / _.listWidth)) * positionOffset;
+        }
+        if (_.options.verticalSwiping === true) {
+            _.swipeLeft = curLeft + swipeLength * positionOffset;
+        }
+
+        if (_.options.fade === true || _.options.touchMove === false) {
+            return false;
+        }
+
+        if (_.animating === true) {
+            _.swipeLeft = null;
+            return false;
+        }
+
+        _.setCSS(_.swipeLeft);
+
+    };
+
+    Slick.prototype.swipeStart = function(event) {
+
+        var _ = this,
+            touches;
+
+        _.interrupted = true;
+
+        if (_.touchObject.fingerCount !== 1 || _.slideCount <= _.options.slidesToShow) {
+            _.touchObject = {};
+            return false;
+        }
+
+        if (event.originalEvent !== undefined && event.originalEvent.touches !== undefined) {
+            touches = event.originalEvent.touches[0];
+        }
+
+        _.touchObject.startX = _.touchObject.curX = touches !== undefined ? touches.pageX : event.clientX;
+        _.touchObject.startY = _.touchObject.curY = touches !== undefined ? touches.pageY : event.clientY;
+
+        _.dragging = true;
+
+    };
+
+    Slick.prototype.unfilterSlides = Slick.prototype.slickUnfilter = function() {
+
+        var _ = this;
+
+        if (_.$slidesCache !== null) {
+
+            _.unload();
+
+            _.$slideTrack.children(this.options.slide).detach();
+
+            _.$slidesCache.appendTo(_.$slideTrack);
+
+            _.reinit();
+
+        }
+
+    };
+
+    Slick.prototype.unload = function() {
+
+        var _ = this;
+
+        $('.slick-cloned', _.$slider).remove();
+
+        if (_.$dots) {
+            _.$dots.remove();
+        }
+
+        if (_.$prevArrow && _.htmlExpr.test(_.options.prevArrow)) {
+            _.$prevArrow.remove();
+        }
+
+        if (_.$nextArrow && _.htmlExpr.test(_.options.nextArrow)) {
+            _.$nextArrow.remove();
+        }
+
+        _.$slides
+            .removeClass('slick-slide slick-active slick-visible slick-current')
+            .attr('aria-hidden', 'true')
+            .css('width', '');
+
+    };
+
+    Slick.prototype.unslick = function(fromBreakpoint) {
+
+        var _ = this;
+        _.$slider.trigger('unslick', [_, fromBreakpoint]);
+        _.destroy();
+
+    };
+
+    Slick.prototype.updateArrows = function() {
+
+        var _ = this,
+            centerOffset;
+
+        centerOffset = Math.floor(_.options.slidesToShow / 2);
+
+        if ( _.options.arrows === true &&
+            _.slideCount > _.options.slidesToShow &&
+            !_.options.infinite ) {
+
+            _.$prevArrow.removeClass('slick-disabled').attr('aria-disabled', 'false');
+            _.$nextArrow.removeClass('slick-disabled').attr('aria-disabled', 'false');
+
+            if (_.currentSlide === 0) {
+
+                _.$prevArrow.addClass('slick-disabled').attr('aria-disabled', 'true');
+                _.$nextArrow.removeClass('slick-disabled').attr('aria-disabled', 'false');
+
+            } else if (_.currentSlide >= _.slideCount - _.options.slidesToShow && _.options.centerMode === false) {
+
+                _.$nextArrow.addClass('slick-disabled').attr('aria-disabled', 'true');
+                _.$prevArrow.removeClass('slick-disabled').attr('aria-disabled', 'false');
+
+            } else if (_.currentSlide >= _.slideCount - 1 && _.options.centerMode === true) {
+
+                _.$nextArrow.addClass('slick-disabled').attr('aria-disabled', 'true');
+                _.$prevArrow.removeClass('slick-disabled').attr('aria-disabled', 'false');
+
+            }
+
+        }
+
+    };
+
+    Slick.prototype.updateDots = function() {
+
+        var _ = this;
+
+        if (_.$dots !== null) {
+
+            _.$dots
+                .find('li')
+                .removeClass('slick-active')
+                .attr('aria-hidden', 'true');
+
+            _.$dots
+                .find('li')
+                .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
+                .addClass('slick-active')
+                .attr('aria-hidden', 'false');
+
+        }
+
+    };
+
+    Slick.prototype.visibility = function() {
+
+        var _ = this;
+
+        if ( _.options.autoplay ) {
+
+            if ( document[_.hidden] ) {
+
+                _.interrupted = true;
+
+            } else {
+
+                _.interrupted = false;
+
+            }
+
+        }
+
+    };
+
+    $.fn.slick = function() {
+        var _ = this,
+            opt = arguments[0],
+            args = Array.prototype.slice.call(arguments, 1),
+            l = _.length,
+            i,
+            ret;
+        for (i = 0; i < l; i++) {
+            if (typeof opt == 'object' || typeof opt == 'undefined')
+                _[i].slick = new Slick(_[i], opt);
+            else
+                ret = _[i].slick[opt].apply(_[i].slick, args);
+            if (typeof ret != 'undefined') return ret;
+        }
+        return _;
+    };
+
+}));
+
+/*!
+ * angular-slick-carousel
+ * DevMark <hc.devmark@gmail.com>
+ * https://github.com/devmark/angular-slick-carousel
+ * Version: 3.1.7 - 2016-08-04T06:17:55.528Z
+ * License: MIT
+ */
+
+
 'use strict';
 
-(function (module) {
-  try {
-    module = angular.module('ui.carousel');
-  } catch (e) {
-    module = angular.module('ui.carousel', []);
-  }
-  module.run(['$templateCache', function ($templateCache) {
-    $templateCache.put('ui-carousel/carousel.template.html', '<div class="carousel-wrapper" ng-show="ctrl.isCarouselReady"><div class="track-wrapper"><div class="track" ng-style="ctrl.trackStyle"><div class="slide" ng-repeat="item in ctrl.slidesInTrack track by $index" ng-style="ctrl.getSlideStyle($index)"><div class="carousel-item"></div></div></div></div><div class="carousel-prev" ng-if="!ctrl.disableArrow" ng-show="ctrl.isVisiblePrev &amp;&amp; ctrl.options.arrows" ng-class="{\'carousel-disable\': !ctrl.isClickablePrev}" ng-click="ctrl.prev()"><button class="carousel-btn"><i class="ui-icon-prev"></i></button></div><div class="carousel-next" ng-if="!ctrl.disableArrow" ng-show="ctrl.isVisibleNext &amp;&amp; ctrl.options.arrows" ng-class="{\'carousel-disable\': !ctrl.isClickableNext}" ng-click="ctrl.next()"><button class="carousel-btn"><i class="ui-icon-next"></i></button></div><ul class="carousel-dots" ng-show="ctrl.isVisibleDots &amp;&amp; ctrl.options.dots"><li ng-repeat="dot in ctrl.getDots()" ng-class="{ \'carousel-active\': dot == ctrl.currentSlide/ctrl.options.slidesToScroll }" ng-click="ctrl.movePage(dot)"><button>{{ dot }}</button></li></ul></div>');
-  }]);
-})();
+angular
+  .module('slickCarousel', [])
+  //global config
+  .constant('slickCarouselConfig', {
+    method: {},
+    event: {}
+  })
+  .directive('slick', [
+    '$timeout', 'slickCarouselConfig', function ($timeout, slickCarouselConfig) {
+      var slickMethodList, slickEventList;
+      slickMethodList = ['slickGoTo', 'slickNext', 'slickPrev', 'slickPause', 'slickPlay', 'slickAdd', 'slickRemove', 'slickFilter', 'slickUnfilter', 'unslick'];
+      slickEventList = ['afterChange', 'beforeChange', 'breakpoint', 'destroy', 'edge', 'init', 'reInit', 'setPosition', 'swipe', 'lazyLoaded', 'lazyLoadError'];
+
+      return {
+        scope: {
+          settings: '=',
+          enabled: '@',
+          accessibility: '@',
+          adaptiveHeight: '@',
+          autoplay: '@',
+          autoplaySpeed: '@',
+          arrows: '@',
+          asNavFor: '@',
+          appendArrows: '@',
+          prevArrow: '@',
+          nextArrow: '@',
+          centerMode: '@',
+          centerPadding: '@',
+          cssEase: '@',
+          customPaging: '&',
+          dots: '@',
+          draggable: '@',
+          fade: '@',
+          focusOnSelect: '@',
+          easing: '@',
+          edgeFriction: '@',
+          infinite: '@',
+          initialSlide: '@',
+          lazyLoad: '@',
+          mobileFirst: '@',
+          pauseOnHover: '@',
+          pauseOnDotsHover: '@',
+          respondTo: '@',
+          responsive: '=?',
+          rows: '@',
+          slide: '@',
+          slidesPerRow: '@',
+          slidesToShow: '@',
+          slidesToScroll: '@',
+          speed: '@',
+          swipe: '@',
+          swipeToSlide: '@',
+          touchMove: '@',
+          touchThreshold: '@',
+          useCSS: '@',
+          variableWidth: '@',
+          vertical: '@',
+          verticalSwiping: '@',
+          rtl: '@'
+        },
+        restrict: 'AE',
+        link: function (scope, element, attr) {
+          //hide slider
+          angular.element(element).css('display', 'none');
+
+          var options, initOptions, destroy, init, destroyAndInit, currentIndex;
+
+          initOptions = function () {
+            options = angular.extend(angular.copy(slickCarouselConfig), {
+              enabled: scope.enabled !== 'false',
+              accessibility: scope.accessibility !== 'false',
+              adaptiveHeight: scope.adaptiveHeight === 'true',
+              autoplay: scope.autoplay === 'true',
+              autoplaySpeed: scope.autoplaySpeed != null ? parseInt(scope.autoplaySpeed, 10) : 3000,
+              arrows: scope.arrows !== 'false',
+              asNavFor: scope.asNavFor ? scope.asNavFor : void 0,
+              appendArrows: scope.appendArrows ? angular.element(scope.appendArrows) : angular.element(element),
+              prevArrow: scope.prevArrow ? angular.element(scope.prevArrow) : void 0,
+              nextArrow: scope.nextArrow ? angular.element(scope.nextArrow) : void 0,
+              centerMode: scope.centerMode === 'true',
+              centerPadding: scope.centerPadding || '50px',
+              cssEase: scope.cssEase || 'ease',
+              customPaging: attr.customPaging ? function (slick, index) {
+                return scope.customPaging({slick: slick, index: index});
+              } : void 0,
+              dots: scope.dots === 'true',
+              draggable: scope.draggable !== 'false',
+              fade: scope.fade === 'true',
+              focusOnSelect: scope.focusOnSelect === 'true',
+              easing: scope.easing || 'linear',
+              edgeFriction: scope.edgeFriction || 0.15,
+              infinite: scope.infinite !== 'false',
+              initialSlide: parseInt(scope.initialSlide) || 0,
+              lazyLoad: scope.lazyLoad || 'ondemand',
+              mobileFirst: scope.mobileFirst === 'true',
+              pauseOnHover: scope.pauseOnHover !== 'false',
+              pauseOnDotsHover: scope.pauseOnDotsHover === "true",
+              respondTo: scope.respondTo != null ? scope.respondTo : 'window',
+              responsive: scope.responsive || void 0,
+              rows: scope.rows != null ? parseInt(scope.rows, 10) : 1,
+              slide: scope.slide || '',
+              slidesPerRow: scope.slidesPerRow != null ? parseInt(scope.slidesPerRow, 10) : 1,
+              slidesToShow: scope.slidesToShow != null ? parseInt(scope.slidesToShow, 10) : 1,
+              slidesToScroll: scope.slidesToScroll != null ? parseInt(scope.slidesToScroll, 10) : 1,
+              speed: scope.speed != null ? parseInt(scope.speed, 10) : 300,
+              swipe: scope.swipe !== 'false',
+              swipeToSlide: scope.swipeToSlide === 'true',
+              touchMove: scope.touchMove !== 'false',
+              touchThreshold: scope.touchThreshold ? parseInt(scope.touchThreshold, 10) : 5,
+              useCSS: scope.useCSS !== 'false',
+              variableWidth: scope.variableWidth === 'true',
+              vertical: scope.vertical === 'true',
+              verticalSwiping: scope.verticalSwiping === 'true',
+              rtl: scope.rtl === 'true'
+            }, scope.settings);
+
+          };
+
+          destroy = function () {
+            var slickness = angular.element(element);
+            if (slickness.hasClass('slick-initialized')) {
+              slickness.remove('slick-list');
+              slickness.slick('unslick');
+            }
+
+            return slickness;
+          };
+
+          init = function () {
+            initOptions();
+
+            var slickness = angular.element(element);
+
+            if (angular.element(element).hasClass('slick-initialized')) {
+              if (options.enabled) {
+                return slickness.slick('getSlick');
+              } else {
+                destroy();
+              }
+            } else {
+              if (!options.enabled) {
+                return;
+              }
+              // Event
+              slickness.on('init', function (event, slick) {
+                if (typeof options.event.init !== 'undefined') {
+                  options.event.init(event, slick);
+                }
+                if (typeof currentIndex !== 'undefined') {
+                  return slick.slideHandler(currentIndex);
+                }
+              });
+
+              $timeout(function () {
+                angular.element(element).css('display', 'block');
+                slickness.not('.slick-initialized').slick(options);
+              });
+            }
+
+            scope.internalControl = options.method || {};
+
+            // Method
+            slickMethodList.forEach(function (value) {
+              scope.internalControl[value] = function () {
+                var args;
+                args = Array.prototype.slice.call(arguments);
+                args.unshift(value);
+                slickness.slick.apply(element, args);
+              };
+            });
+
+            // Event
+            slickness.on('afterChange', function (event, slick, currentSlide) {
+              currentIndex = currentSlide;
+              if (typeof options.event.afterChange !== 'undefined') {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.afterChange(event, slick, currentSlide);
+                  });
+                });
+              }
+            });
+
+            slickness.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+              if (typeof options.event.beforeChange !== 'undefined') {
+                $timeout(function () {
+                  $timeout(function () {
+                    scope.$apply(function () {
+                      options.event.beforeChange(event, slick, currentSlide, nextSlide);
+                    });
+                  });
+                });
+              }
+            });
+
+            slickness.on('reInit', function (event, slick) {
+              if (typeof options.event.reInit !== 'undefined') {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.reInit(event, slick);
+                  });
+                });
+              }
+            });
+
+            if (typeof options.event.breakpoint !== 'undefined') {
+              slickness.on('breakpoint', function (event, slick, breakpoint) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.breakpoint(event, slick, breakpoint);
+                  });
+                });
+              });
+            }
+            if (typeof options.event.destroy !== 'undefined') {
+              slickness.on('destroy', function (event, slick) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.destroy(event, slick);
+                  });
+                });
+              });
+            }
+            if (typeof options.event.edge !== 'undefined') {
+              slickness.on('edge', function (event, slick, direction) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.edge(event, slick, direction);
+                  });
+                });
+              });
+            }
+
+            if (typeof options.event.setPosition !== 'undefined') {
+              slickness.on('setPosition', function (event, slick) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.setPosition(event, slick);
+                  });
+                });
+              });
+            }
+            if (typeof options.event.swipe !== 'undefined') {
+              slickness.on('swipe', function (event, slick, direction) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.swipe(event, slick, direction);
+                  });
+                });
+              });
+            }
+            if (typeof options.event.lazyLoaded !== 'undefined') {
+              slickness.on('lazyLoaded', function (event, slick, image, imageSource) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.lazyLoaded(event, slick, image, imageSource);
+                  });
+                });
+              });
+            }
+            if (typeof options.event.lazyLoadError !== 'undefined') {
+              slickness.on('lazyLoadError', function (event, slick, image, imageSource) {
+                $timeout(function () {
+                  scope.$apply(function () {
+                    options.event.lazyLoadError(event, slick, image, imageSource);
+                  });
+                });
+              });
+            }
+          };
+
+          destroyAndInit = function () {
+            destroy();
+            init();
+          };
+
+          element.one('$destroy', function () {
+            destroy();
+          });
+
+          return scope.$watch('settings', function (newVal, oldVal) {
+            if (newVal !== null) {
+              return destroyAndInit();
+            }
+          }, true);
+
+        }
+      };
+    }
+  ]);
+
 /**
  * @license AngularJS v1.6.3
  * (c) 2010-2017 Google, Inc. http://angularjs.org
@@ -43867,9 +45346,10 @@ var app = angular.module('dinaApp', [
     'ui.router',
     //'ui.router.stateHelper',
     'ngTouch',
-    '720kb.datepicker',
+    //'720kb.datepicker',
     //'angular-carousel',
-    'ui.carousel',
+    //'ui.carousel',
+    'slickCarousel',
     'angular-loading-bar',
 
 
@@ -43902,7 +45382,10 @@ app.config(["$locationProvider", function($locationProvider) {
     $locationProvider.html5Mode(true);
 }]);
 
-
+//app.config(['slickCarouselConfig', function (slickCarouselConfig) {
+//    slickCarouselConfig.dots = true;
+//    slickCarouselConfig.autoplay = true;
+//}]);
 app.filter('nl2br', function($sce){
     return function(msg,is_xhtml) {
         var is_xhtml = is_xhtml || true;
@@ -44012,6 +45495,45 @@ app
 
                 ;
             };
+
+            $scope.slickConfig = {
+                enabled: true,
+                autoplay: true,
+                draggable: false,
+                autoplaySpeed: 8000,
+                method: {},
+                event: {
+                    beforeChange: function (event, slick, currentSlide, nextSlide) {
+                        var slideOut = new TimelineMax()
+                            .set(".caru_lead", {css:{autoAlpha:0}, ease:Power1.easeIn})
+                            .set(".caru_bgr_circle", {css:{autoAlpha:0}, ease:Power1.easeIn})
+                            ;
+                    },
+                    afterChange: function (event, slick, currentSlide, nextSlide) {
+                        var slideIn = new TimelineMax()
+
+                            .fromTo(".caru_bgr_circle", 2,
+                                {css:{autoAlpha:0, scale:0.7, transformOrigin:"50% 50% "}, ease:Power1.easeOut},
+                                {css:{autoAlpha:1, scale:1.0}, ease:Power3.easeOut}
+                                , "circleIn")
+                            .fromTo(".caru_lead", 1,
+                                {css:{autoAlpha:0,rotationX:360, y:"-300"}, ease:Power1.easeOut},
+                                {css:{autoAlpha:1,rotationX:0, y:0}, ease:Power1.easeOut}
+                                , "clearWorkspace")
+                            ;
+                    }
+                }
+            };
+            $scope.number = [{label: 1}, {label: 2}, {label: 3}, {label: 4}, {label: 5}, {label: 6}, {label: 7}, {label: 8}];
+            $scope.numberLoaded = true;
+            $scope.numberUpdate = function(){
+                $scope.numberLoaded = false; // disable slick
+
+                //number update
+
+                $scope.numberLoaded = true; // enable slick
+            };
+
             $scope.goNextAdvantage = function(){
                 var tlIn = new TimelineMax({paused:true});
                 tlIn.to("#advantageName", 2, {autoAlpha:0}, "clearWorkspace")

@@ -26,9 +26,10 @@ var app = angular.module('dinaApp', [
     'ui.router',
     //'ui.router.stateHelper',
     'ngTouch',
-    '720kb.datepicker',
+    //'720kb.datepicker',
     //'angular-carousel',
-    'ui.carousel',
+    //'ui.carousel',
+    'slickCarousel',
     'angular-loading-bar',
 
 
@@ -61,3 +62,7 @@ app.config(["$locationProvider", function($locationProvider) {
     $locationProvider.html5Mode(true);
 }]);
 
+//app.config(['slickCarouselConfig', function (slickCarouselConfig) {
+//    slickCarouselConfig.dots = true;
+//    slickCarouselConfig.autoplay = true;
+//}]);
