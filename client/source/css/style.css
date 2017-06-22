@@ -367,6 +367,7 @@ h1{
 }
 .us_icon {
     width: 100px;
+    height: 100px;
     /*stroke: #525e64;*/
 }
 .us_menuitem svg{
@@ -946,6 +947,7 @@ label {
     }
     .topMenu .us_icon{
         width: 80px;
+        height: 80px;
     }
 
     .main_phone {
@@ -1007,19 +1009,9 @@ label {
     #servicesSection .pagename{
         margin-top: 20px;
         margin-bottom: 20px;
-        background-color: rgba(0,0,0,0.5);
     }
-    .topMenu {
-        background-color: rgba(0,0,0,0.3);
-    }
-    .us_menusection {
-        background-color: rgba(0,0,0,0.1);
-    }
-    .us_icon {
-        background-color: rgba(0,0,0,0.2);
-    }
+
     #servicesSection .triangle_svg {
-        display: none!important;
         top:114px;
     }
     .topMenu .us_link{
