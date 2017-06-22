@@ -30,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'type',
+//            'type',
+            [
+                'attribute'=> 'type',
+                'value' => app\models\CleanType::find()->where(['id'=>$model['type']])->one()->name,
+            ],
             'text:ntext',
             'image:ntext',
             'icon:ntext',

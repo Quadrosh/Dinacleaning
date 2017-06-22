@@ -65,6 +65,7 @@ $config = [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'orders'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'prices'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'calendar'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'callme','pluralize'=>false],
             ],
         ],
     ],

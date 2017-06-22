@@ -69,12 +69,16 @@ class OrdersController extends ActiveController
         $workplace = Yii::$app->request->post('workplace');
         $address = Yii::$app->request->post('address');
         $comment = Yii::$app->request->post('comment');
-        
+
         if ($phone!= null) {
             $response = $client->createRequest()
                 ->setMethod('post')
                 ->setUrl('https://sms.ru/sms/send')
-                ->setData(['api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE', 'to' => '79853461615,79164497826','text'=> $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment])
+                ->setData([
+                    'api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE',
+                    'to' => '79853461615,79164497826',
+                    'text'=> $work_date.' '.$name.' тип:'.$workType .' тел:'. $phone.' помещение:'.$workplace.' '.$area.'м2 место:'.$address.' '.$comment
+                ])
                 ->send();
             if ($response->isOk) {
                 Yii::$app->session->setFlash('success','отправлено');

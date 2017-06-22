@@ -1,24 +1,26 @@
-<h1>{{pageData.pagehead}}</h1>
-<p class="pagedescription" ng-bind-html="pageData.pagedescription|nl2br"></p>
-
-<div id="servicesGeneralViewContainer">
-    <div id="servicesGeneralView" ui-view="servicesGeneral">
-        <img class="defaultBottomImage" src="/assets/img/general.png" alt="Генеральная уборка в Москве цены">
-    </div>
-</div>
 <div class="row">
-    <div class="col-sm-12 text-center">
-        <a class="secondlink" ui-sref="home.generalnaya.vhodit" ui-sref-active="active">Что входит в генеральную уборку</a>
+    <div class="col-sm-6 servicePadding">
+        <h1>{{pageData.pagehead}}</h1>
+        <div>
+            <a class="secondlink" ui-sref="home.generalnaya.price" ui-sref-active="active">Цены</a>
+            <a class="secondlink" ui-sref="home.generalnaya.vhodit" ui-sref-active="active">Что входит</a>
+
+        </div>
+        <p class="pagedescription" ng-bind-html="pageData.pagedescription|nl2br"></p>
+        <div class="row">
+            <div class=" text-left mt20">
+                <a class="btn btn-primary" ui-sref="home.zakaz">Заказать</a>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-12 text-center mt10">
-        <a class="secondlink" ui-sref="home.generalnaya.price" ui-sref-active="active">Цены на генеральную уборку</a>
-    </div>
-    <div class="col-sm-12 text-center mt20">
-        <a class="btn btn-primary" ui-sref="home.zakaz">Заказать генеральную уборку</a>
+    <div class="col-sm-6">
+        <div id="servicesGeneralViewContainer">
+            <div id="servicesGeneralView" ui-view="servicesGeneral">
+                <img class="defaultBottomImage" src="/assets/img/general.png" alt="Генеральная уборка в Москве цены">
+            </div>
+        </div>
     </div>
 </div>
-
-
 
 
 

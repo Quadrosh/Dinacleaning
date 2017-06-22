@@ -13,7 +13,8 @@ app
         'partnersData',
         'reviewData',
         'orderData',
-        'OrderService', function($scope,
+        'OrderService',
+        'CallmeService', function($scope,
                                  $interval,
                              homeData,
                              pageData,
@@ -24,42 +25,69 @@ app
                              partnersData,
                              reviewData,
                              orderData,
-                             OrderService){
+                             OrderService,
+                             CallmeService){
             $scope.homeData = homeData;
             $scope.pageData = pageData;
             $scope.allPages = allPages;
             $scope.advantagesData = advantagesData;
             $scope.partnersData = partnersData;
-            $scope.reviewData = reviewData;
+
             $scope.orderData = orderData;
 
             $scope.i = 0;
             $scope.piter = 0;
             $scope.riter = 0;
 
-            $scope.carouselSlideIn = function(){
-                var slideIn = new TimelineMax();
-                slideIn.fromTo(".caru_lead", 2, {css:{autoAlpha:0,rotationX:360, y:"-600"}, ease:Power1.easeOut},{css:{autoAlpha:1,rotationX:0, y:0}, ease:Power1.easeOut}, "clearWorkspace")
-                    //.to(".caru_lead", 2, {css:{x:0}, ease:Power1.easeOut})
-                ;
-            };
-            $scope.carouselSlideOut = function(){
-                var slideOut = new TimelineMax();
-                slideOut.to(".caru_lead", 0.5, {css:{autoAlpha:0}, ease:Power1.easeIn})
 
-                ;
+            //$scope.reviewData = reviewData;
+            var getReviewData = function(data){
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].type == 1){
+                        data[i].type = 'Повседневная уборка';
+                    }
+                    if (data[i].type == 2){
+                        data[i].type = 'Генеральная уборка';
+                    }
+                    if (data[i].type == 3){
+                        data[i].type = 'Уборка после ремонта';
+                    }
+                    if (data[i].type == 4){
+                        data[i].type = 'Мойка окон';
+                    }
+
+                }
+                return data;
             };
 
-            $scope.slickConfig = {
+            $scope.reviewData = getReviewData(reviewData);
+
+            //$scope.carouselSlideIn = function(){
+            //    var slideIn = new TimelineMax();
+            //    slideIn.fromTo(".caru_lead", 2, {css:{autoAlpha:0,rotationX:360, y:"-600"}, ease:Power1.easeOut},{css:{autoAlpha:1,rotationX:0, y:0}, ease:Power1.easeOut}, "clearWorkspace")
+            //        //.to(".caru_lead", 2, {css:{x:0}, ease:Power1.easeOut})
+            //    ;
+            //};
+            //$scope.carouselSlideOut = function(){
+            //    var slideOut = new TimelineMax();
+            //    slideOut.to(".caru_lead", 0.5, {css:{autoAlpha:0}, ease:Power1.easeIn})
+            //
+            //    ;
+            //};
+
+            $scope.slickTopConfig = {
                 enabled: true,
                 autoplay: true,
+                arrows: false,
                 draggable: false,
-                autoplaySpeed: 8000,
+                autoplaySpeed: 10000,
                 method: {},
                 event: {
                     beforeChange: function (event, slick, currentSlide, nextSlide) {
                         var slideOut = new TimelineMax()
                             .set(".caru_lead", {css:{autoAlpha:0}, ease:Power1.easeIn})
+                            .set("#callMeWrap", {css:{autoAlpha:0,rotationY:270,transformOrigin:"50% 100% 100"}})
+                            .set(".caru_lead2", {css:{autoAlpha:0,rotationX:90, y:0, transformOrigin:"50% 100%"}})
                             .set(".caru_bgr_circle", {css:{autoAlpha:0}, ease:Power1.easeIn})
                             ;
                     },
@@ -67,26 +95,53 @@ app
                         var slideIn = new TimelineMax()
 
                             .fromTo(".caru_bgr_circle", 2,
-                                {css:{autoAlpha:0, scale:0.7, transformOrigin:"50% 50% "}, ease:Power1.easeOut},
-                                {css:{autoAlpha:1, scale:1.0}, ease:Power3.easeOut}
+                                {css:{autoAlpha:0, scale:0.7, transformOrigin:"50% 50% "}},
+                                {css:{autoAlpha:1, scale:1.0}, ease: Elastic.easeOut.config(1, 0.3)}
                                 , "circleIn")
                             .fromTo(".caru_lead", 1,
                                 {css:{autoAlpha:0,rotationX:360, y:"-300"}, ease:Power1.easeOut},
                                 {css:{autoAlpha:1,rotationX:0, y:0}, ease:Power1.easeOut}
-                                , "clearWorkspace")
+                                , "circleIn+=1")
+                            .to(".caru_lead2", 1,
+                                {css:{autoAlpha:1,rotationX:0, y:0}, ease:Power3.easeOut}
+                                , "lead2")
+                            .to("#callMeWrap", 1,
+                                {css:{autoAlpha:1, rotationY:0, y:0}, ease:Power3.easeIn}
+                                , "lead2")
+                            .to("#callMeBtn", 0.7,
+                                {css:{ scaleY:1.2}, ease:Power1.easeIn}
+                                , "lead2+=3")
+                            .to("#callMeBtn", 1,
+                                {css:{ scaleY:1}, ease: Elastic.easeOut}
+                                )
                             ;
                     }
                 }
             };
-            $scope.number = [{label: 1}, {label: 2}, {label: 3}, {label: 4}, {label: 5}, {label: 6}, {label: 7}, {label: 8}];
-            $scope.numberLoaded = true;
-            $scope.numberUpdate = function(){
-                $scope.numberLoaded = false; // disable slick
-
+            $scope.slickTopGo = true;
+            $scope.slickTopUpdate = function(){
+                $scope.slickTopGo = false; // disable slick
                 //number update
-
-                $scope.numberLoaded = true; // enable slick
+                $scope.slickTopGo = true; // enable slick
             };
+            var getSlidesToShow = function(width){
+                if (width>768) {
+                    return 3;
+                } else {
+                    return 1;
+                }
+            }
+            $scope.slickReviewConfig = {
+                enabled: true,
+                autoplay: true,
+                slidesToShow:getSlidesToShow(window.innerWidth),
+                arrows: false,
+                draggable: true,
+                autoplaySpeed: 6000,
+                method: {},
+
+            };
+            $scope.slickReviewGo = true;
 
             $scope.goNextAdvantage = function(){
                 var tlIn = new TimelineMax({paused:true});
@@ -113,9 +168,12 @@ app
             };
             $scope.goNextPartner = function(){
                 var tlIn = new TimelineMax({paused:true});
-                tlIn.to("#partnerName", 2, {autoAlpha:0}, "clearWorkspace")
-                    .to("#partnerText", 2, {autoAlpha:0}, "clearWorkspace")
-                    .to("#partnerImage", 2, {autoAlpha:0}, "clearWorkspace")
+                tlIn.to("#partnerName", 1, {autoAlpha:0,  rotationY:"-=90", transformOrigin:"50% 100% 200", ease:Power1.easeInOut}, "clearWorkspace")
+                    .to("#partnerText", 1, {autoAlpha:0, rotationY:"-=90",transformOrigin:"50% 100% 200", ease:Power1.easeInOut}, "clearWorkspace")
+                    .to("#partnersArrowSvg", 1, {autoAlpha:0, rotationY:"-=90",transformOrigin:"50% 100% 200", ease:Power1.easeInOut}, "clearWorkspace")
+                    .to("#partnersInfo", 1, {autoAlpha:0, rotationX:"-=90",transformOrigin:"50% 100% 70", ease:Power1.easeInOut}, "clearWorkspace")
+                    .to("#partnersBtn", 1, {autoAlpha:0, rotationX:"-=90",transformOrigin:"50% 50%", ease:Power1.easeInOut}, "clearWorkspace")
+                    .to("#partnerImage", 1, {autoAlpha:0, transformOrigin:"50% 50% ", ease:Power1.easeInOut}, "clearWorkspace")
                 ;
                 var newI= $scope.piter+1;
                 var goNext = function(){
@@ -125,11 +183,14 @@ app
                         $scope.piter = 0;
                     }
                 };
-                $timeout(goNext,2000);
+                $timeout(goNext,1000);
                 var tlOut = new TimelineMax({paused:true});
-                tlOut.to("#partnerName", 2, {autoAlpha:1}, "Start")
-                    .to("#partnerText", 2, {autoAlpha:1}, "Start")
-                    .to("#partnerImage", 2, {autoAlpha:1}, "Start")
+                tlOut.to("#partnerName", 1, {autoAlpha:1, rotationY:0, ease:Power1.easeIn}, "Start")
+                    .to("#partnerText", 1, {autoAlpha:1, rotationY:0, ease:Power1.easeIn}, "Start")
+                    .to("#partnersArrowSvg", 1, {autoAlpha:1, rotationY:"-=270", ease:Power1.easeIn}, "Start")
+                    .to("#partnersInfo", 1, {autoAlpha:1, rotationX:0, ease:Power1.easeIn}, "Start")
+                    .to("#partnersBtn", 1, {autoAlpha:1, rotationX:0, ease:Power1.easeIn}, "Start")
+                    .to("#partnerImage", 1, {autoAlpha:1, rotationX:0, ease:Power1.easeIn}, "Start")
                 ;
                 var masterTl = new TimelineMax()
                     .add(tlIn.play(),"in")
@@ -159,6 +220,20 @@ app
                     .add(tlIn.play(),"in")
                     .add(tlOut.play(),"out")
                     ;
+            };
+            $scope.callMe = function(data){
+                CallmeService.post(data).then(
+                    function(){
+
+                        //yaCounter44480872.reachGoal('sendOrder');
+                        //ga('send','event','order','send','sendOrder');
+                        alert('мы перезвоним в течение 20 минут');
+                    },
+                    function(error){
+                        console.log(error);
+                        alert('неполучилось отправить, ошибка - '+ error.statusText);
+                    }
+                );
             };
             $scope.newOrder = function(data){
                 OrderService.post(data).then(

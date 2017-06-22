@@ -23,11 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
 //            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+//            'type',
+            [
+                'attribute'=> 'type',
+                'value' => function($data)
+                {
+                    $theData = app\models\CleanType::find()->where(['id'=>$data['type']])->one();
+                    return $theData['name'];
+                },
+            ],
             'name',
-            'type',
+            'icon:ntext',
             'text:ntext',
-            'image:ntext',
-            // 'icon:ntext',
+//            'image:ntext',
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

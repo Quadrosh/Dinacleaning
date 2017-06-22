@@ -42,11 +42,11 @@ class Review extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'type' => 'Type',
-            'text' => 'Text',
+            'name' => 'Имя Фамилия',
+            'type' => 'Тип уборки',
+            'text' => 'Текст',
             'image' => 'Image',
-            'icon' => 'Icon',
+            'icon' => 'Профессия',
         ];
     }
 }

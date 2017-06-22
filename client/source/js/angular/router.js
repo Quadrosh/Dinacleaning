@@ -42,9 +42,6 @@ app.config(function($stateProvider, $urlRouterProvider){
             abstract:false,
             url:'/home',
             templateUrl: templatesPath + 'home.html',
-            //params: {
-            //    hrurl: 'home',
-            //},
             resolve: {
                 homeData: function(HomeService, $stateParams){
                     return new HomeService.query();
@@ -88,7 +85,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 2, {scrollTo:"#servicesSection"});
+                    .to('#servicesViewContainer', 2, {autoAlpha:1},'scroll')
+                    .to(window, 2, {scrollTo:"#servicesSection"},'scroll');
             },
             templateUrl: templatesPath +'home.html',
             resolve: {
@@ -103,7 +101,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesSection"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesSection"},'scroll');
             },
             resolve: {
                 pageData: function(PageService){
@@ -123,7 +122,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesPovsednevnayaView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesPovsednevnayaView"},'scroll');
 
             },
             resolve: {
@@ -142,19 +142,10 @@ app.config(function($stateProvider, $urlRouterProvider){
         .state('home.povsednevnaya.price', {
             url:'/price',
             onEnter: function () {
-                //var view = angular.element( document.querySelector( '#servicesPovsednevnayaViewContainer' ) );
-                //alert(view.innerHeight);
-
-
                 var tl = new TimelineLite()
-                    //.set('#servicesPovsednevnayaViewContainer', {height:"auto"})
-                    //.to('#servicesPovsednevnayaViewContainer', 1, {height:0,})
-
-                    //.to('#servicesPovsednevnayaViewContainer', 1, {autoAlpha:0,})
-                    //.from('#servicesPovsednevnayaViewContainer', 1, {height:0,immediateRender:false})
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    //.to('#servicesPovsednevnayaViewContainer', 1, {autoAlpha:1,})
-                    .to(window, 1, {scrollTo:"#servicesPovsednevnayaView",});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesPovsednevnayaView"},'scroll');
 
             },
             resolve: {
@@ -174,7 +165,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesSection"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesSection"},'scroll');
             },
             resolve: {
                 pageData: function(PageService){
@@ -194,7 +186,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"},'scroll');
             },
             resolve: {
                 priceData: function(PriceService){
@@ -213,7 +206,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"},'scroll');
             },
             resolve: {
                 taskData: function(TaskService){
@@ -235,7 +229,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesSection"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesSection"},'scroll');
             },
             resolve: {
                 pageData: function(PageService){
@@ -255,7 +250,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"},'scroll');
             },
             resolve: {
                 priceData: function(PriceService){
@@ -274,7 +270,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesGeneralView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesGeneralView"},'scroll');
             },
             resolve: {
                 taskData: function(TaskService){
@@ -294,7 +291,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesSection"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesSection"},'scroll');
             },
             resolve: {
                 pageData: function(PageService){
@@ -314,7 +312,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesRepairView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesRepairView"},'scroll');
             },
             resolve: {
                 priceData: function(PriceService){
@@ -333,7 +332,8 @@ app.config(function($stateProvider, $urlRouterProvider){
             onEnter: function () {
                 var tl = new TimelineLite()
                     .from('#servicesViewContainer', 1, {autoAlpha:0})
-                    .to(window, 1, {scrollTo:"#servicesRepairView"});
+                    .to('#servicesViewContainer', 1, {autoAlpha:1},'scroll')
+                    .to(window, 1, {scrollTo:"#servicesRepairView"},'scroll');
             },
             resolve: {
                 taskData: function(TaskService){

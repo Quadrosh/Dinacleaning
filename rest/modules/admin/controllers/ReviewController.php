@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\CleanType;
 use Yii;
 use app\models\Review;
 use yii\data\ActiveDataProvider;
@@ -121,4 +122,5 @@ class ReviewController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

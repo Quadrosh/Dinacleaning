@@ -43,7 +43,13 @@ AppAsset::register($this);
             ['label' => 'Pages', 'url' => ['/admin/pages']],
             ['label' => 'Prices', 'url' => ['/admin/prices']],
             ['label' => 'Tasks', 'url' => ['/admin/tasks']],
-            ['label' => 'Orders', 'url' => ['/admin/orders']],
+//            ['label' => 'Orders', 'url' => ['/admin/orders']],
+            ['label' => 'Orders',
+                'items' => [
+                    ['label' => 'Orders', 'url' => ['/admin/orders/index']],
+                    ['label' => 'Call Me', 'url' => ['/admin/callme/index']],
+                ],
+            ],
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/admin/default/login']]
