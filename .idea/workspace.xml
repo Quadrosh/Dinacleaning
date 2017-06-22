@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/css/app.min.css" afterPath="$PROJECT_DIR$/client/assets/css/app.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
     </list>
     <ignored path="dinacleaning.iws" />
@@ -86,8 +85,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4295082">
-              <caret line="1010" column="28" selection-start-line="1010" selection-start-column="28" selection-end-line="1010" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.33114755">
+              <caret line="394" column="13" selection-start-line="394" selection-start-column="1" selection-end-line="394" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -1205,8 +1204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4295082">
-          <caret line="1010" column="28" selection-start-line="1010" selection-start-column="28" selection-end-line="1010" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.33114755">
+          <caret line="394" column="13" selection-start-line="394" selection-start-column="1" selection-end-line="394" selection-end-column="13" />
           <folding />
         </state>
       </provider>
