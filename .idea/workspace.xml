@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/home.html" afterPath="$PROJECT_DIR$/client/templates/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28196722">
-              <caret line="123" column="39" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
+            <state vertical-scroll-proportion="-2.6296296">
+              <caret line="124" column="27" selection-start-line="124" selection-start-column="20" selection-end-line="124" selection-end-column="27" />
               <folding>
                 <element signature="n#style#0;n#svg#0;n#div#0;n#div#0;n#div#0;n#slick#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#svg#0;n#a#0;n#section#0;n#!!top" expanded="true" />
@@ -82,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.5185186">
-              <caret line="1004" column="5" selection-start-line="1004" selection-start-column="5" selection-end-line="1004" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.5770492">
+              <caret line="1011" column="40" selection-start-line="1011" selection-start-column="40" selection-end-line="1011" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -248,8 +248,8 @@
         <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
         <option value="$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php" />
         <option value="$PROJECT_DIR$/rest/controllers/OrdersController.php" />
-        <option value="$PROJECT_DIR$/client/source/css/style.css" />
         <option value="$PROJECT_DIR$/client/templates/home.html" />
+        <option value="$PROJECT_DIR$/client/source/css/style.css" />
       </list>
     </option>
   </component>
@@ -1178,18 +1178,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5185186">
-          <caret line="1004" column="5" selection-start-line="1004" selection-start-column="5" selection-end-line="1004" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28196722">
-          <caret line="123" column="39" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
+        <state vertical-scroll-proportion="-2.6296296">
+          <caret line="124" column="27" selection-start-line="124" selection-start-column="20" selection-end-line="124" selection-end-column="27" />
           <folding>
             <element signature="n#style#0;n#svg#0;n#div#0;n#div#0;n#div#0;n#slick#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#svg#0;n#a#0;n#section#0;n#!!top" expanded="true" />
@@ -1207,6 +1199,14 @@
             <element signature="n#style#0;n#svg#0;n#a#0;n#section#5;n#!!top" expanded="true" />
             <element signature="n#style#0;n#svg#0;n#a#1;n#section#5;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5770492">
+          <caret line="1011" column="40" selection-start-line="1011" selection-start-column="40" selection-end-line="1011" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>

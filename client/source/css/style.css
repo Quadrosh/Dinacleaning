@@ -1008,6 +1008,9 @@ label {
         margin-bottom: 20px;
         background-color: rgba(0,0,0,0.5);
     }
+    .topMenu {
+        background-color: rgba(0,0,0,0.3);
+    }
     .triangle_svg {
         top:114px;
     }
