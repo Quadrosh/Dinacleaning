@@ -782,7 +782,7 @@ select::-ms-expand {
 .reviewText {
     /*margin-top: 130px;*/
     font-family:"HelveticaRegular",sans-serif;
-    font-size:16px;
+    font-size:14px;
 }
 .reviewName {
     margin-top: 20px;
