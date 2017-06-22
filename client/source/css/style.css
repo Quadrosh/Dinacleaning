@@ -1005,7 +1005,8 @@ label {
     }
     #servicesSection .pagename{
         margin-top: 20px;
-        margin-bottom: 20px !important;
+        margin-bottom: 20px;
+        background-color: rgba(0,0,0,0.5);
     }
     .triangle_svg {
         top:114px;
