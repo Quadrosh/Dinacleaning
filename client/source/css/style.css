@@ -417,9 +417,17 @@ h1{
     font-family: HelveticaThin, sans-serif;
     cursor: default;
 }
+.pagename{
+    color: lightgray;
+    text-transform: uppercase;
+    text-align: center;
+}
 #servicesSection .pagename{
     margin-top: 70px;
     margin-bottom: 50px;
+    color: lightgray;
+    text-transform: uppercase;
+    text-align: center;
 }
 .uslugi .pagedescription {
     padding: 50px 0 50px;
@@ -477,12 +485,7 @@ section {
     min-height:600px;
     position: relative;
 }
-.pagename,
-#servicesSection .pagename {
-    color: lightgray;
-    text-transform: uppercase;
-    text-align: center;
-}
+
 
 
 #servicesSection .defaultImage{
@@ -1002,7 +1005,7 @@ label {
     }
     #servicesSection .pagename{
         margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 20px !important;
     }
     .triangle_svg {
         top:114px;
