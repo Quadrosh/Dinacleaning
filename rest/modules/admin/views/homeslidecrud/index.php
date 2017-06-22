@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'lead',
             'lead2',
-            'text:ntext',
-            // 'image',
+//            'text:ntext',
+             'image',
             // 'promolink',
             // 'promoname',
 

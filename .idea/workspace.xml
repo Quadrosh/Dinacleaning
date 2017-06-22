@@ -2,45 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/source/js/angular/modules/callme/services/CallmeService.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rest/controllers/CallmeController.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rest/models/-Calendar.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/dclogo.png" afterPath="$PROJECT_DIR$/client/assets/img/dclogo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/general.png" afterPath="$PROJECT_DIR$/client/assets/img/general.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/repair.png" afterPath="$PROJECT_DIR$/client/assets/img/repair.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/supporting.png" afterPath="$PROJECT_DIR$/client/assets/img/supporting.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/img/windows.png" afterPath="$PROJECT_DIR$/client/assets/img/windows.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/css/app.min.css" afterPath="$PROJECT_DIR$/client/assets/css/app.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.js" afterPath="$PROJECT_DIR$/client/assets/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.min.js" afterPath="$PROJECT_DIR$/client/assets/js/app.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" afterPath="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/js/angular/router.js" afterPath="$PROJECT_DIR$/client/source/js/angular/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/home.html" afterPath="$PROJECT_DIR$/client/templates/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.general.html" afterPath="$PROJECT_DIR$/client/templates/services.general.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.general.price.html" afterPath="$PROJECT_DIR$/client/templates/services.general.price.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.general.tasks.html" afterPath="$PROJECT_DIR$/client/templates/services.general.tasks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.repair.html" afterPath="$PROJECT_DIR$/client/templates/services.repair.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.repair.price.html" afterPath="$PROJECT_DIR$/client/templates/services.repair.price.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.repair.tasks.html" afterPath="$PROJECT_DIR$/client/templates/services.repair.tasks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.supporting.html" afterPath="$PROJECT_DIR$/client/templates/services.supporting.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.supporting.price.html" afterPath="$PROJECT_DIR$/client/templates/services.supporting.price.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.supporting.tasks.html" afterPath="$PROJECT_DIR$/client/templates/services.supporting.tasks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.windows.html" afterPath="$PROJECT_DIR$/client/templates/services.windows.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.windows.price.html" afterPath="$PROJECT_DIR$/client/templates/services.windows.price.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/services.windows.tasks.html" afterPath="$PROJECT_DIR$/client/templates/services.windows.tasks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylib/2server/api.dinacleaning.ru" afterPath="$PROJECT_DIR$/mylib/2server/api.dinacleaning.ru" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylib/2server/dinacleaning.ru" afterPath="$PROJECT_DIR$/mylib/2server/dinacleaning.ru" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/config/web.php" afterPath="$PROJECT_DIR$/rest/config/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/controllers/OrdersController.php" afterPath="$PROJECT_DIR$/rest/controllers/OrdersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/controllers/ReviewController.php" afterPath="$PROJECT_DIR$/rest/controllers/ReviewController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/models/Review.php" afterPath="$PROJECT_DIR$/rest/models/Review.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/modules/admin/controllers/ReviewController.php" afterPath="$PROJECT_DIR$/rest/modules/admin/controllers/ReviewController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/modules/admin/views/layouts/admin.php" afterPath="$PROJECT_DIR$/rest/modules/admin/views/layouts/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/modules/admin/views/review/_form.php" afterPath="$PROJECT_DIR$/rest/modules/admin/views/review/_form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/modules/admin/views/review/index.php" afterPath="$PROJECT_DIR$/rest/modules/admin/views/review/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/modules/admin/views/review/view.php" afterPath="$PROJECT_DIR$/rest/modules/admin/views/review/view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php" afterPath="$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,11 +82,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23278688">
+            <state vertical-scroll-proportion="-2.6296296">
               <caret line="746" column="21" selection-start-line="746" selection-start-column="21" selection-end-line="746" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5873494">
+              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -237,7 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/rest/modules/sms/controllers/SendController.php" />
         <option value="$PROJECT_DIR$/rest/controllers/PartnersController.php" />
         <option value="$PROJECT_DIR$/rest/modules/admin/controllers/HashController.php" />
         <option value="$PROJECT_DIR$/rest/modules/admin/views/hash/index.php" />
@@ -288,6 +259,7 @@
         <option value="$PROJECT_DIR$/client/templates/home.html" />
         <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
         <option value="$PROJECT_DIR$/client/source/css/style.css" />
+        <option value="$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php" />
       </list>
     </option>
   </component>
@@ -439,6 +411,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="review" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dinacleaning" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dinacleaning" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="homeslidecrud" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -841,13 +843,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/partners/services/PartnersService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16853933">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/models/ContactForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28089887">
@@ -1238,8 +1233,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23278688">
+        <state vertical-scroll-proportion="-2.6296296">
           <caret line="746" column="21" selection-start-line="746" selection-start-column="21" selection-end-line="746" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5873494">
+          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
           <folding />
         </state>
       </provider>
