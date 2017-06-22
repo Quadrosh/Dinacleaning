@@ -1011,6 +1011,9 @@ label {
     .topMenu {
         background-color: rgba(0,0,0,0.3);
     }
+    .us_menusection {
+        background-color: rgba(0,0,0,0.1);
+    }
     #servicesSection .triangle_svg {
         display: none!important;
         top:114px;
