@@ -977,6 +977,7 @@ label {
     }
     .topMenu .us_icon{
         width: 60px;
+        height: 60px;
     }
     #clearSection .text {
         top: 150px;
