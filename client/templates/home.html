@@ -372,22 +372,7 @@
             <p id="partnerText"  ng-bind-html="partnersData[piter].description|nl2br"></p>
 
             <div class="text-center">
-                <!--<a  id="partnersBtn" class="btn btn-primary btn_right_arrow mt50" ng-click="goNextPartner()"><svg-->
-                                <!--version="1.1" id="partnersArrowSvg" class="svg_arrow"-->
-                                <!--xmlns="http://www.w3.org/2000/svg"-->
-                                <!--xmlns:xlink="http://www.w3.org/1999/xlink"-->
-                                <!--x="0px" y="0px"-->
-                                <!--width="66px" height="31px"-->
-                                <!--viewBox="0 0 66 31"-->
-                                <!--style="enable-background:new 0 0 66 31;"-->
-                                <!--xml:space="preserve"-->
-                            <!--&gt;-->
-<!--<g >-->
-    <!--<line  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="3" y1="15.5" x2="63" y2="15.5"/>-->
-    <!--<line  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"  x1="49.1" y1="30" x2="63.1" y2="16"/>-->
-    <!--<line  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"  x1="63.1" y1="15" x2="49.1" y2="1"/>-->
-<!--</g>-->
-								<!--</svg></a>-->
+
                 <a  id="partnersBtn" class="carouselControl slickNext" ng-click="goNextPartner()"><svg
                         id="partnersArrowSvg"
                         version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -416,11 +401,14 @@
 <!-- отзывы -->
 
 <section id="reviewSection" class="almostWhite">
-    <!--<h2 class="pagename">{{allPages[8].pagehead}}</h2>-->
     <h2 class="pagename">{{allPages[8].pagedescription}}</h2>
 
     <div class="container">
-        <slick settings="slickReviewConfig" infinite=true slides-to-scroll=1 ng-if="slickReviewGo">
+        <slick
+                settings="slickReviewConfig"
+                infinite=true
+                slides-to-scroll=1
+                ng-if="slickReviewGo">
             <div ng-repeat="slide in reviewData">
                 <div class="caruwrap" >
 

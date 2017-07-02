@@ -125,7 +125,7 @@ app
                 $scope.slickTopGo = true; // enable slick
             };
             var getSlidesToShow = function(width){
-                if (width>768) {
+                if (width > 767) {
                     return 3;
                 } else {
                     return 1;

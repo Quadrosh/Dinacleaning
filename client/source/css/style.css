@@ -652,6 +652,7 @@ section {
 #partnersSection{
     padding: 0;
     height: 600px;
+    overflow: hidden;
 }
 #partnersSection .info{
     margin-top: 30px;
@@ -892,12 +893,12 @@ label {
 /*==========  Desktop First Method  ==========*/
 
 /* Large Devices, Wide Screens */
-@media only screen and (max-width : 1200px) {
+@media only screen and (max-width : 1199px) {
 
 }
 
 /* Medium Devices, Desktops */
-@media only screen and (max-width : 992px) {
+@media only screen and (max-width : 991px) {
     #reviewSection .container{
     width: 90%;
     margin-left:5%;
@@ -934,7 +935,8 @@ label {
 }
 
 /* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width : 767px) {
+/*@media only screen and (max-width : 790px) {*/
     .navbar-top {
         height: 60px;
     }
@@ -949,6 +951,7 @@ label {
     #partnersSection{
         height: 400px;
         min-height: 400px;
+      
     }
     #partnerName {
         margin-top: 50px;
@@ -995,7 +998,7 @@ label {
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width : 479px) {
     #reviewSection .container{
         width: 80%;
         margin-left:10%;
@@ -1034,7 +1037,7 @@ label {
     }
 }
 
-@media only screen and (max-width : 360px) {
+@media only screen and (max-width : 359px) {
     #advantagesSection .imagebox {
         padding-left:5px;
         padding-right: 5px;
@@ -1066,7 +1069,7 @@ label {
     }
 }
 /* Custom, iPhone Retina */
-@media only screen and (max-width : 320px) {
+@media only screen and (max-width : 319px) {
 
 }
 
@@ -1088,6 +1091,7 @@ label {
     .topsection-xs {
         display: none;
     }
+  
 }
 
 /* Medium Devices, Desktops */

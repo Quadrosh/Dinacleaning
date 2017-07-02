@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/css/app.min.css" afterPath="$PROJECT_DIR$/client/assets/css/app.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.js" afterPath="$PROJECT_DIR$/client/assets/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/js/app.min.js" afterPath="$PROJECT_DIR$/client/assets/js/app.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" afterPath="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/home.html" afterPath="$PROJECT_DIR$/client/templates/home.html" />
     </list>
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,8 +54,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="103.888885">
-              <caret line="2" column="33" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="33" />
+            <state vertical-scroll-proportion="5.0">
+              <caret line="364" column="71" selection-start-line="364" selection-start-column="62" selection-end-line="364" selection-end-column="71" />
               <folding>
                 <element signature="n#style#0;n#svg#0;n#div#0;n#div#0;n#div#0;n#slick#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#svg#0;n#a#0;n#section#0;n#!!top" expanded="true" />
@@ -87,8 +91,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67540985">
-              <caret line="775" column="21" selection-start-line="775" selection-start-column="21" selection-end-line="775" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.5770492">
+              <caret line="953" column="6" selection-start-line="953" selection-start-column="6" selection-end-line="953" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -148,7 +152,7 @@
         <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
+              <caret line="136" column="64" selection-start-line="136" selection-start-column="64" selection-end-line="136" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -246,10 +250,10 @@
         <option value="$PROJECT_DIR$/rest/modules/admin/views/review/_form.php" />
         <option value="$PROJECT_DIR$/rest/modules/admin/controllers/ReviewController.php" />
         <option value="$PROJECT_DIR$/rest/controllers/ReviewController.php" />
-        <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
         <option value="$PROJECT_DIR$/rest/modules/admin/views/homeslidecrud/index.php" />
         <option value="$PROJECT_DIR$/rest/controllers/CallmeController.php" />
         <option value="$PROJECT_DIR$/rest/controllers/OrdersController.php" />
+        <option value="$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js" />
         <option value="$PROJECT_DIR$/client/templates/home.html" />
         <option value="$PROJECT_DIR$/client/source/css/style.css" />
       </list>
@@ -1003,15 +1007,15 @@
     <entry file="file://$PROJECT_DIR$/client/source/js/angular/modules/home/controllers/HomeCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
+          <caret line="136" column="64" selection-start-line="136" selection-start-column="64" selection-end-line="136" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="103.888885">
-          <caret line="2" column="33" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="33" />
+        <state vertical-scroll-proportion="5.0">
+          <caret line="364" column="71" selection-start-line="364" selection-start-column="62" selection-end-line="364" selection-end-column="71" />
           <folding>
             <element signature="n#style#0;n#svg#0;n#div#0;n#div#0;n#div#0;n#slick#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#svg#0;n#a#0;n#section#0;n#!!top" expanded="true" />
@@ -1035,8 +1039,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67540985">
-          <caret line="775" column="21" selection-start-line="775" selection-start-column="21" selection-end-line="775" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.5770492">
+          <caret line="953" column="6" selection-start-line="953" selection-start-column="6" selection-end-line="953" selection-end-column="6" />
           <folding />
         </state>
       </provider>
