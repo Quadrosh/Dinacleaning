@@ -652,6 +652,12 @@ section {
     background-position: center center;
     background-color: transparent;
 }
+#partnersSection  .slickNext{
+    top: 400px;
+    margin-top: -30px;
+    right: 50%;
+    margin-right:-30px;
+}
 /*.partnersImg{*/
     /*width: 80%;*/
     /*position: relative;*/
@@ -909,6 +915,9 @@ label {
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
+    #partnersSection  .slickNext{
+        top: 240px;
+    }
     #reviewSection .container{
         width: 60%;
         margin-left:20%;
