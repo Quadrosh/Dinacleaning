@@ -773,6 +773,7 @@ select::-ms-expand {
 }
 #reviewSection .pagename {
     margin-top: 70px;
+    background-color: rgba(0,0,0,0.3);
 }
 #reviewSection .textBox{
     background-color: #fff;
