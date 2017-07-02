@@ -240,6 +240,7 @@ h1{
 }
 .carouselControl svg{
     width: 60px;
+    height: 60px;
 }
 .slickPrev {
     left:20px;
@@ -769,11 +770,11 @@ select::-ms-expand {
     width: 80%;
     margin-left:10%;
     margin-top: 50px;
-    background-color: rgba(0,0,0,0.3);
+    /*background-color: rgba(0,0,0,0.3);*/
 }
 #reviewSection .pagename {
     margin-top: 70px;
-    background-color: rgba(0,0,0,0.3);
+    /*background-color: rgba(0,0,0,0.3);*/
 }
 #reviewSection .textBox{
     background-color: #fff;
@@ -1124,6 +1125,7 @@ label {
     }
     .carouselControl svg{
         width: 60px;
+        height:60px;
     }
 }
 

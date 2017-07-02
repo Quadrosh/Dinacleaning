@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/assets/css/app.min.css" afterPath="$PROJECT_DIR$/client/assets/css/app.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/source/css/style.css" afterPath="$PROJECT_DIR$/client/source/css/style.css" />
     </list>
     <ignored path="dinacleaning.iws" />
@@ -49,7 +50,7 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1111112">
+            <state vertical-scroll-proportion="103.888885">
               <caret line="2" column="33" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="33" />
               <folding>
                 <element signature="n#style#0;n#svg#0;n#div#0;n#div#0;n#div#0;n#slick#0;n#section#0;n#!!top" expanded="true" />
@@ -86,8 +87,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.60655737">
-              <caret line="775" column="38" selection-start-line="775" selection-start-column="38" selection-end-line="775" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.67540985">
+              <caret line="775" column="21" selection-start-line="775" selection-start-column="21" selection-end-line="775" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -1009,7 +1010,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1111112">
+        <state vertical-scroll-proportion="103.888885">
           <caret line="2" column="33" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="33" />
           <folding>
             <element signature="n#style#0;n#svg#0;n#div#0;n#div#0;n#div#0;n#slick#0;n#section#0;n#!!top" expanded="true" />
@@ -1034,8 +1035,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/source/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60655737">
-          <caret line="775" column="38" selection-start-line="775" selection-start-column="38" selection-end-line="775" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.67540985">
+          <caret line="775" column="21" selection-start-line="775" selection-start-column="21" selection-end-line="775" selection-end-column="21" />
           <folding />
         </state>
       </provider>
