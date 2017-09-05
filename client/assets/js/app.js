@@ -45351,6 +45351,7 @@ function getUtm(param) {
     return vars;
 }
 
+if(getUtm('utm_source')){
     var utmTags = {
         utm_source:getUtm('utm_source'),
         utm_medium:getUtm('utm_medium'),
@@ -45359,6 +45360,9 @@ function getUtm(param) {
         utm_content:getUtm('utm_content')
     };
     localStorage.setItem('utmTags', JSON.stringify(utmTags));
+}
+
+
 //var utmTags = JSON.parse(localStorage.getItem('utmTags'));
 
 
