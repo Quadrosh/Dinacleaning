@@ -222,12 +222,13 @@ app
                     ;
             };
             $scope.callMe = function(data){
-                CallmeService.post(data).then(
+                var newCallMeData = angular.extend(data,JSON.parse(localStorage.getItem('utmTags')));
+                CallmeService.post(newCallMeData).then(
                     function(){
 
-                        //yaCounter44480872.reachGoal('sendOrder');
-                        //ga('send','event','order','send','sendOrder');
-                        alert('мы перезвоним в течение 20 минут');
+                        yaCounter44480872.reachGoal('sendOrder');
+                        ga('send','event','order','send','sendOrder');
+                        alert('Спасибо за заявку, мы перезвоним в течение 20 минут (с 10-00 до 22-00)');
                     },
                     function(error){
                         console.log(error);
@@ -236,11 +237,12 @@ app
                 );
             };
             $scope.newOrder = function(data){
-                OrderService.post(data).then(
+                var newOrderData = angular.extend(data,JSON.parse(localStorage.getItem('utmTags')));
+                OrderService.post(newOrderData).then(
                     function(){
                         yaCounter44480872.reachGoal('sendOrder');
                         ga('send','event','order','send','sendOrder');
-                        alert('заказ отправлен');
+                        alert('Спасибо, заказ отправлен - мы свяжемся с Вами в ближайшее время (с 10-00 до 22-00 в течение 20 минут)');
                     },
                     function(error){
                         console.log(error);

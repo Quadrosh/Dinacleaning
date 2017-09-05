@@ -24,6 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'phone',
             'comment:ntext',
+            'utm_source',
+            'utm_medium',
+            'utm_campaign',
+            'utm_term',
+            'utm_content',
             'date',
 
             ['class' => 'yii\grid\ActionColumn'],

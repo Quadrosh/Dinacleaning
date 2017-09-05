@@ -49,6 +49,47 @@ class Orders extends \yii\db\ActiveRecord
             [['work_date', 'work_type', 'area', 'workplace', 'name', 'phone', 'contacts', 'email', 'status', 'work_time'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 510],
             [['phone','address','work_type'], 'required'],
+            [['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'], 'string'],
+            ['utm_source', 'filter', 'filter' => function ($value) {
+                if (strlen($value)>=509) {
+                    $newValue = substr($value,0,509);
+                } else {
+                    $newValue = $value;
+                }
+                return $newValue;
+            }],
+            ['utm_medium', 'filter', 'filter' => function ($value) {
+                if (strlen($value)>=509) {
+                    $newValue = substr($value,0,509);
+                } else {
+                    $newValue = $value;
+                }
+                return $newValue;
+            }],
+            ['utm_campaign', 'filter', 'filter' => function ($value) {
+                if (strlen($value)>=509) {
+                    $newValue = substr($value,0,509);
+                } else {
+                    $newValue = $value;
+                }
+                return $newValue;
+            }],
+            ['utm_term', 'filter', 'filter' => function ($value) {
+                if (strlen($value)>=509) {
+                    $newValue = substr($value,0,509);
+                } else {
+                    $newValue = $value;
+                }
+                return $newValue;
+            }],
+            ['utm_content', 'filter', 'filter' => function ($value) {
+                if (strlen($value)>=509) {
+                    $newValue = substr($value,0,509);
+                } else {
+                    $newValue = $value;
+                }
+                return $newValue;
+            }],
         ];
     }
 
@@ -77,6 +118,12 @@ class Orders extends \yii\db\ActiveRecord
             'windows' => 'Windows',
             'windows_qnt' => 'Windows Qnt',
             'work_time' => 'Work Time',
+
+            'utm_source' => 'UTM Source',
+            'utm_medium' => 'UTM Medium',
+            'utm_campaign' => 'UTM Campaign',
+            'utm_term' => 'UTM Term',
+            'utm_content' => 'UTM Content',
         ];
     }
 }

@@ -62,9 +62,9 @@ class CallmeController extends ActiveController
                 ->setUrl('https://sms.ru/sms/send')
                 ->setData([
                     'api_id' => '4940EAEB-EAD2-89D5-E5CE-F61C7FC262EE',
-                    'to' => '79853461615, 79092487575', // новый
+//                    'to' => '79853461615, 79092487575', // новый
 //                    'to' => '79853461615, 79164497826', // дина
-//                    'to' => '79853461615',
+                    'to' => '79853461615',
                     'text'=> 'ДинаКлининг - перезвони мне, тел:'. $phone
                 ])
                 ->send();

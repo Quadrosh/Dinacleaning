@@ -44,10 +44,18 @@ AppAsset::register($this);
             ['label' => 'Prices', 'url' => ['/admin/prices']],
             ['label' => 'Tasks', 'url' => ['/admin/tasks']],
 //            ['label' => 'Orders', 'url' => ['/admin/orders']],
-            ['label' => 'Orders',
+//            ['label' => 'Orders',
+//                'items' => [
+//                    ['label' => 'Orders', 'url' => ['/admin/orders/index']],
+//                    ['label' => 'Call Me', 'url' => ['/admin/callme/index']],
+//                ],
+//            ],
+            [
+                'label' => 'Заявки',
                 'items' => [
                     ['label' => 'Orders', 'url' => ['/admin/orders/index']],
-                    ['label' => 'Call Me', 'url' => ['/admin/callme/index']],
+                    ['label' => 'Перезвони мне', 'url' => ['/admin/callme/index']],
+                    ['label' => 'UTM', 'url' => ['/admin/orders/utm']],
                 ],
             ],
 

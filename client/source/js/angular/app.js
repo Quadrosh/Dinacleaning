@@ -16,6 +16,33 @@ if (document.location.host == 'www.dinacleaning.ru') {
     var apiHost = 'http://api.dinacleaning.ru/';
 }
 
+function getUtm(param) {
+    var vars = {};
+    window.location.href.replace( location.hash, '' ).replace(
+        /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+        function( m, key, value ) { // callback
+            vars[key] = value !== undefined ? value : '';
+        }
+    );
+
+    if ( param ) {
+        return vars[param] ? vars[param] : null;
+    }
+    return vars;
+}
+
+    var utmTags = {
+        utm_source:getUtm('utm_source'),
+        utm_medium:getUtm('utm_medium'),
+        utm_campaign:getUtm('utm_campaign'),
+        utm_term:getUtm('utm_term'),
+        utm_content:getUtm('utm_content')
+    };
+    localStorage.setItem('utmTags', JSON.stringify(utmTags));
+//var utmTags = JSON.parse(localStorage.getItem('utmTags'));
+
+
+
 /**
  * Инициализация ангуляра
  */

@@ -37,6 +37,14 @@ class CallmeController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Callme::find(),
+            'pagination'=> [
+                'pageSize' => 100,
+            ],
+            'sort' =>[
+                'defaultOrder'=> [
+                    'id' => SORT_DESC
+                ]
+            ]
         ]);
 
         return $this->render('index', [

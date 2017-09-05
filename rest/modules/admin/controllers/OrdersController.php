@@ -2,9 +2,11 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Callme;
 use Yii;
 use app\models\Orders;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,6 +57,53 @@ class OrdersController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionUtm()
+    {
+        $orders = Orders::find()->orderBy('date')->all();
+        $callmes = Callme::find()->orderBy('date')->all();
+        $leads = [];
+        $leadId = 0;
+        foreach ($orders as $order) {
+            $leadId ++;
+
+            $leads[$leadId]['type']= 'order';
+            $leads[$leadId]['id']= $order['id'];
+
+            $leads[$leadId]['work_date']= $order['work_date'];
+            $leads[$leadId]['phone']= $order['phone'];
+            $leads[$leadId]['work_type']= $order['work_type'];
+
+            $leads[$leadId]['utm_source']= $order['utm_source'];
+            $leads[$leadId]['utm_medium']= $order['utm_medium'];
+            $leads[$leadId]['utm_campaign']= $order['utm_campaign'];
+            $leads[$leadId]['utm_term']= $order['utm_term'];
+            $leads[$leadId]['utm_content']= $order['utm_content'];
+            $leads[$leadId]['date']= $order['date'];
+        }
+        foreach ($callmes as $callme) {
+            $leadId ++;
+            $leads[$leadId]['type']= 'quickForm';
+            $leads[$leadId]['id']= $callme['id'];
+            $leads[$leadId]['work_date']= '';
+            $leads[$leadId]['phone']= $callme['phone'];
+            $leads[$leadId]['work_type']= '';
+
+            $leads[$leadId]['utm_source']= $callme['utm_source'];
+            $leads[$leadId]['utm_medium']= $callme['utm_medium'];
+            $leads[$leadId]['utm_campaign']= $callme['utm_campaign'];
+            $leads[$leadId]['utm_term']= $callme['utm_term'];
+            $leads[$leadId]['utm_content']= $callme['utm_content'];
+            $leads[$leadId]['date']= $callme['date'];
+        }
+        ArrayHelper::multisort($leads,['date'],[SORT_DESC]);
+//        var_dump($leads); die;
+        return $this->render('utm', [
+            'leads' => $leads,
+        ]);
+    }
+
+
 
     public function actionSms()
     {

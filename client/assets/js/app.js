@@ -45336,6 +45336,33 @@ if (document.location.host == 'www.dinacleaning.ru') {
     var apiHost = 'http://api.dinacleaning.ru/';
 }
 
+function getUtm(param) {
+    var vars = {};
+    window.location.href.replace( location.hash, '' ).replace(
+        /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+        function( m, key, value ) { // callback
+            vars[key] = value !== undefined ? value : '';
+        }
+    );
+
+    if ( param ) {
+        return vars[param] ? vars[param] : null;
+    }
+    return vars;
+}
+
+    var utmTags = {
+        utm_source:getUtm('utm_source'),
+        utm_medium:getUtm('utm_medium'),
+        utm_campaign:getUtm('utm_campaign'),
+        utm_term:getUtm('utm_term'),
+        utm_content:getUtm('utm_content')
+    };
+    localStorage.setItem('utmTags', JSON.stringify(utmTags));
+//var utmTags = JSON.parse(localStorage.getItem('utmTags'));
+
+
+
 /**
  * Инициализация ангуляра
  */
@@ -45690,12 +45717,13 @@ app
                     ;
             };
             $scope.callMe = function(data){
-                CallmeService.post(data).then(
+                var newCallMeData = angular.extend(data,JSON.parse(localStorage.getItem('utmTags')));
+                CallmeService.post(newCallMeData).then(
                     function(){
 
-                        //yaCounter44480872.reachGoal('sendOrder');
-                        //ga('send','event','order','send','sendOrder');
-                        alert('мы перезвоним в течение 20 минут');
+                        yaCounter44480872.reachGoal('sendOrder');
+                        ga('send','event','order','send','sendOrder');
+                        alert('Спасибо за заявку, мы перезвоним в течение 20 минут (с 10-00 до 22-00)');
                     },
                     function(error){
                         console.log(error);
@@ -45704,11 +45732,12 @@ app
                 );
             };
             $scope.newOrder = function(data){
-                OrderService.post(data).then(
+                var newOrderData = angular.extend(data,JSON.parse(localStorage.getItem('utmTags')));
+                OrderService.post(newOrderData).then(
                     function(){
                         yaCounter44480872.reachGoal('sendOrder');
                         ga('send','event','order','send','sendOrder');
-                        alert('заказ отправлен');
+                        alert('Спасибо, заказ отправлен - мы свяжемся с Вами в ближайшее время (с 10-00 до 22-00 в течение 20 минут)');
                     },
                     function(error){
                         console.log(error);
