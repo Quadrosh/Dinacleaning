@@ -1,6 +1,6 @@
 <?php
 
-$params = require(__DIR__ . '/params.php');
+$params = require(__DIR__ . '/local_params.php');
 
 $config = [
     'id' => 'basic',
@@ -18,7 +18,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'mufCCHDCR-DZ6KYrEIktV9G8uOWbxkR0',
+            'cookieValidationKey' => $params['cookieValidationKey'],
             // REST
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',  // enable Json for REST
@@ -50,7 +50,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
+        'db' => require(__DIR__ . '/local_db.php'),
 
         'urlManager' => [
             'enablePrettyUrl' => true,
