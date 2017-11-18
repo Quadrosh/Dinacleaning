@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rest/config/db.php" afterPath="$PROJECT_DIR$/rest/config/local_db.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/rest/config/params.php" afterPath="$PROJECT_DIR$/rest/config/local_params.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/config/web.php" afterPath="$PROJECT_DIR$/rest/config/web.php" />
-    </list>
+    <list default="true" id="79ff7064-d16b-444b-9190-f0c3768ad0e8" name="Default" comment="" />
     <ignored path="dinacleaning.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -130,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/rest/config/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.3271028">
-              <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+              <caret line="52" column="48" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -1057,7 +1052,7 @@
     <entry file="file://$PROJECT_DIR$/rest/config/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3271028">
-          <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+          <caret line="52" column="48" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="48" />
           <folding />
         </state>
       </provider>
