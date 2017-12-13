@@ -6,14 +6,22 @@
  * @type {string}
  */
 
+var apiHost = 'http://api.dinacleaning.ru/';
+
 if (document.location.host == 'dc.dev' || document.location.host == 'dcadmin.dev') {
-    var apiHost = 'http://dcrest.dev/';
+    apiHost = 'http://dcrest.dev/';
 }
 if (document.location.host == 'dinacleaning.ru') {
-    var apiHost = 'http://api.dinacleaning.ru/';
+    apiHost = 'http://api.dinacleaning.ru/';
 }
 if (document.location.host == 'www.dinacleaning.ru') {
-    var apiHost = 'http://api.dinacleaning.ru/';
+    apiHost = 'http://api.dinacleaning.ru/';
+}
+if (document.location.host == 'www.xn--80agbqbamipeb.xn--p1ai') {
+    apiHost = 'http://api.dinacleaning.ru/';
+}
+if (document.location.host == 'xn--80agbqbamipeb.xn--p1ai') {
+    apiHost = 'http://api.dinacleaning.ru/';
 }
 
 function getUtm(param) {
