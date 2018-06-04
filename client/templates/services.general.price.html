@@ -3,7 +3,7 @@
         <h2 class="vhoditLead">Цены на генеральную уборку: </h2>
         <ul class="priceItems">
             <li ng-repeat="price in priceData | filter : {type_id : '2'} ">
-                <p ><i class="glyphicon glyphicon-home"></i> <span ng-bind-html="price.name"></span> {{price.name_descr}} - {{price.price}} {{price.price_descr}}</p>
+                <p ><i class="glyphicon glyphicon-home"></i> <span ng-bind-html="price.name"></span> {{price.name_descr}} - {{price.price}} <span ng-bind-html="price.price_descr"></span></p>
             </li>
         </ul>
         <p class="pricesInfo">Расценки приведены для информации. <br> Реальная цена зависит от степени загрязненности и наличия сложных загрязнений.</p>
