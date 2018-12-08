@@ -45332,16 +45332,16 @@ if (document.location.host == 'dc.dev' || document.location.host == 'dcadmin.dev
     apiHost = 'http://dcrest.dev/';
 }
 if (document.location.host == 'dinacleaning.ru') {
-    apiHost = 'http://api.dinacleaning.ru/';
+    apiHost = 'https://api.dinacleaning.ru/';
 }
 if (document.location.host == 'www.dinacleaning.ru') {
-    apiHost = 'http://api.dinacleaning.ru/';
+    apiHost = 'https://api.dinacleaning.ru/';
 }
 if (document.location.host == 'www.xn--80agbqbamipeb.xn--p1ai') {
-    apiHost = 'http://api.dinacleaning.ru/';
+    apiHost = 'https://api.dinacleaning.ru/';
 }
 if (document.location.host == 'xn--80agbqbamipeb.xn--p1ai') {
-    apiHost = 'http://api.dinacleaning.ru/';
+    apiHost = 'https://api.dinacleaning.ru/';
 }
 
 function getUtm(param) {
